@@ -1,0 +1,27 @@
+{
+  "name": "pcp-server-nodejs-sdk",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node src/index.ts",
+    "lint": "eslint \"src/**/*.ts\" --max-warnings 0",
+    "lint:fix": "eslint \"src/**/*.ts\" --max-warnings 0 --fix",
+    "format:check": "prettier --check \"src/**/!(*.d).ts\"",
+    "format:write": "prettier --write \"src/**/!(*.d).ts\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "9.7.0",
+    "@types/node": "20.14.12",
+    "eslint": "9.7.0",
+    "globals": "15.8.0",
+    "prettier": "^3.3.3",
+    "ts-node": "10.9.2",
+    "typescript": "5.5.4",
+    "typescript-eslint": "7.17.0"
+  }
+}
