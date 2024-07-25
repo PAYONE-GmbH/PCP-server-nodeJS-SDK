@@ -2,7 +2,7 @@
   "name": "pcp-server-nodejs-sdk",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/index.ts",
@@ -23,5 +23,8 @@
     "ts-node": "10.9.2",
     "typescript": "5.5.4",
     "typescript-eslint": "7.17.0"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
   }
 }

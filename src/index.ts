@@ -1,5 +1,4 @@
-console.log('Hello, World!');
-
-const a = 4;
-
-console.log({ a });
+export * from './endpoints';
+export * from './errors';
+export * from './queries';
+export { CommunicatorConfiguration } from './CommunicatorConfiguration';
