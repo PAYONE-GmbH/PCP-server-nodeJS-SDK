@@ -24,7 +24,7 @@ export class BaseApiClient {
     requestInit = this.requestHeaderGenerator.generateAdditionalRequestHeaders(url, requestInit);
 
     const response = await fetch(url, requestInit);
-    console.log('sdfsdf');
+
     const body = await response.json();
     if (response.ok) {
       return body as Promise<T>;
