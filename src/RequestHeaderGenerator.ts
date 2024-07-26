@@ -65,7 +65,6 @@ export class RequestHeaderGenerator {
       stringToSign += `${urlInternal.search}`;
     }
     stringToSign += '\n';
-    console.log({ stringToSign });
     const signature = this.sign(stringToSign);
     return `GCS v1HMAC:${this.config.getApiKey()}:${signature}`;
   }
