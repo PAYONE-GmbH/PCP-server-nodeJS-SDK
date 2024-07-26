@@ -23,9 +23,9 @@ const run = async () => {
   const commerceCaseApiClientExample = new CommerceCaseApiExample(communicatorConfiguration);
 
   commerceCaseApiClientExample.runPostOne();
-  // commerceCaseApiClientExample.runGetAll();
-  // commerceCaseApiClientExample.runGetOne();
-  // commerceCaseApiClientExample.runUpdateOne();
+  commerceCaseApiClientExample.runGetAll();
+  commerceCaseApiClientExample.runGetOne();
+  commerceCaseApiClientExample.runUpdateOne();
 };
 
 run();

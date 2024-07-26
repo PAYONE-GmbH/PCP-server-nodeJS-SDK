@@ -2,6 +2,11 @@
 
 Welcome to the Node SDK for the PayOne PCP platform! This repository contains a powerful, easy-to-use software development kit (SDK) designed to simplify the integration of online payment processing into your applications.
 
+### TODOS
+- [ ] Setup changelog
+- [ ] Setup sonarcloud
+- [ ] Setup Jest and coverage
+- [ ] Setup Github actions
 
 
 ## Table of Contents
