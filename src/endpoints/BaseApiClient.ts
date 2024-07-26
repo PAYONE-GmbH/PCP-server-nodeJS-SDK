@@ -26,6 +26,7 @@ export class BaseApiClient {
     const response = await fetch(url, requestInit);
 
     const body = await response.json();
+
     if (response.ok) {
       return body as Promise<T>;
     }

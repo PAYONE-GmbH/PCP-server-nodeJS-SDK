@@ -3,9 +3,10 @@ import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import { CheckoutResponse } from '../models/CheckoutResponse.js';
 import { CreateCheckoutRequest } from '../models/CreateCheckoutRequest.js';
-import { createResponseMock } from '../testutils/mock-response.js';
 import { CheckoutApiClient } from './CheckoutApiClient.js';
 import { ErrorResponse } from '../models/ErrorResponse.js';
+import { createResponseMock } from '../testutils/mock-response.js';
+import { ApiErrorResponseException } from '../errors/ApiErrorResponseException.js';
 
 vi.mock('node-fetch', async importOriginal => {
   return {
@@ -40,15 +41,15 @@ describe('CheckoutApiClient', () => {
       expect(res).toEqual(expectedResponse);
     });
     test('given request was not successful, then return errorresponse', async () => {
-      const expectedResponse = createResponseMock<ErrorResponse>(400, new ErrorResponse());
+      const expectedResponse = new ErrorResponse();
 
-      mockedFetch.mockRejectedValueOnce(expectedResponse);
+      mockedFetch.mockResolvedValueOnce(createResponseMock<ErrorResponse>(400, expectedResponse));
 
       expect.assertions(1);
       try {
         await checkoutApiClient.createCheckoutRequest('merchantId', 'commerceCaseId', new CreateCheckoutRequest());
       } catch (error) {
-        expect(error).toEqual(expectedResponse);
+        expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
       }
     });
   });
