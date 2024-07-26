@@ -5,9 +5,8 @@ Welcome to the Node SDK for the PayOne PCP platform! This repository contains a 
 ### TODOS
 - [ ] Setup changelog
 - [ ] Setup sonarcloud
-- [ ] Setup Jest and coverage
 - [ ] Setup Github actions
-
+- [ ] Write more tests
 
 ## Table of Contents
 
