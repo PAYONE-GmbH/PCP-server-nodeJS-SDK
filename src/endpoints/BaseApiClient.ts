@@ -1,11 +1,9 @@
-import fetch, { RequestInit, Response } from 'node-fetch';
+import fetch, { RequestInit } from 'node-fetch';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import { RequestHeaderGenerator } from '../RequestHeaderGenerator.js';
-import { ApiResponseRetrievalException } from '../errors/index.js';
-import { ErrorResponse } from '../models/index.js';
+import { ApiErrorResponseException } from '../errors/index.js';
 
 export class BaseApiClient {
-  private readonly JSON_PARSE_ERROR = 'Expected valid JSON response, but failed to parse';
   protected readonly requestHeaderGenerator: RequestHeaderGenerator;
   protected readonly config: CommunicatorConfiguration;
 
@@ -24,25 +22,14 @@ export class BaseApiClient {
 
   protected async makeApiCall<T>(url: string, requestInit: RequestInit): Promise<T> {
     requestInit = this.requestHeaderGenerator.generateAdditionalRequestHeaders(url, requestInit);
-    console.log(requestInit.headers);
-    const response = await this.getResponse(url, requestInit);
-    console.log(response);
-    await this.handleError(response.clone());
-    return response.json() as Promise<T>;
-  }
 
-  private async handleError(response: Response): Promise<void> {
+    const response = await fetch(url, requestInit);
+    console.log('sdfsdf');
+    const body = await response.json();
     if (response.ok) {
-      return;
+      return body as Promise<T>;
     }
-
-    const responseBody = (await response.json()) as Promise<ErrorResponse>;
-    if (!responseBody) {
-      throw new ApiResponseRetrievalException(response.status, responseBody);
-    }
-  }
-
-  public async getResponse(url: string, requestInit: RequestInit) {
-    return fetch(url, requestInit);
+    // TODO check if this is a valid error response
+    throw new ApiErrorResponseException(response.status, JSON.stringify(body));
   }
 }

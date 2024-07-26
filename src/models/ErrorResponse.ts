@@ -16,29 +16,11 @@ export class ErrorResponse {
   /**
    * Unique reference of this error response for debugging purposes
    */
-  'errorId'?: string;
-  'errors'?: Array<APIError>;
+  errorId: string | null;
+  errors: Array<APIError> | null;
 
-  static readonly discriminator: string | undefined = undefined;
-
-  static readonly attributeTypeMap: Array<{ name: string; baseName: string; type: string; format: string }> = [
-    {
-      name: 'errorId',
-      baseName: 'errorId',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'errors',
-      baseName: 'errors',
-      type: 'Array<APIError>',
-      format: '',
-    },
-  ];
-
-  static getAttributeTypeMap() {
-    return ErrorResponse.attributeTypeMap;
+  public constructor() {
+    this.errorId = null;
+    this.errors = null;
   }
-
-  public constructor() {}
 }
