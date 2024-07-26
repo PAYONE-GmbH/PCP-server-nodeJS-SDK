@@ -27,115 +27,42 @@ export class CheckoutResponse {
   /**
    * reference to the Commerce Case.
    */
-  'commerceCaseId'?: string;
+  commerceCaseId: string | null;
   /**
    * reference to the Checkout.
    */
-  'checkoutId'?: string;
+  checkoutId: string | null;
   /**
    * Unique identifier for the customer.
    */
-  'merchantCustomerId'?: string;
-  'amountOfMoney'?: AmountOfMoney;
-  'references'?: CheckoutReferences;
-  'shipping'?: Shipping;
-  'shoppingCart'?: ShoppingCartResult;
-  'paymentExecutions'?: Array<PaymentExecution>;
-  'checkoutStatus'?: StatusCheckout;
-  'statusOutput'?: StatusOutput;
-  'paymentInformation'?: Array<PaymentInformationResponse>;
+  merchantCustomerId: string | null;
+  amountOfMoney: AmountOfMoney | null;
+  references: CheckoutReferences | null;
+  shipping: Shipping | null;
+  shoppingCart: ShoppingCartResult | null;
+  paymentExecutions: Array<PaymentExecution> | null;
+  checkoutStatus: StatusCheckout | null;
+  statusOutput: StatusOutput | null;
+  paymentInformation: Array<PaymentInformationResponse> | null;
   /**
    * Creation date and time of the Checkout in RFC3339 format. It can either be provided in the request or otherwise will be automatically set to the time when the request CreateCommerceCase was received. Response values will always be in UTC time, but when providing this field in the requests, the time offset can have different formats.  Accepted formats are: * YYYY-MM-DD\'T\'HH:mm:ss\'Z\' * YYYY-MM-DD\'T\'HH:mm:ss+XX:XX * YYYY-MM-DD\'T\'HH:mm:ss-XX:XX * YYYY-MM-DD\'T\'HH:mm\'Z\' * YYYY-MM-DD\'T\'HH:mm+XX:XX * YYYY-MM-DD\'T\'HH:mm-XX:XX  All other formats may be ignored by the system.
    */
-  'creationDateTime'?: Date;
-  'allowedPaymentActions'?: Array<AllowedPaymentActions>;
+  creationDateTime: Date | null;
+  allowedPaymentActions: Array<AllowedPaymentActions> | null;
 
-  static readonly discriminator: string | undefined = undefined;
-
-  static readonly attributeTypeMap: Array<{ name: string; baseName: string; type: string; format: string }> = [
-    {
-      name: 'commerceCaseId',
-      baseName: 'commerceCaseId',
-      type: 'string',
-      format: 'UUID',
-    },
-    {
-      name: 'checkoutId',
-      baseName: 'checkoutId',
-      type: 'string',
-      format: 'UUID',
-    },
-    {
-      name: 'merchantCustomerId',
-      baseName: 'merchantCustomerId',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'amountOfMoney',
-      baseName: 'amountOfMoney',
-      type: 'AmountOfMoney',
-      format: '',
-    },
-    {
-      name: 'references',
-      baseName: 'references',
-      type: 'CheckoutReferences',
-      format: '',
-    },
-    {
-      name: 'shipping',
-      baseName: 'shipping',
-      type: 'Shipping',
-      format: '',
-    },
-    {
-      name: 'shoppingCart',
-      baseName: 'shoppingCart',
-      type: 'ShoppingCartResult',
-      format: '',
-    },
-    {
-      name: 'paymentExecutions',
-      baseName: 'paymentExecutions',
-      type: 'Array<PaymentExecution>',
-      format: '',
-    },
-    {
-      name: 'checkoutStatus',
-      baseName: 'checkoutStatus',
-      type: 'StatusCheckout',
-      format: '',
-    },
-    {
-      name: 'statusOutput',
-      baseName: 'statusOutput',
-      type: 'StatusOutput',
-      format: '',
-    },
-    {
-      name: 'paymentInformation',
-      baseName: 'paymentInformation',
-      type: 'Array<PaymentInformationResponse>',
-      format: '',
-    },
-    {
-      name: 'creationDateTime',
-      baseName: 'creationDateTime',
-      type: 'Date',
-      format: 'date-time',
-    },
-    {
-      name: 'allowedPaymentActions',
-      baseName: 'allowedPaymentActions',
-      type: 'Array<AllowedPaymentActions>',
-      format: '',
-    },
-  ];
-
-  static getAttributeTypeMap() {
-    return CheckoutResponse.attributeTypeMap;
+  constructor() {
+    this.commerceCaseId = null;
+    this.checkoutId = null;
+    this.merchantCustomerId = null;
+    this.amountOfMoney = null;
+    this.references = null;
+    this.shipping = null;
+    this.shoppingCart = null;
+    this.paymentExecutions = null;
+    this.checkoutStatus = null;
+    this.statusOutput = null;
+    this.paymentInformation = null;
+    this.creationDateTime = null;
+    this.allowedPaymentActions = null;
   }
-
-  public constructor() {}
 }

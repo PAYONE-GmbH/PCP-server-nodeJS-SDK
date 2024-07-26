@@ -25,7 +25,7 @@ export class BaseApiClient {
   protected async makeApiCall<T>(url: string, requestInit: RequestInit): Promise<T> {
     requestInit = this.requestHeaderGenerator.generateAdditionalRequestHeaders(url, requestInit);
     console.log(requestInit.headers);
-    const response = await fetch(url, requestInit);
+    const response = await this.getResponse(url, requestInit);
     console.log(response);
     await this.handleError(response.clone());
     return response.json() as Promise<T>;
@@ -40,5 +40,9 @@ export class BaseApiClient {
     if (!responseBody) {
       throw new ApiResponseRetrievalException(response.status, responseBody);
     }
+  }
+
+  public async getResponse(url: string, requestInit: RequestInit) {
+    return fetch(url, requestInit);
   }
 }

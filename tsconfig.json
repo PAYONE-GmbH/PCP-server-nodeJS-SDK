@@ -10,7 +10,9 @@
     "skipLibCheck": true,
     "strictNullChecks": true,
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "types": ["node"],
+    "sourceMap": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
