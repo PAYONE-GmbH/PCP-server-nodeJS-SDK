@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { InstallmentOption } from '../models/InstallmentOption';
+import { InstallmentOption } from './InstallmentOption.js';
 
 /**
  * Object containing specific information for PAYONE Secured Installment.

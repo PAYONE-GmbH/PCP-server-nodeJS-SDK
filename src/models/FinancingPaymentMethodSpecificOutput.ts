@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PaymentProduct3391SpecificOutput } from '../models/PaymentProduct3391SpecificOutput';
+import { PaymentProduct3391SpecificOutput } from './PaymentProduct3391SpecificOutput.js';
 
 /**
  * Object containing the specific output details for financing payment methods (Buy Now Pay Later)

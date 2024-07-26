@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { CreatePaymentResponse } from '../models/CreatePaymentResponse';
-import { ShoppingCartResult } from '../models/ShoppingCartResult';
+import { CreatePaymentResponse } from './CreatePaymentResponse.js';
+import { ShoppingCartResult } from './ShoppingCartResult.js';
 
 /**
  * Object that contains details on the created payment in case one has been created.

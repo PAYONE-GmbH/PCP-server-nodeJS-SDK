@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CartItemInput } from '../models/CartItemInput';
+import { CartItemInput } from './CartItemInput.js';
 
 /**
  * Shopping cart data, including items and specific amounts.

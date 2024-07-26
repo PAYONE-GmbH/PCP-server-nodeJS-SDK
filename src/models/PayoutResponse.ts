@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { PayoutOutput } from '../models/PayoutOutput';
-import { StatusCategoryValue } from '../models/StatusCategoryValue';
-import { StatusValue } from '../models/StatusValue';
+import { PayoutOutput } from './PayoutOutput.js';
+import { StatusCategoryValue } from './StatusCategoryValue.js';
+import { StatusValue } from './StatusValue.js';
 
 /**
  * Object that holds the payment related properties for the refund of a Payment Information.

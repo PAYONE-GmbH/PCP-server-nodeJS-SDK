@@ -10,13 +10,13 @@
  * Do not edit the class manually.
  */
 
-import { CardPaymentMethodSpecificInput } from '../models/CardPaymentMethodSpecificInput';
-import { CustomerDevice } from '../models/CustomerDevice';
-import { FinancingPaymentMethodSpecificInput } from '../models/FinancingPaymentMethodSpecificInput';
-import { MobilePaymentMethodSpecificInput } from '../models/MobilePaymentMethodSpecificInput';
-import { PaymentChannel } from '../models/PaymentChannel';
-import { RedirectPaymentMethodSpecificInput } from '../models/RedirectPaymentMethodSpecificInput';
-import { SepaDirectDebitPaymentMethodSpecificInput } from '../models/SepaDirectDebitPaymentMethodSpecificInput';
+import { CardPaymentMethodSpecificInput } from './CardPaymentMethodSpecificInput.js';
+import { CustomerDevice } from './CustomerDevice.js';
+import { FinancingPaymentMethodSpecificInput } from './FinancingPaymentMethodSpecificInput.js';
+import { MobilePaymentMethodSpecificInput } from './MobilePaymentMethodSpecificInput.js';
+import { PaymentChannel } from './PaymentChannel.js';
+import { RedirectPaymentMethodSpecificInput } from './RedirectPaymentMethodSpecificInput.js';
+import { SepaDirectDebitPaymentMethodSpecificInput } from './SepaDirectDebitPaymentMethodSpecificInput.js';
 
 /**
  * Input for the payment for a respective payment method. In case the paymentMethodSpecificInput has already been provided when creating the Commerce Case or Checkout, it will automatically be used for the Payment Execution. If a new input will be provided, the existing input will be updated.

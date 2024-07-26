@@ -10,11 +10,11 @@
  * Do not edit the class manually.
  */
 
-import { AmountOfMoney } from '../models/AmountOfMoney';
-import { Customer } from '../models/Customer';
-import { References } from '../models/References';
-import { Shipping } from '../models/Shipping';
-import { ShoppingCartInput } from '../models/ShoppingCartInput';
+import { AmountOfMoney } from './AmountOfMoney.js';
+import { Customer } from './Customer.js';
+import { References } from './References.js';
+import { Shipping } from './Shipping.js';
+import { ShoppingCartInput } from './ShoppingCartInput.js';
 
 /**
  * Order object containing order related data Please note that this object is required to be able to submit the amount.

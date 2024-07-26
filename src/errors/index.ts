@@ -1,3 +1,3 @@
-export { ApiErrorResponseException } from './ApiErrorResponseException';
-export { ApiException } from './ApiException';
-export { ApiResponseRetrievalException } from './ApiResponseRetrievalException';
+export { ApiErrorResponseException } from './ApiErrorResponseException.js';
+export { ApiException } from './ApiException.js';
+export { ApiResponseRetrievalException } from './ApiResponseRetrievalException.js';

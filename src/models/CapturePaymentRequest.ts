@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { CancellationReason } from '../models/CancellationReason';
-import { DeliveryInformation } from '../models/DeliveryInformation';
-import { PaymentReferences } from '../models/PaymentReferences';
+import { CancellationReason } from './CancellationReason.js';
+import { DeliveryInformation } from './DeliveryInformation.js';
+import { PaymentReferences } from './PaymentReferences.js';
 
 /**
  * If the shopping cart is specified, a Capture is made with the amount of the shopping cart for the items that are specified.

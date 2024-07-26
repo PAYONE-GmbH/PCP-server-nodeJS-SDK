@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { CancelPaymentResponse } from '../models/CancelPaymentResponse';
-import { ShoppingCartResult } from '../models/ShoppingCartResult';
+import { CancelPaymentResponse } from './CancelPaymentResponse.js';
+import { ShoppingCartResult } from './ShoppingCartResult.js';
 
 export class CancelResponse {
   'cancelPaymentResponse'?: CancelPaymentResponse;

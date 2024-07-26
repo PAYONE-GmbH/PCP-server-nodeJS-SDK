@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { AmountOfMoney } from '../models/AmountOfMoney';
-import { PaymentReferences } from '../models/PaymentReferences';
+import { AmountOfMoney } from './AmountOfMoney.js';
+import { PaymentReferences } from './PaymentReferences.js';
 
 /**
  * Object containing Refund details

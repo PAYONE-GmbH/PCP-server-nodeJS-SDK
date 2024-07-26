@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { AddressPersonal } from '../models/AddressPersonal';
+import { AddressPersonal } from './AddressPersonal.js';
 
 /**
  * Object containing information regarding shipping / delivery

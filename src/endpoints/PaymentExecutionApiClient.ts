@@ -1,5 +1,5 @@
 import { Headers, RequestInit } from 'node-fetch';
-import { CommunicatorConfiguration } from '../CommunicatorConfiguration';
+import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import {
   CancelPaymentRequest,
   CancelPaymentResponse,
@@ -11,8 +11,8 @@ import {
   PaymentExecutionRequest,
   RefundPaymentResponse,
   RefundRequest,
-} from '../models';
-import { BaseApiClient } from './BaseApiClient';
+} from '../models/index.js';
+import { BaseApiClient } from './BaseApiClient.js';
 
 export class PaymentExecutionApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {

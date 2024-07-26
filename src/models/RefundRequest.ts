@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { PaymentReferences } from '../models/PaymentReferences';
-import { PositiveAmountOfMoney } from '../models/PositiveAmountOfMoney';
-import { ReturnInformation } from '../models/ReturnInformation';
+import { PaymentReferences } from './PaymentReferences.js';
+import { PositiveAmountOfMoney } from './PositiveAmountOfMoney.js';
+import { ReturnInformation } from './ReturnInformation.js';
 
 /**
  * Request to refund a payment for a Checkout. It is possible to perform multiple partial refunds by providing an amount that is lower than the total captured amount. The returnReason can be provided for reporting and reconciliation purposes but is not mandatory.

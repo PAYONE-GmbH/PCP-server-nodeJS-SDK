@@ -1,2 +1,2 @@
-export { GetCheckoutsQuery } from './GetCheckoutsQuery';
-export { GetCommerceCasesQuery } from './GetCommerceCasesQuery';
+export { GetCheckoutsQuery } from './GetCheckoutsQuery.js';
+export { GetCommerceCasesQuery } from './GetCommerceCasesQuery.js';

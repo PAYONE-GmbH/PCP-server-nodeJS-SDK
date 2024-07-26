@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { Address } from '../models/Address';
-import { PaymentProduct840CustomerAccount } from '../models/PaymentProduct840CustomerAccount';
+import { Address } from './Address.js';
+import { PaymentProduct840CustomerAccount } from './PaymentProduct840CustomerAccount.js';
 
 /**
  * PayPal (payment product 840) specific details.

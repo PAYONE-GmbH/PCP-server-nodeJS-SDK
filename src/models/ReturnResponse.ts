@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { RefundPaymentResponse } from '../models/RefundPaymentResponse';
-import { ShoppingCartResult } from '../models/ShoppingCartResult';
+import { RefundPaymentResponse } from './RefundPaymentResponse.js';
+import { ShoppingCartResult } from './ShoppingCartResult.js';
 
 export class ReturnResponse {
   'returnPaymentResponse'?: RefundPaymentResponse;

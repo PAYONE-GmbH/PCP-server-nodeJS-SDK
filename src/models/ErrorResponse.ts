@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { APIError } from '../models/APIError';
+import { APIError } from './APIError.js';
 
 export class ErrorResponse {
   /**

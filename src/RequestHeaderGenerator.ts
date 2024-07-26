@@ -1,22 +1,22 @@
 import * as crypto from 'crypto';
 import { Headers, RequestInit } from 'node-fetch';
-import { CommunicatorConfiguration } from './CommunicatorConfiguration';
-import { ServerMetaInfo } from './utils/ServerMetaInfo';
+import { URL } from 'url';
+
+import { CommunicatorConfiguration } from './CommunicatorConfiguration.js';
+import { ServerMetaInfo } from './utils/ServerMetaInfo.js';
 
 export class RequestHeaderGenerator {
   public static readonly SERVER_META_INFO_HEADER_NAME = 'X-GCS-ServerMetaInfo';
   public static readonly CLIENT_META_INFO_HEADER_NAME = 'X-GCS-ClientMetaInfo';
-  private static readonly ALGORITHM = 'HmacSHA256';
+  private static readonly ALGORITHM = 'sha256';
   private static readonly WHITESPACE_REGEX = /\r?\n[h]*/g;
   private readonly DATE_HEADER_NAME = 'Date';
   private readonly AUTHORIZATION_HEADER_NAME = 'Authorization';
 
   private readonly config: CommunicatorConfiguration;
-  private readonly hmac: crypto.Hmac;
 
   constructor(config: CommunicatorConfiguration) {
     this.config = config;
-    this.hmac = crypto.createHmac(RequestHeaderGenerator.ALGORITHM, config.getApiSecret());
   }
 
   public generateAdditionalRequestHeaders(url: string, request: RequestInit): RequestInit {
@@ -46,7 +46,7 @@ export class RequestHeaderGenerator {
     let stringToSign = `${request.method}\n`;
     // 2. Content-Type
     if (headers.has('Content-Type')) {
-      stringToSign += `${headers.get('Content-Type')}\n`;
+      stringToSign += `${headers.get('Content-Type')}`;
     }
     stringToSign += '\n';
     // 3. Date
@@ -65,12 +65,14 @@ export class RequestHeaderGenerator {
       stringToSign += `${urlInternal.search}`;
     }
     stringToSign += '\n';
+    console.log({ stringToSign });
     const signature = this.sign(stringToSign);
     return `GCS v1HMAC:${this.config.getApiKey()}:${signature}`;
   }
 
   private sign(target: string): string {
-    const hash = this.hmac.update(target).digest();
+    const hmac = crypto.createHmac(RequestHeaderGenerator.ALGORITHM, this.config.getApiSecret());
+    const hash = hmac.update(target).digest();
     return hash.toString('base64');
   }
 

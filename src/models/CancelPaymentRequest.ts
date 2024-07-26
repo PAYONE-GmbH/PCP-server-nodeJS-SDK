@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CancellationReason } from '../models/CancellationReason';
+import { CancellationReason } from './CancellationReason.js';
 
 export class CancelPaymentRequest {
   'cancellationReason'?: CancellationReason;

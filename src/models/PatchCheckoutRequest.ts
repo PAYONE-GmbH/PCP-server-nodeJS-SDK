@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { AmountOfMoney } from '../models/AmountOfMoney';
-import { CheckoutReferences } from '../models/CheckoutReferences';
-import { PaymentMethodSpecificInput } from '../models/PaymentMethodSpecificInput';
-import { References } from '../models/References';
-import { Shipping } from '../models/Shipping';
-import { ShoppingCartPatch } from '../models/ShoppingCartPatch';
+import { AmountOfMoney } from './AmountOfMoney.js';
+import { CheckoutReferences } from './CheckoutReferences.js';
+import { PaymentMethodSpecificInput } from './PaymentMethodSpecificInput.js';
+import { References } from './References.js';
+import { Shipping } from './Shipping.js';
+import { ShoppingCartPatch } from './ShoppingCartPatch.js';
 
 /**
  * An existing shopping cart of a Checkout will not be overwritten with the Patch request. New items can be added to the shoppingCart by providing them in the request. To change existing items (delete, modify or add), the respective itemId must be provided. An item can be completely removed if quantity = 0 is provided.  The price of an item can be changed as long as no payment has happened for this item (i.e. as long as an item has no specific status). Items with a status can no longer be removed entirely, however the quantity can be increased or decreased (for items without payment) by using the itemId.  If no amountOfMoney for the Checkout is provided, the platform will calculate the respective amount based on the cartItem productPrice and productQuantity.

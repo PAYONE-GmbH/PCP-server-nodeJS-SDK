@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ApplePaymentDataTokenInformation } from '../models/ApplePaymentDataTokenInformation';
+import { ApplePaymentDataTokenInformation } from './ApplePaymentDataTokenInformation.js';
 
 /**
  * Object containing additional Information needed for Apple Pay payment transactions.

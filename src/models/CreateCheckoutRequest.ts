@@ -10,11 +10,11 @@
  * Do not edit the class manually.
  */
 
-import { AmountOfMoney } from '../models/AmountOfMoney';
-import { CheckoutReferences } from '../models/CheckoutReferences';
-import { OrderRequest } from '../models/OrderRequest';
-import { Shipping } from '../models/Shipping';
-import { ShoppingCartInput } from '../models/ShoppingCartInput';
+import { AmountOfMoney } from './AmountOfMoney.js';
+import { CheckoutReferences } from './CheckoutReferences.js';
+import { OrderRequest } from './OrderRequest.js';
+import { Shipping } from './Shipping.js';
+import { ShoppingCartInput } from './ShoppingCartInput.js';
 
 /**
  * Request to create a Checkout for a Commerce Case. The payment for the Checkout can be directly executed if autoExecuteOrder = true. In this case, the paymentMethodSpecificInput must be provided and only a full order is possible.  If no amountOfMoney is provided, the platform will calculate the respective Checkout amount based on the cartItem productPrice and quantity.  In case of a payment error, the payment can be retried by providing the respective commerceCaseId and checkoutId to the the Order or Payment Execution endpoint.

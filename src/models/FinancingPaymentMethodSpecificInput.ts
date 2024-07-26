@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PaymentProduct3392SpecificInput } from '../models/PaymentProduct3392SpecificInput';
+import { PaymentProduct3392SpecificInput } from './PaymentProduct3392SpecificInput.js';
 
 /**
  * Object containing the specific input details for financing payment methods (Buy Now Pay Later)

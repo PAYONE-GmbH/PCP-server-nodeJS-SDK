@@ -1,0 +1,17 @@
+{
+  "name": "example-app",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-esm ./src/index.ts"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node": "10.9.2",
+    "typescript": "5.5.4",
+    "pcp-server-nodejs-sdk": "0.0.1"
+  }
+}

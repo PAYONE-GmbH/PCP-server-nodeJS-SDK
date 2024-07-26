@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CartItemInput } from '../models/CartItemInput';
+import { CartItemInput } from './CartItemInput.js';
 
 /**
  * Delivery object contains additional information about the delivery/shipment, which is the basis for the Capture. The amountOfMoney in the cartItem will not be used in the request.

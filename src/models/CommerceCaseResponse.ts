@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { CheckoutResponse } from '../models/CheckoutResponse';
-import { Customer } from '../models/Customer';
+import { CheckoutResponse } from './CheckoutResponse.js';
+import { Customer } from './Customer.js';
 
 export class CommerceCaseResponse {
   /**

@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { PaymentOutput } from '../models/PaymentOutput';
-import { PaymentStatusOutput } from '../models/PaymentStatusOutput';
-import { StatusValue } from '../models/StatusValue';
+import { PaymentOutput } from './PaymentOutput.js';
+import { PaymentStatusOutput } from './PaymentStatusOutput.js';
+import { StatusValue } from './StatusValue.js';
 
 /**
  * Object that holds the payment related properties.

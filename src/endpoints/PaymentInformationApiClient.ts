@@ -1,7 +1,7 @@
 import { Headers, RequestInit } from 'node-fetch';
-import { CommunicatorConfiguration } from '../CommunicatorConfiguration';
-import { PaymentInformationRequest, PaymentInformationResponse } from '../models';
-import { BaseApiClient } from './BaseApiClient';
+import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
+import { PaymentInformationRequest, PaymentInformationResponse } from '../models/index.js';
+import { BaseApiClient } from './BaseApiClient.js';
 
 export class PaymentInformationApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {

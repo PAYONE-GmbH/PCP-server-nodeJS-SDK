@@ -35,7 +35,11 @@ Welcome to the Node SDK for the PayOne PCP platform! This repository contains a 
 
 ### Run the example app
 
-
+```sh
+cd example-app
+yarn
+API_KEY=api_key API_SECRET=api_secret MERCHANT_ID=123 COMMERCE_CASE_ID=234 CHECKOUT_ID=345 yarn dev
+```
 
 ## Contributing
 

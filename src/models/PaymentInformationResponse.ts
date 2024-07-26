@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { CardPaymentDetails } from '../models/CardPaymentDetails';
-import { PaymentChannel } from '../models/PaymentChannel';
-import { PaymentEvent } from '../models/PaymentEvent';
+import { CardPaymentDetails } from './CardPaymentDetails.js';
+import { PaymentChannel } from './PaymentChannel.js';
+import { PaymentEvent } from './PaymentEvent.js';
 
 /**
  * Object containing the related data of the created Payment Information.

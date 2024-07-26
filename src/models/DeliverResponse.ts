@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { CapturePaymentResponse } from '../models/CapturePaymentResponse';
-import { ShoppingCartResult } from '../models/ShoppingCartResult';
+import { CapturePaymentResponse } from './CapturePaymentResponse.js';
+import { ShoppingCartResult } from './ShoppingCartResult.js';
 
 export class DeliverResponse {
   'capturePaymentResponse'?: CapturePaymentResponse;

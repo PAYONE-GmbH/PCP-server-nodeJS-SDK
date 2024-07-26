@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { PaymentStatusOutput } from '../models/PaymentStatusOutput';
-import { RefundOutput } from '../models/RefundOutput';
-import { StatusValue } from '../models/StatusValue';
+import { PaymentStatusOutput } from './PaymentStatusOutput.js';
+import { RefundOutput } from './RefundOutput.js';
+import { StatusValue } from './StatusValue.js';
 
 /**
  * This object has the numeric representation of the current Refund status, timestamp of last status change and performable action on the current Refund resource. In case of a rejected Refund, detailed error information is listed.

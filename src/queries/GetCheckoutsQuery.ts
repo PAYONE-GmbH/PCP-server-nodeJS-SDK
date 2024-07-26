@@ -1,5 +1,5 @@
-import { PaymentChannel, StatusCheckout, ExtendedCheckoutStatus } from '../models';
-import { QueryConfig } from '../utils/QueryConfig';
+import { PaymentChannel, StatusCheckout, ExtendedCheckoutStatus } from '../models/index.js';
+import { QueryConfig } from '../utils/QueryConfig.js';
 
 export class GetCheckoutsQuery implements QueryConfig {
   private offset?: number;

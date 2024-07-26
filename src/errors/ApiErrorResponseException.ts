@@ -1,5 +1,5 @@
-import { APIError } from '../models/APIError';
-import { ApiException } from './ApiException';
+import { APIError } from '../models/APIError.js';
+import { ApiException } from './ApiException.js';
 
 export class ApiErrorResponseException extends ApiException {
   private readonly errors: APIError[];

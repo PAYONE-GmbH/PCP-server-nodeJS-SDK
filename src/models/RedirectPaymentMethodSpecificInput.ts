@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { RedirectPaymentProduct840SpecificInput } from '../models/RedirectPaymentProduct840SpecificInput';
-import { RedirectionData } from '../models/RedirectionData';
+import { RedirectPaymentProduct840SpecificInput } from './RedirectPaymentProduct840SpecificInput.js';
+import { RedirectionData } from './RedirectionData.js';
 
 /**
  * Object containing the specific input details for payments that involve redirects to 3rd parties to complete, like iDeal and PayPal

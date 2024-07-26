@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ProcessingMandateInformation } from '../models/ProcessingMandateInformation';
+import { ProcessingMandateInformation } from './ProcessingMandateInformation.js';
 
 /**
  * Object containing information specific to SEPA Direct Debit

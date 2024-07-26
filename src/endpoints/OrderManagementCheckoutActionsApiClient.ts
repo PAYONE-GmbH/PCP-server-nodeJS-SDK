@@ -1,5 +1,5 @@
 import { Headers, RequestInit } from 'node-fetch';
-import { CommunicatorConfiguration } from '../CommunicatorConfiguration';
+import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import {
   CancelRequest,
   CancelResponse,
@@ -9,8 +9,8 @@ import {
   OrderResponse,
   ReturnRequest,
   ReturnResponse,
-} from '../models';
-import { BaseApiClient } from './BaseApiClient';
+} from '../models/index.js';
+import { BaseApiClient } from './BaseApiClient.js';
 
 export class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {

@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { CartItemOrderStatus } from '../models/CartItemOrderStatus';
-import { ProductType } from '../models/ProductType';
+import { CartItemOrderStatus } from './CartItemOrderStatus.js';
+import { ProductType } from './ProductType.js';
 
 /**
  * Object containing additional information that when supplied can have a beneficial effect on the discountrates.

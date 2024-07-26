@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CheckoutResponse } from '../models/CheckoutResponse';
+import { CheckoutResponse } from './CheckoutResponse.js';
 
 /**
  * Object that holds the number of found Checkouts and the requested page of Checkouts

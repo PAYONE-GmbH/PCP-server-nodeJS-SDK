@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { CompleteFinancingPaymentMethodSpecificInput } from '../models/CompleteFinancingPaymentMethodSpecificInput';
-import { CustomerDevice } from '../models/CustomerDevice';
-import { Order } from '../models/Order';
+import { CompleteFinancingPaymentMethodSpecificInput } from './CompleteFinancingPaymentMethodSpecificInput.js';
+import { CustomerDevice } from './CustomerDevice.js';
+import { Order } from './Order.js';
 
 /**
  * The Complete request is the last step to finalize the initially created Payment. It requires the completeFinancingPaymentMethodSpecificInput. The data for the order object should not differ from the previously provided information in Commerce Case, Checkout and Payment, but will not be validated nor automatically loaded from the Commerce Platform.

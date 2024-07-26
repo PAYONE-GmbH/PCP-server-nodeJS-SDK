@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CartItemInput } from '../models/CartItemInput';
+import { CartItemInput } from './CartItemInput.js';
 
 /**
  * Return object contains additional information about the return/shipment, which is the basis for the Refund. The amountOfMoney in the cartItem will not be used in the request.

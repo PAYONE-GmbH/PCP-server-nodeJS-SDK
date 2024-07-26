@@ -1,5 +1,5 @@
-import { PaymentChannel, StatusCheckout } from '../models';
-import { QueryConfig } from '../utils/QueryConfig';
+import { PaymentChannel, StatusCheckout } from '../models/index.js';
+import { QueryConfig } from '../utils/QueryConfig.js';
 
 export class GetCommerceCasesQuery implements QueryConfig {
   private offset?: number;

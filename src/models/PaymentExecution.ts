@@ -10,14 +10,14 @@
  * Do not edit the class manually.
  */
 
-import { CardPaymentMethodSpecificInput } from '../models/CardPaymentMethodSpecificInput';
-import { FinancingPaymentMethodSpecificInput } from '../models/FinancingPaymentMethodSpecificInput';
-import { MobilePaymentMethodSpecificInput } from '../models/MobilePaymentMethodSpecificInput';
-import { PaymentChannel } from '../models/PaymentChannel';
-import { PaymentEvent } from '../models/PaymentEvent';
-import { RedirectPaymentMethodSpecificInput } from '../models/RedirectPaymentMethodSpecificInput';
-import { References } from '../models/References';
-import { SepaDirectDebitPaymentMethodSpecificInput } from '../models/SepaDirectDebitPaymentMethodSpecificInput';
+import { CardPaymentMethodSpecificInput } from './CardPaymentMethodSpecificInput.js';
+import { FinancingPaymentMethodSpecificInput } from './FinancingPaymentMethodSpecificInput.js';
+import { MobilePaymentMethodSpecificInput } from './MobilePaymentMethodSpecificInput.js';
+import { PaymentChannel } from './PaymentChannel.js';
+import { PaymentEvent } from './PaymentEvent.js';
+import { RedirectPaymentMethodSpecificInput } from './RedirectPaymentMethodSpecificInput.js';
+import { References } from './References.js';
+import { SepaDirectDebitPaymentMethodSpecificInput } from './SepaDirectDebitPaymentMethodSpecificInput.js';
 
 /**
  * Object contains information of the payment with a specific payment method.

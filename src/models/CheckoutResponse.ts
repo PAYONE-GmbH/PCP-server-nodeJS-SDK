@@ -10,15 +10,15 @@
  * Do not edit the class manually.
  */
 
-import { AllowedPaymentActions } from '../models/AllowedPaymentActions';
-import { AmountOfMoney } from '../models/AmountOfMoney';
-import { CheckoutReferences } from '../models/CheckoutReferences';
-import { PaymentExecution } from '../models/PaymentExecution';
-import { PaymentInformationResponse } from '../models/PaymentInformationResponse';
-import { Shipping } from '../models/Shipping';
-import { ShoppingCartResult } from '../models/ShoppingCartResult';
-import { StatusCheckout } from '../models/StatusCheckout';
-import { StatusOutput } from '../models/StatusOutput';
+import { AllowedPaymentActions } from './AllowedPaymentActions.js';
+import { AmountOfMoney } from './AmountOfMoney.js';
+import { CheckoutReferences } from './CheckoutReferences.js';
+import { PaymentExecution } from './PaymentExecution.js';
+import { PaymentInformationResponse } from './PaymentInformationResponse.js';
+import { Shipping } from './Shipping.js';
+import { ShoppingCartResult } from './ShoppingCartResult.js';
+import { StatusCheckout } from './StatusCheckout.js';
+import { StatusOutput } from './StatusOutput.js';
 
 /**
  * The Checkout corresponds to the order of the WL API. We do not take additionalInput from the WL API. We have no  shipping and use deliveryAddress instead of address.

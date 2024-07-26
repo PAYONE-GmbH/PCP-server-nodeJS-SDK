@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { CaptureOutput } from '../models/CaptureOutput';
-import { PaymentStatusOutput } from '../models/PaymentStatusOutput';
-import { StatusValue } from '../models/StatusValue';
+import { CaptureOutput } from './CaptureOutput.js';
+import { PaymentStatusOutput } from './PaymentStatusOutput.js';
+import { StatusValue } from './StatusValue.js';
 
 export class CapturePaymentResponse {
   'captureOutput'?: CaptureOutput;

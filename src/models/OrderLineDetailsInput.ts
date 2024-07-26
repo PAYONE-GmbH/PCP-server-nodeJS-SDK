@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ProductType } from '../models/ProductType';
+import { ProductType } from './ProductType.js';
 
 /**
  * Object containing additional information that when supplied can have a beneficial effect on the discountrates.

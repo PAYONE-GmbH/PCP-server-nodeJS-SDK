@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PaymentProduct3391SpecificInput } from '../models/PaymentProduct3391SpecificInput';
+import { PaymentProduct3391SpecificInput } from './PaymentProduct3391SpecificInput.js';
 
 /**
  * To complete the Payment the completeFinancingMethodSpecificInput has to be provided. At the moment it is only available for PAYONE Secured Installment (paymentProductId 3391).

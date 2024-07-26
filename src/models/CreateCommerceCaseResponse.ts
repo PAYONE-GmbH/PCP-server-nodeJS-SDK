@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { CreateCheckoutResponse } from '../models/CreateCheckoutResponse';
-import { Customer } from '../models/Customer';
+import { CreateCheckoutResponse } from './CreateCheckoutResponse.js';
+import { Customer } from './Customer.js';
 
 /**
  * The response contains references to the created Commerce case and the Checkout. It also contains the payment response if the flag \'autoExecuteOrder\' was set to true.

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { BankAccountInformation } from '../models/BankAccountInformation';
+import { BankAccountInformation } from './BankAccountInformation.js';
 
 /**
  * Object containing specific information for PAYONE Secured Direct. Debit.

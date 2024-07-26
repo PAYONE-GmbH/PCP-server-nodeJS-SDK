@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { AmountOfMoney } from '../models/AmountOfMoney';
-import { LinkInformation } from '../models/LinkInformation';
+import { AmountOfMoney } from './AmountOfMoney.js';
+import { LinkInformation } from './LinkInformation.js';
 
 export class InstallmentOption {
   /**

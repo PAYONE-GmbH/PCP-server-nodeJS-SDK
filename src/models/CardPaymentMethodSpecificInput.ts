@@ -10,12 +10,12 @@
  * Do not edit the class manually.
  */
 
-import { AuthorizationMode } from '../models/AuthorizationMode';
-import { CardInfo } from '../models/CardInfo';
-import { CardRecurrenceDetails } from '../models/CardRecurrenceDetails';
-import { TransactionChannel } from '../models/TransactionChannel';
-import { UnscheduledCardOnFileRequestor } from '../models/UnscheduledCardOnFileRequestor';
-import { UnscheduledCardOnFileSequenceIndicator } from '../models/UnscheduledCardOnFileSequenceIndicator';
+import { AuthorizationMode } from './AuthorizationMode.js';
+import { CardInfo } from './CardInfo.js';
+import { CardRecurrenceDetails } from './CardRecurrenceDetails.js';
+import { TransactionChannel } from './TransactionChannel.js';
+import { UnscheduledCardOnFileRequestor } from './UnscheduledCardOnFileRequestor.js';
+import { UnscheduledCardOnFileSequenceIndicator } from './UnscheduledCardOnFileSequenceIndicator.js';
 
 /**
  * Object containing the specific input details for card payments.

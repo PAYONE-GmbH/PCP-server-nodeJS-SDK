@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { SepaDirectDebitPaymentProduct771SpecificInput } from '../models/SepaDirectDebitPaymentProduct771SpecificInput';
+import { SepaDirectDebitPaymentProduct771SpecificInput } from './SepaDirectDebitPaymentProduct771SpecificInput.js';
 
 /**
  * Object containing the specific input details for SEPA direct debit payments

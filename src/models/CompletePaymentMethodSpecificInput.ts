@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PaymentProduct3391SpecificInput } from '../models/PaymentProduct3391SpecificInput';
+import { PaymentProduct3391SpecificInput } from './PaymentProduct3391SpecificInput.js';
 
 /**
  * To complete the Order the completePaymentMethodSpecificInput has to be provided, containing the selected installmentOptionId as well as the the bankAccountInformation of the customer.

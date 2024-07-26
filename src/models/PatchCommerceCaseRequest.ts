@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { Customer } from '../models/Customer';
+import { Customer } from './Customer.js';
 
 /**
  * Update the customer data of the given Commerce Case

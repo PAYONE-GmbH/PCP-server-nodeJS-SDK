@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { AuthorizationMode } from '../models/AuthorizationMode';
-import { PaymentProduct320SpecificInput } from '../models/PaymentProduct320SpecificInput';
+import { AuthorizationMode } from './AuthorizationMode.js';
+import { PaymentProduct320SpecificInput } from './PaymentProduct320SpecificInput.js';
 
 /**
  * Object containing the specific input details for mobile payments.

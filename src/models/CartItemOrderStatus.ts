@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CartItemStatus } from './CartItemStatus';
+import { CartItemStatus } from './CartItemStatus.js';
 
 /**
  * Detailed information regarding an occurred payment event.

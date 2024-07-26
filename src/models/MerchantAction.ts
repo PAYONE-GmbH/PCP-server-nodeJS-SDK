@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { RedirectData } from '../models/RedirectData';
+import { RedirectData } from './RedirectData.js';
 
 /**
  * Object that contains the action, including the needed data, that you should perform next, like showing instructions, showing the transaction results or redirect to a third party to complete the payment

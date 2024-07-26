@@ -10,10 +10,10 @@
  * Do not edit the class manually.
  */
 
-import { AmountOfMoney } from '../models/AmountOfMoney';
-import { CancellationReason } from '../models/CancellationReason';
-import { PaymentType } from '../models/PaymentType';
-import { StatusValue } from '../models/StatusValue';
+import { AmountOfMoney } from './AmountOfMoney.js';
+import { CancellationReason } from './CancellationReason.js';
+import { PaymentType } from './PaymentType.js';
+import { StatusValue } from './StatusValue.js';
 
 /**
  * Detailed information regarding an occurred payment event.

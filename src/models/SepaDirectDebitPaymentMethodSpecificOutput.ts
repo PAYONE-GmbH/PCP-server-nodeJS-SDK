@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PaymentProduct771SpecificOutput } from '../models/PaymentProduct771SpecificOutput';
+import { PaymentProduct771SpecificOutput } from './PaymentProduct771SpecificOutput.js';
 
 /**
  * Object containing the SEPA direct debit details.

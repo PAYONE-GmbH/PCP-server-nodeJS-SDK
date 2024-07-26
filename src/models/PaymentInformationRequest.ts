@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { AmountOfMoney } from '../models/AmountOfMoney';
-import { PaymentChannel } from '../models/PaymentChannel';
-import { PaymentType } from '../models/PaymentType';
+import { AmountOfMoney } from './AmountOfMoney.js';
+import { PaymentChannel } from './PaymentChannel.js';
+import { PaymentType } from './PaymentType.js';
 
 export class PaymentInformationRequest {
   'amountOfMoney': AmountOfMoney;

@@ -1,9 +1,14 @@
 import { Headers, RequestInit } from 'node-fetch';
-import { URLSearchParams } from 'url';
-import { CommunicatorConfiguration } from '../CommunicatorConfiguration';
-import { CommerceCaseResponse, CreateCommerceCaseRequest, CreateCommerceCaseResponse, Customer } from '../models';
-import { GetCommerceCasesQuery } from '../queries/GetCommerceCasesQuery';
-import { BaseApiClient } from './BaseApiClient';
+import { URLSearchParams, URL } from 'url';
+import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
+import {
+  CommerceCaseResponse,
+  CreateCommerceCaseRequest,
+  CreateCommerceCaseResponse,
+  Customer,
+} from '../models/index.js';
+import { GetCommerceCasesQuery } from '../queries/GetCommerceCasesQuery.js';
+import { BaseApiClient } from './BaseApiClient.js';
 
 export class CommerceCaseApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {
@@ -20,13 +25,13 @@ export class CommerceCaseApiClient extends BaseApiClient {
     if (!payload) {
       throw new Error('Payload is required');
     }
-
-    const url = new URL(`/v1/${merchantId}/commerce-cases`, this.getConfig()?.getHost());
+    console.log(payload);
+    const url = new URL(`/v1/${merchantId}/commerce-cases`, this.getConfig().getHost());
 
     const requestInit: RequestInit = {
       method: 'POST',
       headers: new Headers({
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
       }),
       body: JSON.stringify(payload),
     };
@@ -42,7 +47,7 @@ export class CommerceCaseApiClient extends BaseApiClient {
       throw new Error('Commerce Case ID is required');
     }
 
-    const url = new URL(`/v1/${merchantId}/commerce-cases/${commerceCaseId}`, this.getConfig()?.getHost());
+    const url = new URL(`/v1/${merchantId}/commerce-cases/${commerceCaseId}`, this.getConfig().getHost());
 
     const requestInit: RequestInit = {
       method: 'GET',
@@ -60,7 +65,7 @@ export class CommerceCaseApiClient extends BaseApiClient {
       throw new Error('Merchant ID is required');
     }
 
-    const url = new URL(`/v1/${merchantId}/commerce-cases`, this.getConfig()?.getHost());
+    const url = new URL(`/v1/${merchantId}/commerce-cases`, this.getConfig().getHost());
 
     if (queryParams) {
       const params = new URLSearchParams(queryParams.toQueryMap());
@@ -86,7 +91,7 @@ export class CommerceCaseApiClient extends BaseApiClient {
       throw new Error('Payload is required');
     }
 
-    const url = new URL(`/v1/${merchantId}/commerce-cases/${commerceCaseId}`, this.getConfig()?.getHost());
+    const url = new URL(`/v1/${merchantId}/commerce-cases/${commerceCaseId}`, this.getConfig().getHost());
 
     const requestInit: RequestInit = {
       method: 'PATCH',

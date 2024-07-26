@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { CardFraudResults } from '../models/CardFraudResults';
-import { ThreeDSecureResults } from '../models/ThreeDSecureResults';
+import { CardFraudResults } from './CardFraudResults.js';
+import { ThreeDSecureResults } from './ThreeDSecureResults.js';
 
 /**
  * Object containing the mobile payment method details.

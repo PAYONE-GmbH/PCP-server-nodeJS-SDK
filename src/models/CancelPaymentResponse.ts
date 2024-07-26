@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PaymentResponse } from '../models/PaymentResponse';
+import { PaymentResponse } from './PaymentResponse.js';
 
 export class CancelPaymentResponse {
   'payment'?: PaymentResponse;

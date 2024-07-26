@@ -10,13 +10,13 @@
  * Do not edit the class manually.
  */
 
-import { AmountOfMoney } from '../models/AmountOfMoney';
-import { CardPaymentMethodSpecificOutput } from '../models/CardPaymentMethodSpecificOutput';
-import { FinancingPaymentMethodSpecificOutput } from '../models/FinancingPaymentMethodSpecificOutput';
-import { MobilePaymentMethodSpecificOutput } from '../models/MobilePaymentMethodSpecificOutput';
-import { PaymentReferences } from '../models/PaymentReferences';
-import { RedirectPaymentMethodSpecificOutput } from '../models/RedirectPaymentMethodSpecificOutput';
-import { SepaDirectDebitPaymentMethodSpecificOutput } from '../models/SepaDirectDebitPaymentMethodSpecificOutput';
+import { AmountOfMoney } from './AmountOfMoney.js';
+import { CardPaymentMethodSpecificOutput } from './CardPaymentMethodSpecificOutput.js';
+import { FinancingPaymentMethodSpecificOutput } from './FinancingPaymentMethodSpecificOutput.js';
+import { MobilePaymentMethodSpecificOutput } from './MobilePaymentMethodSpecificOutput.js';
+import { PaymentReferences } from './PaymentReferences.js';
+import { RedirectPaymentMethodSpecificOutput } from './RedirectPaymentMethodSpecificOutput.js';
+import { SepaDirectDebitPaymentMethodSpecificOutput } from './SepaDirectDebitPaymentMethodSpecificOutput.js';
 
 /**
  * Object containing payment details.

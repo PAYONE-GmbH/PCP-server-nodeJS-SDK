@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { CartItemPatch } from '../models/CartItemPatch';
+import { CartItemPatch } from './CartItemPatch.js';
 
 /**
  * Shopping cart data, including items and specific amounts.

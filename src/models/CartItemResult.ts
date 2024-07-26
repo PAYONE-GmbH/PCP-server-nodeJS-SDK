@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { CartItemInvoiceData } from '../models/CartItemInvoiceData';
-import { OrderLineDetailsResult } from '../models/OrderLineDetailsResult';
+import { CartItemInvoiceData } from './CartItemInvoiceData.js';
+import { OrderLineDetailsResult } from './OrderLineDetailsResult.js';
 
 /**
  * This object contains information of all items in the cart. If a cart item is provided, the productPrice and quantity is required.

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { ApplePaymentDataTokenHeaderInformation } from '../models/ApplePaymentDataTokenHeaderInformation';
+import { ApplePaymentDataTokenHeaderInformation } from './ApplePaymentDataTokenHeaderInformation.js';
 
 /**
  * Additional information about the Apple payment data token. This information are needed for checking the validity of the payment data token before decryption.

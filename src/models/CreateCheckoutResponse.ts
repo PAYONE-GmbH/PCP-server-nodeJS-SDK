@@ -10,16 +10,16 @@
  * Do not edit the class manually.
  */
 
-import { AllowedPaymentActions } from '../models/AllowedPaymentActions';
-import { AmountOfMoney } from '../models/AmountOfMoney';
-import { CheckoutReferences } from '../models/CheckoutReferences';
-import { CreatePaymentResponse } from '../models/CreatePaymentResponse';
-import { ErrorResponse } from '../models/ErrorResponse';
-import { PaymentExecution } from '../models/PaymentExecution';
-import { Shipping } from '../models/Shipping';
-import { ShoppingCartResult } from '../models/ShoppingCartResult';
-import { StatusCheckout } from '../models/StatusCheckout';
-import { StatusOutput } from '../models/StatusOutput';
+import { AllowedPaymentActions } from './AllowedPaymentActions.js';
+import { AmountOfMoney } from './AmountOfMoney.js';
+import { CheckoutReferences } from './CheckoutReferences.js';
+import { CreatePaymentResponse } from './CreatePaymentResponse.js';
+import { ErrorResponse } from './ErrorResponse.js';
+import { PaymentExecution } from './PaymentExecution.js';
+import { Shipping } from './Shipping.js';
+import { ShoppingCartResult } from './ShoppingCartResult.js';
+import { StatusCheckout } from './StatusCheckout.js';
+import { StatusOutput } from './StatusOutput.js';
 
 /**
  * Object containing the reference of the Checkout for following requests.

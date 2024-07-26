@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PaymentProduct840SpecificOutput } from '../models/PaymentProduct840SpecificOutput';
+import { PaymentProduct840SpecificOutput } from './PaymentProduct840SpecificOutput.js';
 
 /**
  * Object containing the redirect payment product details.

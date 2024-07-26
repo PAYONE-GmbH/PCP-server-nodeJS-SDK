@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { CancelItem } from '../models/CancelItem';
-import { CancelType } from '../models/CancelType';
-import { CancellationReason } from '../models/CancellationReason';
+import { CancelItem } from './CancelItem.js';
+import { CancelType } from './CancelType.js';
+import { CancellationReason } from './CancellationReason.js';
 
 /**
  * Request to mark items as of the respective Checkout as cancelled and to automatically reverse the associated payment.  A Cancel can be created for a full or the partial ShoppingCart of the Checkout.  The platform will automatically calculate the respective amount to trigger the Cancel. For a partial Cancel a list of items must be provided.  The cancellationReason is mandatory for BNPL payment methods (paymentProductId 3390, 3391 and 3392). For other payment methods the cancellationReason is not mandatory but can be used for reporting and reconciliation purposes.

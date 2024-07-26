@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import { PersonalName } from '../models/PersonalName';
+import { PersonalName } from './PersonalName.js';
 
 /**
  * Object containing personal information like name, date of birth and gender.

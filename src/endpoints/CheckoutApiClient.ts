@@ -1,16 +1,16 @@
 import { Headers, RequestInit } from 'node-fetch';
 import { URLSearchParams } from 'url';
-import { CommunicatorConfiguration } from '../CommunicatorConfiguration';
+import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import {
   CheckoutResponse,
   CheckoutsResponse,
   CreateCheckoutRequest,
   CreateCheckoutResponse,
   PatchCheckoutRequest,
-} from '../models';
+} from '../models/index.js';
 
-import { GetCheckoutsQuery } from '../queries';
-import { BaseApiClient } from './BaseApiClient';
+import { GetCheckoutsQuery } from '../queries/index.js';
+import { BaseApiClient } from './BaseApiClient.js';
 
 export class CheckoutApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {

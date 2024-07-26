@@ -1,8 +1,8 @@
 import fetch, { RequestInit, Response } from 'node-fetch';
-import { CommunicatorConfiguration } from '../CommunicatorConfiguration';
-import { RequestHeaderGenerator } from '../RequestHeaderGenerator';
-import { ApiResponseRetrievalException } from '../errors';
-import { ErrorResponse } from '../models';
+import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
+import { RequestHeaderGenerator } from '../RequestHeaderGenerator.js';
+import { ApiResponseRetrievalException } from '../errors/index.js';
+import { ErrorResponse } from '../models/index.js';
 
 export class BaseApiClient {
   private readonly JSON_PARSE_ERROR = 'Expected valid JSON response, but failed to parse';
@@ -24,9 +24,10 @@ export class BaseApiClient {
 
   protected async makeApiCall<T>(url: string, requestInit: RequestInit): Promise<T> {
     requestInit = this.requestHeaderGenerator.generateAdditionalRequestHeaders(url, requestInit);
-
+    console.log(requestInit.headers);
     const response = await fetch(url, requestInit);
-    await this.handleError(response);
+    console.log(response);
+    await this.handleError(response.clone());
     return response.json() as Promise<T>;
   }
 

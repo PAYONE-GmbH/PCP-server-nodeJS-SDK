@@ -10,9 +10,9 @@
  * Do not edit the class manually.
  */
 
-import { MerchantAction } from '../models/MerchantAction';
-import { PaymentCreationOutput } from '../models/PaymentCreationOutput';
-import { PaymentResponse } from '../models/PaymentResponse';
+import { MerchantAction } from './MerchantAction.js';
+import { PaymentCreationOutput } from './PaymentCreationOutput.js';
+import { PaymentResponse } from './PaymentResponse.js';
 
 export class CompletePaymentResponse {
   'creationOutput'?: PaymentCreationOutput;

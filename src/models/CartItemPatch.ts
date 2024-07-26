@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { CartItemInvoiceData } from './CartItemInvoiceData';
-import { OrderLineDetailsPatch } from './OrderLineDetailsPatch';
+import { CartItemInvoiceData } from './CartItemInvoiceData.js';
+import { OrderLineDetailsPatch } from './OrderLineDetailsPatch.js';
 
 /**
  * This object contains information of all items in the cart. If a cart item is provided, the productPrice and quantity is required.

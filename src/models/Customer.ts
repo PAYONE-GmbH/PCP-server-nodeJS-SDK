@@ -10,10 +10,10 @@
  * Do not edit the class manually.
  */
 
-import { Address } from '../models/Address';
-import { CompanyInformation } from '../models/CompanyInformation';
-import { ContactDetails } from '../models/ContactDetails';
-import { PersonalInformation } from '../models/PersonalInformation';
+import { Address } from './Address.js';
+import { CompanyInformation } from './CompanyInformation.js';
+import { ContactDetails } from './ContactDetails.js';
+import { PersonalInformation } from './PersonalInformation.js';
 
 /**
  * Object containing the details of a customer.

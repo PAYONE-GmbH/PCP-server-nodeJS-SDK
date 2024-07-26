@@ -10,8 +10,8 @@
  * Do not edit the class manually.
  */
 
-import { BankAccountInformation } from '../models/BankAccountInformation';
-import { MandateRecurrenceType } from '../models/MandateRecurrenceType';
+import { BankAccountInformation } from './BankAccountInformation.js';
+import { MandateRecurrenceType } from './MandateRecurrenceType.js';
 
 /**
  * Object containing the relevant information of a SEPA Direct Debit mandate for processing (mandatory fields in pain.008). Renamed from CreateMandateWithReturnUrl to ProcessingMandateInformation.
