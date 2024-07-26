@@ -17,56 +17,23 @@ export class CommerceCaseResponse {
   /**
    * Unique reference of the Commerce Case that is also returned for reporting and reconciliation purposes.
    */
-  'merchantReference'?: string;
+  merchantReference: string | null;
   /**
    * Unique ID reference of the Commerce Case. It can be used to add additional Checkouts to the Commerce Case.
    */
-  'commerceCaseId'?: string;
-  'customer'?: Customer;
-  'checkouts'?: Array<CheckoutResponse>;
+  commerceCaseId: string | null;
+  customer: Customer | null;
+  checkouts: Array<CheckoutResponse> | null;
   /**
    * Creation date and time of the Checkout in RFC3339 format. It can either be provided in the request or otherwise will be automatically set to the time when the request CreateCommerceCase was received. Response values will always be in UTC time, but when providing this field in the requests, the time offset can have different formats.  Accepted formats are: * YYYY-MM-DD\'T\'HH:mm:ss\'Z\' * YYYY-MM-DD\'T\'HH:mm:ss+XX:XX * YYYY-MM-DD\'T\'HH:mm:ss-XX:XX * YYYY-MM-DD\'T\'HH:mm\'Z\' * YYYY-MM-DD\'T\'HH:mm+XX:XX * YYYY-MM-DD\'T\'HH:mm-XX:XX  All other formats may be ignored by the system.
    */
-  'creationDateTime'?: Date;
+  creationDateTime: Date | null;
 
-  static readonly discriminator: string | undefined = undefined;
-
-  static readonly attributeTypeMap: Array<{ name: string; baseName: string; type: string; format: string }> = [
-    {
-      name: 'merchantReference',
-      baseName: 'merchantReference',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'commerceCaseId',
-      baseName: 'commerceCaseId',
-      type: 'string',
-      format: 'UUID',
-    },
-    {
-      name: 'customer',
-      baseName: 'customer',
-      type: 'Customer',
-      format: '',
-    },
-    {
-      name: 'checkouts',
-      baseName: 'checkouts',
-      type: 'Array<CheckoutResponse>',
-      format: '',
-    },
-    {
-      name: 'creationDateTime',
-      baseName: 'creationDateTime',
-      type: 'Date',
-      format: 'date-time',
-    },
-  ];
-
-  static getAttributeTypeMap() {
-    return CommerceCaseResponse.attributeTypeMap;
+  public constructor() {
+    this.merchantReference = null;
+    this.commerceCaseId = null;
+    this.customer = null;
+    this.checkouts = null;
+    this.creationDateTime = null;
   }
-
-  public constructor() {}
 }

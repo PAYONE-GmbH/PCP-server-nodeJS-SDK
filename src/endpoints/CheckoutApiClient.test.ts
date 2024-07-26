@@ -1,9 +1,20 @@
-import { Response } from 'node-fetch';
+import fetch from 'node-fetch';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
-import { CheckoutApiClient } from './CheckoutApiClient.js';
 import { CheckoutResponse } from '../models/CheckoutResponse.js';
 import { CreateCheckoutRequest } from '../models/CreateCheckoutRequest.js';
+import { createResponseMock } from '../testutils/mock-response.js';
+import { CheckoutApiClient } from './CheckoutApiClient.js';
+import { ErrorResponse } from '../models/ErrorResponse.js';
+
+vi.mock('node-fetch', async importOriginal => {
+  return {
+    ...(await importOriginal<typeof import('node-fetch')>()),
+    default: vi.fn(),
+  };
+});
+
+const mockedFetch = vi.mocked(fetch, true);
 
 describe('CheckoutApiClient', () => {
   let checkoutApiClient: CheckoutApiClient;
@@ -15,9 +26,8 @@ describe('CheckoutApiClient', () => {
   describe('createCheckoutRequest', () => {
     test('given request was successful, then return response', async () => {
       const expectedResponse = new CheckoutResponse();
-      vi.spyOn(checkoutApiClient, 'getResponse').mockImplementationOnce(() => {
-        return Promise.resolve(new Response(JSON.stringify(expectedResponse)));
-      });
+
+      mockedFetch.mockResolvedValueOnce(createResponseMock<CheckoutResponse>(200, expectedResponse));
 
       const res = await checkoutApiClient.createCheckoutRequest(
         'merchantId',
@@ -27,7 +37,19 @@ describe('CheckoutApiClient', () => {
 
       console.log({ res });
 
-      expect(res).toBeDefined();
+      expect(res).toEqual(expectedResponse);
+    });
+    test('given request was not successful, then return errorresponse', async () => {
+      const expectedResponse = createResponseMock<ErrorResponse>(400, new ErrorResponse());
+
+      mockedFetch.mockRejectedValueOnce(expectedResponse);
+
+      expect.assertions(1);
+      try {
+        await checkoutApiClient.createCheckoutRequest('merchantId', 'commerceCaseId', new CreateCheckoutRequest());
+      } catch (error) {
+        expect(error).toEqual(expectedResponse);
+      }
     });
   });
 });

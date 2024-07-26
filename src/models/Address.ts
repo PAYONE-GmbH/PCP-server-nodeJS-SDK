@@ -17,82 +17,39 @@ export class Address {
   /**
    * Second line of street or additional address information such as apartments and suits
    */
-  'additionalInfo'?: string;
+  additionalInfo: string | null;
   /**
    * City
    */
-  'city'?: string;
+  city: string | null;
   /**
    * ISO 3166-1 alpha-2 country code
    */
-  'countryCode'?: string;
+  countryCode: string | null;
   /**
    * House number
    */
-  'houseNumber'?: string;
+  houseNumber: string | null;
   /**
    * State (ISO 3166-2 subdivisions), only if country=US, CA, CN, JP, MX, BR, AR, ID, TH, IN.
    */
-  'state'?: string;
+  state: string | null;
   /**
    * Street name
    */
-  'street'?: string;
+  street: string | null;
   /**
    * Zip code
    */
-  'zip'?: string;
+  zip: string | null;
 
-  static readonly discriminator: string | undefined = undefined;
-
-  static readonly attributeTypeMap: Array<{ name: string; baseName: string; type: string; format: string }> = [
-    {
-      name: 'additionalInfo',
-      baseName: 'additionalInfo',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'city',
-      baseName: 'city',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'countryCode',
-      baseName: 'countryCode',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'houseNumber',
-      baseName: 'houseNumber',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'state',
-      baseName: 'state',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'street',
-      baseName: 'street',
-      type: 'string',
-      format: '',
-    },
-    {
-      name: 'zip',
-      baseName: 'zip',
-      type: 'string',
-      format: '',
-    },
-  ];
-
-  static getAttributeTypeMap() {
-    return Address.attributeTypeMap;
+  public constructor() {
+    this.additionalInfo = null;
+    this.city = null;
+    this.countryCode = null;
+    this.houseNumber = null;
+    this.state = null;
+    this.street = null;
+    this.zip = null;
   }
-
-  public constructor() {}
 }
