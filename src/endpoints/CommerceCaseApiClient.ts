@@ -80,15 +80,19 @@ export class CommerceCaseApiClient extends BaseApiClient {
     return this.makeApiCall<CommerceCaseResponse[]>(url.toString(), requestInit);
   }
 
-  public async updateCommerceCaseRequest(merchantId: string, commerceCaseId: string, payload: Customer): Promise<void> {
+  public async updateCommerceCaseRequest(
+    merchantId: string,
+    commerceCaseId: string,
+    customer: Customer,
+  ): Promise<void> {
     if (!merchantId) {
       throw new Error('Merchant ID is required');
     }
     if (!commerceCaseId) {
       throw new Error('Commerce Case ID is required');
     }
-    if (!payload) {
-      throw new Error('Payload is required');
+    if (!customer) {
+      throw new Error('Customer is required');
     }
 
     const url = new URL(`/v1/${merchantId}/commerce-cases/${commerceCaseId}`, this.getConfig().getHost());
@@ -98,7 +102,7 @@ export class CommerceCaseApiClient extends BaseApiClient {
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
-      body: JSON.stringify({ customer: payload }),
+      body: JSON.stringify({ customer }),
     };
 
     await this.makeApiCall(url.toString(), requestInit);

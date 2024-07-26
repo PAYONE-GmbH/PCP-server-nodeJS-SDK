@@ -38,6 +38,9 @@ export class CommerceCaseApiExample {
     if (!getOneResponse.customer) {
       throw new Error('Customer not found');
     }
+    if (!getOneResponse.customer.billingAddress) {
+      throw new Error('Billing address not found');
+    }
     const modifiedCustomer: Customer = {
       ...getOneResponse.customer,
       billingAddress: {
