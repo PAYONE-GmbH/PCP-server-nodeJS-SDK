@@ -7,8 +7,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/index.ts",
-    "lint": "eslint \"src/**/*.ts\" --max-warnings 0",
-    "lint:fix": "eslint \"src/**/*.ts\" --max-warnings 0 --fix",
+    "lint": "eslint -c ./eslint.config.mjs",
+    "lint:fix": "eslint -c ./eslint.config.mjs --fix",
     "format:check": "prettier --check \"src/**/!(*.d).ts\"",
     "format:write": "prettier --write \"src/**/!(*.d).ts\"",
     "test": "vitest",
@@ -18,16 +18,16 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@eslint/js": "9.7.0",
-    "@types/node": "20.14.12",
-    "@vitest/coverage-v8": "^2.0.4",
-    "eslint": "9.7.0",
-    "globals": "15.8.0",
+    "@eslint/js": "9.8.0",
+    "@types/node": "22.1.0",
+    "@vitest/coverage-v8": "^2.0.5",
+    "eslint": "9.8.0",
+    "globals": "15.9.0",
     "prettier": "3.3.3",
     "ts-node": "10.9.2",
     "typescript": "5.5.4",
-    "typescript-eslint": "7.17.0",
-    "vitest": "2.0.4"
+    "typescript-eslint": "8.0.1",
+    "vitest": "2.0.5"
   },
   "dependencies": {
     "node-fetch": "3.3.2"

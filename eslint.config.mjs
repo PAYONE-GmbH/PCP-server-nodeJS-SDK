@@ -9,6 +9,9 @@ export default [
   {
     languageOptions: { globals: globals.node },
   },
+  {
+    ignores: ['node_modules/**', 'dist/**', 'example-app/**', 'coverage/**', 'build/**'],
+  },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
 ];
