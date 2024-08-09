@@ -1,7 +1,19 @@
 import fetch, { type RequestInit } from 'node-fetch';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import { RequestHeaderGenerator } from '../RequestHeaderGenerator.js';
-import { ApiErrorResponseException } from '../errors/index.js';
+import { ApiErrorResponseException, ApiResponseRetrievalException } from '../errors/index.js';
+import type { ErrorResponse } from '../models/ErrorResponse.js';
+
+function isErrorResponse(parsed: object): parsed is ErrorResponse {
+  const record = parsed as Record<string, unknown>;
+  if (Object.prototype.hasOwnProperty.call(record, 'errorId') && typeof record['errorId'] !== 'string') {
+    return false;
+  }
+  if (Object.prototype.hasOwnProperty.call(record, 'errorId') && !Array.isArray(record['errors'])) {
+    return false;
+  }
+  return true;
+}
 
 export class BaseApiClient {
   protected readonly requestHeaderGenerator: RequestHeaderGenerator;
@@ -25,12 +37,23 @@ export class BaseApiClient {
 
     const response = await fetch(url, requestInit);
 
-    const body = await response.json();
-
-    if (response.ok) {
-      return body as Promise<T>;
+    const body = await response.text();
+    let parsed: unknown;
+    try {
+      parsed = JSON.parse(body);
+    } catch (error) {
+      throw new ApiResponseRetrievalException(response.status, body, error instanceof Error ? error : undefined);
     }
-    // TODO check if this is a valid error response
-    throw new ApiErrorResponseException(response.status, JSON.stringify(body));
+    if (typeof parsed !== 'object' || parsed === null) {
+      throw new ApiResponseRetrievalException(response.status, body);
+    }
+
+    if (!response.ok) {
+      if (isErrorResponse(parsed)) {
+        throw new ApiErrorResponseException(response.status, body, parsed.errors ?? []);
+      }
+      throw new ApiResponseRetrievalException(response.status, body);
+    }
+    return parsed as Promise<T>;
   }
 }

@@ -4,7 +4,7 @@ export interface APIError {
    * @description Error code
    * @example 50001130
    */
-  errorCode: string;
+  errorCode?: string;
   /**
    * @description Category the error belongs to. The category should give an indication of the type of error you are dealing
    *     with. Possible values:
