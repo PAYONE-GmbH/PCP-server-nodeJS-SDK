@@ -1,7 +1,7 @@
-import { Headers, RequestInit } from 'node-fetch';
+import { Headers, type RequestInit } from 'node-fetch';
 import { URLSearchParams, URL } from 'url';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
-import {
+import type {
   CommerceCaseResponse,
   CreateCommerceCaseRequest,
   CreateCommerceCaseResponse,

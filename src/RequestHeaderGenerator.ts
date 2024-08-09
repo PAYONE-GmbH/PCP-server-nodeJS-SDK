@@ -1,5 +1,5 @@
 import * as crypto from 'crypto';
-import { Headers, RequestInit } from 'node-fetch';
+import { Headers, type RequestInit } from 'node-fetch';
 import { URL } from 'url';
 
 import { CommunicatorConfiguration } from './CommunicatorConfiguration.js';

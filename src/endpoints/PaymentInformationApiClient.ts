@@ -1,6 +1,6 @@
-import { Headers, RequestInit } from 'node-fetch';
+import { Headers, type RequestInit } from 'node-fetch';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
-import { PaymentInformationRequest, PaymentInformationResponse } from '../models/index.js';
+import type { PaymentInformationRequest, PaymentInformationResponse } from '../models/index.js';
 import { BaseApiClient } from './BaseApiClient.js';
 
 export class PaymentInformationApiClient extends BaseApiClient {

@@ -31,5 +31,5 @@ export interface CreateCheckoutRequest {
    *
    * @default false
    */
-  autoExecuteOrder: boolean;
+  autoExecuteOrder?: boolean;
 }

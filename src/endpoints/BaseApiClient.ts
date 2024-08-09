@@ -1,4 +1,4 @@
-import fetch, { RequestInit } from 'node-fetch';
+import fetch, { type RequestInit } from 'node-fetch';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import { RequestHeaderGenerator } from '../RequestHeaderGenerator.js';
 import { ApiErrorResponseException } from '../errors/index.js';
