@@ -4,6 +4,9 @@ export default defineConfig({
   test: {
     coverage: {
       provider: 'v8',
+      include: ['src'],
+      exclude: ['src/models', '**/*index.ts'],
+      reporter: ['text', 'lcov'],
     },
   },
 });
