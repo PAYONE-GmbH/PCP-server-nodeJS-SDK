@@ -12,8 +12,6 @@ export class GetCommerceCasesQuery implements QueryConfig {
   private includeCheckoutStatus?: StatusCheckout[];
   private includePaymentChannel?: PaymentChannel[];
 
-  constructor() {}
-
   public setOffset(offset: number): this {
     this.offset = offset;
     return this;
