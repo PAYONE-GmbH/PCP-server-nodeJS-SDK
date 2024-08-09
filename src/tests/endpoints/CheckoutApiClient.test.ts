@@ -1,10 +1,10 @@
 import fetch from 'node-fetch';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
-import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
-import type { CheckoutResponse, ErrorResponse } from '../models/index.js';
-import { CheckoutApiClient } from './CheckoutApiClient.js';
-import { createResponseMock } from '../testutils/mock-response.js';
-import { ApiErrorResponseException } from '../errors/ApiErrorResponseException.js';
+import { CommunicatorConfiguration } from '../../CommunicatorConfiguration.js';
+import type { CheckoutResponse, ErrorResponse } from '../../models/index.js';
+import { CheckoutApiClient } from '../../endpoints/CheckoutApiClient.js';
+import { createResponseMock } from '../mock-response.js';
+import { ApiErrorResponseException } from '../../errors/ApiErrorResponseException.js';
 
 vi.mock('node-fetch', async importOriginal => {
   return {
@@ -28,11 +28,7 @@ describe('CheckoutApiClient', () => {
 
       mockedFetch.mockResolvedValueOnce(createResponseMock<CheckoutResponse>(200, expectedResponse));
 
-      const res = await checkoutApiClient.createCheckoutRequest(
-        'merchantId',
-        'commerceCaseId',
-        {},
-      );
+      const res = await checkoutApiClient.createCheckoutRequest('merchantId', 'commerceCaseId', {});
 
       console.log({ res });
 

@@ -1,5 +1,5 @@
 import { expect, describe, test } from 'vitest';
-import { ServerMetaInfo } from './ServerMetaInfo.js';
+import { ServerMetaInfo } from '../../utils/ServerMetaInfo.js';
 import * as os from 'os';
 
 describe('ServerMetaInfo', () => {
