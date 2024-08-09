@@ -31,7 +31,9 @@ function versionFromString(value: string): ApplePaymentTokenVersion {
   }
 }
 
-export function applePayPaymentToMobilePaymentMethodSpecificInput(payment: ApplePayPayment) {
+export function applePayPaymentToMobilePaymentMethodSpecificInput(
+  payment: ApplePayPayment,
+): MobilePaymentMethodSpecificInput {
   return {
     paymentProductId: 302,
     publicKeyHash: payment.token?.paymentData?.header?.publicKeyHash,
