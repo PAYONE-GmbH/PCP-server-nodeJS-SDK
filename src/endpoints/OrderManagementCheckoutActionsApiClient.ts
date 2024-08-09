@@ -1,6 +1,6 @@
-import { Headers, RequestInit } from 'node-fetch';
+import { Headers, type RequestInit } from 'node-fetch';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
-import {
+import type {
   CancelRequest,
   CancelResponse,
   DeliverRequest,

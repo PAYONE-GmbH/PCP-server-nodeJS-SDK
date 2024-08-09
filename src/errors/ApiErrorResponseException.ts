@@ -1,4 +1,4 @@
-import { APIError } from '../models/APIError.js';
+import type { APIError } from '../models/APIError.js';
 import { ApiException } from './ApiException.js';
 
 export class ApiErrorResponseException extends ApiException {

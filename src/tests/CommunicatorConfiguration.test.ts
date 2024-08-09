@@ -1,5 +1,5 @@
 import { expect, describe, test } from 'vitest';
-import { CommunicatorConfiguration } from './CommunicatorConfiguration.js';
+import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 
 describe('CommunicatorConfiguration', () => {
   test('constructs', () => {
