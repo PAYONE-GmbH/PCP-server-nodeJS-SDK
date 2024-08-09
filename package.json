@@ -2,8 +2,12 @@
   "name": "pcp-server-nodejs-sdk",
   "version": "0.0.1",
   "description": "",
-  "type": "module",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/index.ts",
@@ -12,11 +16,22 @@
     "format:check": "prettier --check \"src/**/!(*.d).ts\"",
     "format:write": "prettier --write \"src/**/!(*.d).ts\"",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "payone",
+    "server",
+    "node",
+    "sdk"
+  ],
   "license": "MIT",
+  "author": "PAYONE-GmbH",
+  "homepage": "https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK.git"
+  },
   "devDependencies": {
     "@eslint/js": "9.8.0",
     "@types/node": "22.1.0",
