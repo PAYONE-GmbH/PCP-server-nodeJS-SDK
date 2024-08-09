@@ -1,8 +1,16 @@
-# PayOne Node SDK
+# PAYONE Commerce Platform Node SDK
 
-Welcome to the Node SDK for the PayOne PCP platform! This repository contains a powerful, easy-to-use software development kit (SDK) designed to simplify the integration of online payment processing into your applications.
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=PAYONE-GmbH_PCP-server-nodeJS-SDK&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=PAYONE-GmbH_PCP-server-nodeJS-SDK)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=PAYONE-GmbH_PCP-server-nodeJS-SDK&metric=coverage)](https://sonarcloud.io/summary/new_code?id=PAYONE-GmbH_PCP-server-nodeJS-SDK)
+[![npm](https://img.shields.io/npm/v/pcp-server-nodejs-sdk)](https://www.npmjs.com/package/pcp-server-nodejs-sdk)
+[![npm downloads](https://img.shields.io/npm/dw/pcp-server-nodejs-sdk)](https://www.npmjs.com/package/pcp-server-nodejs-sdk)
+
+**NOTE:** This SDK is still under development. Some things may be broken, features may change in non-compatible ways or will be removed completely.
+
+Welcome to the Node SDK for the PAYONE Commerce Platform! This repository contains a powerful, easy-to-use software development kit (SDK) designed to simplify the integration of online payment processing into your applications.
 
 ### TODOS
+
 - [ ] Setup changelog
 - [ ] Setup sonarcloud
 - [ ] Setup Github actions
@@ -13,7 +21,7 @@ Welcome to the Node SDK for the PayOne PCP platform! This repository contains a 
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-    - [Configuration](#configuration)
+  - [Configuration](#configuration)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -26,16 +34,9 @@ Welcome to the Node SDK for the PayOne PCP platform! This repository contains a 
 
 ## Installation
 
-
 ## Usage
 
-
-
 ### Configuration
-
-
-
-
 
 ### Run the example app
 
@@ -57,28 +58,27 @@ Push to the branch (`git push origin feature-branch`).
 Create a new Pull Request.
 Please make sure to follow the coding standards and write appropriate tests for your changes.
 
-
 ### Build the library
 
-
-
 ### Run tests
-
 
 ### Releasing the library
 
 - Checkout develop branch
 - Create release branch (release/0.1.0)
+
 ```sh
 git checkout -b release/0.1.0
 ```
+
 - Run prepare-release.sh script to set correct version
+
 ```sh
 ./prepare-release.sh
 ```
+
 - Create PR on develop branch
 - Merge develop in main branch
-
 
 ## License
 
