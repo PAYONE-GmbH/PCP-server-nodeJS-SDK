@@ -1,10 +1,10 @@
-import type { AuthorizationMode } from "./AuthorizationMode.js";
-import type { CardInfo } from "./CardInfo.js";
-import type { CardOnFileRecurringFrequency } from "./CardOnFileRecurringFrequency.js";
-import type { CardRecurrenceDetails } from "./CardRecurrenceDetails.js";
-import type { TransactionChannel } from "./TransactionChannel.js";
-import type { UnscheduledCardOnFileRequestor } from "./UnscheduledCardOnFileRequestor.js";
-import type { UnscheduledCardOnFileSequenceIndicator } from "./UnscheduledCardOnFileSequenceIndicator.js";
+import type { AuthorizationMode } from './AuthorizationMode.js';
+import type { CardInfo } from './CardInfo.js';
+import type { CardOnFileRecurringFrequency } from './CardOnFileRecurringFrequency.js';
+import type { CardRecurrenceDetails } from './CardRecurrenceDetails.js';
+import type { TransactionChannel } from './TransactionChannel.js';
+import type { UnscheduledCardOnFileRequestor } from './UnscheduledCardOnFileRequestor.js';
+import type { UnscheduledCardOnFileSequenceIndicator } from './UnscheduledCardOnFileSequenceIndicator.js';
 
 /** @description Object containing the specific input details for card payments.  */
 export interface CardPaymentMethodSpecificInput {

@@ -10,7 +10,12 @@ import type {
 } from '../models/index.js';
 
 import { GetCheckoutsQuery } from '../queries/index.js';
-import { BaseApiClient, CHECKOUT_ID_REQUIRED_ERROR, COMMERCE_CASE_ID_REQUIRED_ERROR, MERCHANT_ID_REQUIRED_ERROR } from './BaseApiClient.js';
+import {
+  BaseApiClient,
+  CHECKOUT_ID_REQUIRED_ERROR,
+  COMMERCE_CASE_ID_REQUIRED_ERROR,
+  MERCHANT_ID_REQUIRED_ERROR,
+} from './BaseApiClient.js';
 
 export class CheckoutApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {

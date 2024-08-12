@@ -81,9 +81,9 @@ describe('PaymentExecutionApiClient', () => {
       await expect(() =>
         paymentExecutionApiClient.createPayment('', 'commerceCaseId', 'checkoutId', {}),
       ).rejects.toThrowError('Merchant ID is required');
-      await expect(() => paymentExecutionApiClient.createPayment('merchantId', '', 'checkoutId', {})).rejects.toThrowError(
-        'Commerce Case ID is required',
-      );
+      await expect(() =>
+        paymentExecutionApiClient.createPayment('merchantId', '', 'checkoutId', {}),
+      ).rejects.toThrowError('Commerce Case ID is required');
       await expect(() =>
         paymentExecutionApiClient.createPayment('merchantId', 'commerceCaseId', '', {}),
       ).rejects.toThrowError('Checkout ID is required');

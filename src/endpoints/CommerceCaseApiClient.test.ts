@@ -91,7 +91,9 @@ describe('CheckoutApiClient', () => {
       }
     });
     test('a required params is empty, throw an error', async () => {
-      await expect(() => commerceCaseApiClient.createCommerceCaseRequest('', {})).rejects.toThrow('Merchant ID is required');
+      await expect(() => commerceCaseApiClient.createCommerceCaseRequest('', {})).rejects.toThrow(
+        'Merchant ID is required',
+      );
     });
   });
   describe('getCommerceCaseRequest', () => {

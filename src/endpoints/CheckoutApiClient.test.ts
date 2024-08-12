@@ -220,9 +220,9 @@ describe('CheckoutApiClient', () => {
       await expect(() =>
         checkoutApiClient.updateCheckoutRequest('', 'commerceCaseId', 'checkoutId', payload),
       ).rejects.toThrow('Merchant ID is required');
-      await expect(() => checkoutApiClient.updateCheckoutRequest('merchantId', '', 'checkoutId', payload)).rejects.toThrow(
-        'Commerce Case ID is required',
-      );
+      await expect(() =>
+        checkoutApiClient.updateCheckoutRequest('merchantId', '', 'checkoutId', payload),
+      ).rejects.toThrow('Commerce Case ID is required');
       await expect(() =>
         checkoutApiClient.updateCheckoutRequest('merchantId', 'commerceCaseId', '', payload),
       ).rejects.toThrow('Checkout ID is required');

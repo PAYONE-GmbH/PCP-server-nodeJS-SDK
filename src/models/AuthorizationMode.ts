@@ -11,4 +11,3 @@ export enum AuthorizationMode {
   PRE_AUTHORIZATION = 'PRE_AUTHORIZATION',
   SALE = 'SALE',
 }
-

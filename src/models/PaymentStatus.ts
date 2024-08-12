@@ -1,5 +1,5 @@
 /**
- * @description 
+ * @description
  *     - WAITING_FOR_PAYMENT - There does not yet exist a PaymentExecution nor a PaymentInformation for this
  *     Checkout.
  *     - PAYMENT_NOT_COMPLETED - There exists a PaymentExecution or a PaymentInformation for this Checkout, but all
