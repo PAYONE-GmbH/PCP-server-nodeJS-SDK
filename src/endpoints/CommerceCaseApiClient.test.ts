@@ -90,8 +90,8 @@ describe('CheckoutApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required params is empty, throw an error', () => {
-      expect(() => commerceCaseApiClient.createCommerceCaseRequest('', {})).rejects.toThrow('Merchant ID is required');
+    test('a required params is empty, throw an error', async () => {
+      await expect(() => commerceCaseApiClient.createCommerceCaseRequest('', {})).rejects.toThrow('Merchant ID is required');
     });
   });
   describe('getCommerceCaseRequest', () => {
@@ -139,11 +139,11 @@ describe('CheckoutApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required params is empty, throw an error', () => {
-      expect(() => commerceCaseApiClient.getCommerceCaseRequest('', 'commerceCaseId')).rejects.toThrow(
+    test('a required params is empty, throw an error', async () => {
+      await expect(() => commerceCaseApiClient.getCommerceCaseRequest('', 'commerceCaseId')).rejects.toThrow(
         'Merchant ID is required',
       );
-      expect(() => commerceCaseApiClient.getCommerceCaseRequest('merchantId', '')).rejects.toThrow(
+      await expect(() => commerceCaseApiClient.getCommerceCaseRequest('merchantId', '')).rejects.toThrow(
         'Commerce Case ID is required',
       );
     });
@@ -194,8 +194,8 @@ describe('CheckoutApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required params is empty, throw an error', () => {
-      expect(() => commerceCaseApiClient.getCommerceCasesRequest('')).rejects.toThrow('Merchant ID is required');
+    test('a required params is empty, throw an error', async () => {
+      await expect(() => commerceCaseApiClient.getCommerceCasesRequest('')).rejects.toThrow('Merchant ID is required');
     });
   });
   describe('updateCommerceCaseRequest', () => {
@@ -229,11 +229,11 @@ describe('CheckoutApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required params is empty, throw an error', () => {
-      expect(() => commerceCaseApiClient.updateCommerceCaseRequest('', 'commerceCaseId', {})).rejects.toThrow(
+    test('a required params is empty, throw an error', async () => {
+      await expect(() => commerceCaseApiClient.updateCommerceCaseRequest('', 'commerceCaseId', {})).rejects.toThrow(
         'Merchant ID is required',
       );
-      expect(() => commerceCaseApiClient.updateCommerceCaseRequest('merchantId', '', {})).rejects.toThrow(
+      await expect(() => commerceCaseApiClient.updateCommerceCaseRequest('merchantId', '', {})).rejects.toThrow(
         'Commerce Case ID is required',
       );
     });

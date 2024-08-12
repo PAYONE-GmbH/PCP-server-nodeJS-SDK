@@ -77,14 +77,14 @@ describe('PaymentExecutionApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required param is empty, throw an error', () => {
-      expect(() =>
+    test('a required param is empty, throw an error', async () => {
+      await expect(() =>
         paymentExecutionApiClient.createPayment('', 'commerceCaseId', 'checkoutId', {}),
       ).rejects.toThrowError('Merchant ID is required');
-      expect(() => paymentExecutionApiClient.createPayment('merchantId', '', 'checkoutId', {})).rejects.toThrowError(
+      await expect(() => paymentExecutionApiClient.createPayment('merchantId', '', 'checkoutId', {})).rejects.toThrowError(
         'Commerce Case ID is required',
       );
-      expect(() =>
+      await expect(() =>
         paymentExecutionApiClient.createPayment('merchantId', 'commerceCaseId', '', {}),
       ).rejects.toThrowError('Checkout ID is required');
     });
@@ -137,17 +137,17 @@ describe('PaymentExecutionApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required param is empty, throw an error', () => {
-      expect(() =>
+    test('a required param is empty, throw an error', async () => {
+      await expect(() =>
         paymentExecutionApiClient.capturePayment('', 'commerceCaseId', 'checkoutId', 'paymentId', { isFinal: false }),
       ).rejects.toThrowError('Merchant ID is required');
-      expect(() =>
+      await expect(() =>
         paymentExecutionApiClient.capturePayment('merchantId', '', 'checkoutId', 'paymentId', { isFinal: false }),
       ).rejects.toThrowError('Commerce Case ID is required');
-      expect(() =>
+      await expect(() =>
         paymentExecutionApiClient.capturePayment('merchantId', 'commerceCaseId', '', 'paymentId', { isFinal: false }),
       ).rejects.toThrowError('Checkout ID is required');
-      expect(() =>
+      await expect(() =>
         paymentExecutionApiClient.capturePayment('merchantId', 'commerceCaseId', 'checkoutId', '', { isFinal: false }),
       ).rejects.toThrowError('Payment Execution ID is required');
     });
@@ -200,17 +200,17 @@ describe('PaymentExecutionApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required param is empty, throw an error', () => {
-      expect(() =>
+    test('a required param is empty, throw an error', async () => {
+      await expect(() =>
         paymentExecutionApiClient.cancelPayment('', 'commerceCaseId', 'checkoutId', 'paymentId', {}),
       ).rejects.toThrowError('Merchant ID is required');
-      expect(() =>
+      await expect(() =>
         paymentExecutionApiClient.cancelPayment('merchantId', '', 'checkoutId', 'paymentId', {}),
       ).rejects.toThrowError('Commerce Case ID is required');
-      expect(() =>
+      await expect(() =>
         paymentExecutionApiClient.cancelPayment('merchantId', 'commerceCaseId', '', 'paymentId', {}),
       ).rejects.toThrowError('Checkout ID is required');
-      expect(() =>
+      await expect(() =>
         paymentExecutionApiClient.cancelPayment('merchantId', 'commerceCaseId', 'checkoutId', '', {}),
       ).rejects.toThrowError('Payment Execution ID is required');
     });
@@ -264,17 +264,17 @@ describe('PaymentExecutionApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required param is empty, throw an error', () => {
-      expect(() =>
+    test('a required param is empty, throw an error', async () => {
+      await expect(() =>
         paymentExecutionApiClient.refundPayment('', 'commerceCaseId', 'checkoutId', 'paymentId', {}),
       ).rejects.toThrowError('Merchant ID is required');
-      expect(() =>
+      await expect(() =>
         paymentExecutionApiClient.refundPayment('merchantId', '', 'checkoutId', 'paymentId', {}),
       ).rejects.toThrowError('Commerce Case ID is required');
-      expect(() =>
+      await expect(() =>
         paymentExecutionApiClient.refundPayment('merchantId', 'commerceCaseId', '', 'paymentId', {}),
       ).rejects.toThrowError('Checkout ID is required');
-      expect(() =>
+      await expect(() =>
         paymentExecutionApiClient.refundPayment('merchantId', 'commerceCaseId', 'checkoutId', '', {}),
       ).rejects.toThrowError('Payment Execution ID is required');
     });
@@ -336,17 +336,17 @@ describe('PaymentExecutionApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required param is empty, throw an error', () => {
-      expect(() =>
+    test('a required param is empty, throw an error', async () => {
+      await expect(() =>
         paymentExecutionApiClient.completePayment('', 'commerceCaseId', 'checkoutId', 'paymentId', {}),
       ).rejects.toThrowError('Merchant ID is required');
-      expect(() =>
+      await expect(() =>
         paymentExecutionApiClient.completePayment('merchantId', '', 'checkoutId', 'paymentId', {}),
       ).rejects.toThrowError('Commerce Case ID is required');
-      expect(() =>
+      await expect(() =>
         paymentExecutionApiClient.completePayment('merchantId', 'commerceCaseId', '', 'paymentId', {}),
       ).rejects.toThrowError('Checkout ID is required');
-      expect(() =>
+      await expect(() =>
         paymentExecutionApiClient.completePayment('merchantId', 'commerceCaseId', 'checkoutId', '', {}),
       ).rejects.toThrowError('Payment Execution ID is required');
     });
