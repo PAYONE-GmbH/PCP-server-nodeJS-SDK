@@ -12,7 +12,14 @@ import type {
   RefundPaymentResponse,
   RefundRequest,
 } from '../models/index.js';
-import { BaseApiClient } from './BaseApiClient.js';
+import {
+  BaseApiClient,
+  CHECKOUT_ID_REQUIRED_ERROR,
+  COMMERCE_CASE_ID_REQUIRED_ERROR,
+  MERCHANT_ID_REQUIRED_ERROR,
+} from './BaseApiClient.js';
+
+const PAYMENT_EXECUTION_ID_REQUIRED_ERROR = 'Payment Execution ID is required';
 
 export class PaymentExecutionApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {
@@ -26,16 +33,13 @@ export class PaymentExecutionApiClient extends BaseApiClient {
     payload: PaymentExecutionRequest,
   ): Promise<CreatePaymentResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
-    }
-    if (!payload) {
-      throw new Error('Payload is required');
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
@@ -62,19 +66,16 @@ export class PaymentExecutionApiClient extends BaseApiClient {
     payload: CapturePaymentRequest,
   ): Promise<CapturePaymentResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
     if (!paymentExecutionId) {
-      throw new Error('Payment Execution ID is required');
-    }
-    if (!payload) {
-      throw new Error('Payload is required');
+      throw new TypeError(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
@@ -101,19 +102,16 @@ export class PaymentExecutionApiClient extends BaseApiClient {
     payload: CancelPaymentRequest,
   ): Promise<CancelPaymentResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
     if (!paymentExecutionId) {
-      throw new Error('Payment Execution ID is required');
-    }
-    if (!payload) {
-      throw new Error('Payload is required');
+      throw new TypeError(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
@@ -140,19 +138,16 @@ export class PaymentExecutionApiClient extends BaseApiClient {
     payload: RefundRequest,
   ): Promise<RefundPaymentResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
     if (!paymentExecutionId) {
-      throw new Error('Payment Execution ID is required');
-    }
-    if (!payload) {
-      throw new Error('Payload is required');
+      throw new TypeError(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
@@ -179,19 +174,16 @@ export class PaymentExecutionApiClient extends BaseApiClient {
     payload: CompletePaymentRequest,
   ): Promise<CompletePaymentResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
     if (!paymentExecutionId) {
-      throw new Error('Payment Execution ID is required');
-    }
-    if (!payload) {
-      throw new Error('Payload is required');
+      throw new TypeError(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(

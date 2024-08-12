@@ -1,7 +1,14 @@
 import { Headers, type RequestInit } from 'node-fetch';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import type { PaymentInformationRequest, PaymentInformationResponse } from '../models/index.js';
-import { BaseApiClient } from './BaseApiClient.js';
+import {
+  BaseApiClient,
+  CHECKOUT_ID_REQUIRED_ERROR,
+  COMMERCE_CASE_ID_REQUIRED_ERROR,
+  MERCHANT_ID_REQUIRED_ERROR,
+} from './BaseApiClient.js';
+
+const PAYMENT_INFORMATION_ID_REQUIRED_ERROR = 'Payment Information ID is required';
 
 export class PaymentInformationApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {
@@ -15,16 +22,13 @@ export class PaymentInformationApiClient extends BaseApiClient {
     payload: PaymentInformationRequest,
   ): Promise<PaymentInformationResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new Error(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new Error(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
-    }
-    if (!payload) {
-      throw new Error('Payload is required');
+      throw new Error(CHECKOUT_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
@@ -50,16 +54,16 @@ export class PaymentInformationApiClient extends BaseApiClient {
     paymentInformationId: string,
   ): Promise<PaymentInformationResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new Error(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new Error(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
+      throw new Error(CHECKOUT_ID_REQUIRED_ERROR);
     }
     if (!paymentInformationId) {
-      throw new Error('Payment Information ID is required');
+      throw new Error(PAYMENT_INFORMATION_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
