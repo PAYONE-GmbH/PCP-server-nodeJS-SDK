@@ -8,7 +8,7 @@ import type { ShoppingCartInput } from './ShoppingCartInput.js';
 export interface Order {
   amountOfMoney?: AmountOfMoney;
   customer?: Customer;
-  references: References;
+  references?: References;
   shipping?: Shipping;
   shoppingCart?: ShoppingCartInput;
 }
