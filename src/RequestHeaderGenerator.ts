@@ -10,8 +10,9 @@ export class RequestHeaderGenerator {
   public static readonly CLIENT_META_INFO_HEADER_NAME = 'X-GCS-ClientMetaInfo';
   private static readonly ALGORITHM = 'sha256';
   private static readonly WHITESPACE_REGEX = /\r?\n[h]*/g;
-  private readonly DATE_HEADER_NAME = 'Date';
-  private readonly AUTHORIZATION_HEADER_NAME = 'Authorization';
+  private static readonly DATE_HEADER_NAME = 'Date';
+  private static readonly AUTHORIZATION_HEADER_NAME = 'Authorization';
+  private static readonly CONTENT_TYPE_HEADER_NAME = 'Content-Type';
 
   private readonly config: CommunicatorConfiguration;
 
@@ -22,8 +23,8 @@ export class RequestHeaderGenerator {
   public generateAdditionalRequestHeaders(url: string, request: RequestInit): RequestInit {
     const headers = new Headers(request.headers);
 
-    if (!headers.has(this.DATE_HEADER_NAME)) {
-      headers.set(this.DATE_HEADER_NAME, new Date().toUTCString());
+    if (!headers.has(RequestHeaderGenerator.DATE_HEADER_NAME)) {
+      headers.set(RequestHeaderGenerator.DATE_HEADER_NAME, new Date().toUTCString());
     }
     if (!headers.has(RequestHeaderGenerator.SERVER_META_INFO_HEADER_NAME)) {
       headers.set(RequestHeaderGenerator.SERVER_META_INFO_HEADER_NAME, this.getServerMetaInfo());
@@ -31,8 +32,8 @@ export class RequestHeaderGenerator {
     if (!headers.has(RequestHeaderGenerator.CLIENT_META_INFO_HEADER_NAME)) {
       headers.set(RequestHeaderGenerator.CLIENT_META_INFO_HEADER_NAME, this.getClientMetaInfo());
     }
-    if (!headers.has(this.AUTHORIZATION_HEADER_NAME)) {
-      headers.set(this.AUTHORIZATION_HEADER_NAME, this.getAuthHeader(url, request, headers));
+    if (!headers.has(RequestHeaderGenerator.AUTHORIZATION_HEADER_NAME)) {
+      headers.set(RequestHeaderGenerator.AUTHORIZATION_HEADER_NAME, this.getAuthHeader(url, request, headers));
     }
 
     return {
@@ -45,12 +46,12 @@ export class RequestHeaderGenerator {
     // 1. method
     let stringToSign = `${request.method}\n`;
     // 2. Content-Type
-    if (headers.has('Content-Type')) {
-      stringToSign += `${headers.get('Content-Type')}`;
+    if (headers.has(RequestHeaderGenerator.CONTENT_TYPE_HEADER_NAME)) {
+      stringToSign += `${headers.get(RequestHeaderGenerator.CONTENT_TYPE_HEADER_NAME)}`;
     }
     stringToSign += '\n';
     // 3. Date
-    stringToSign += `${headers.get(this.DATE_HEADER_NAME)}\n`;
+    stringToSign += `${headers.get(RequestHeaderGenerator.DATE_HEADER_NAME)}\n`;
     // 4. Canonicalized Headers (starting with X-GCS, sorted by names)
     if (headers.has(RequestHeaderGenerator.CLIENT_META_INFO_HEADER_NAME)) {
       stringToSign += `${RequestHeaderGenerator.CLIENT_META_INFO_HEADER_NAME.toLowerCase()}:${headers.get(RequestHeaderGenerator.CLIENT_META_INFO_HEADER_NAME)!.replace(RequestHeaderGenerator.WHITESPACE_REGEX, ' ').trim()}\n`;

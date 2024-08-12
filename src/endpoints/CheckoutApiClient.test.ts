@@ -36,8 +36,6 @@ describe('CheckoutApiClient', () => {
         new CreateCheckoutRequest(),
       );
 
-      console.log({ res });
-
       expect(res).toEqual(expectedResponse);
     });
     test('given request was not successful, then return errorresponse', async () => {

@@ -40,7 +40,7 @@ export class PaymentExecutionApiClient extends BaseApiClient {
 
     const url = new URL(
       `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/payment-executions`,
-      this.getConfig()?.getHost(),
+      this.getConfig().getHost(),
     );
 
     const requestInit: RequestInit = {
@@ -79,7 +79,7 @@ export class PaymentExecutionApiClient extends BaseApiClient {
 
     const url = new URL(
       `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/payment-executions/${paymentExecutionId}/capture`,
-      this.getConfig()?.getHost(),
+      this.getConfig().getHost(),
     );
 
     const requestInit: RequestInit = {
@@ -118,7 +118,7 @@ export class PaymentExecutionApiClient extends BaseApiClient {
 
     const url = new URL(
       `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/payment-executions/${paymentExecutionId}/cancel`,
-      this.getConfig()?.getHost(),
+      this.getConfig().getHost(),
     );
 
     const requestInit: RequestInit = {
@@ -157,7 +157,7 @@ export class PaymentExecutionApiClient extends BaseApiClient {
 
     const url = new URL(
       `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/payment-executions/${paymentExecutionId}/refund`,
-      this.getConfig()?.getHost(),
+      this.getConfig().getHost(),
     );
 
     const requestInit: RequestInit = {
@@ -196,7 +196,7 @@ export class PaymentExecutionApiClient extends BaseApiClient {
 
     const url = new URL(
       `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/payment-executions/${paymentExecutionId}/complete`,
-      this.getConfig()?.getHost(),
+      this.getConfig().getHost(),
     );
 
     const requestInit: RequestInit = {
