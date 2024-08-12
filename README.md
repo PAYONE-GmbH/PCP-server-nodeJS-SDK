@@ -5,8 +5,6 @@
 [![npm](https://img.shields.io/npm/v/pcp-server-nodejs-sdk)](https://www.npmjs.com/package/pcp-server-nodejs-sdk)
 [![npm downloads](https://img.shields.io/npm/dw/pcp-server-nodejs-sdk)](https://www.npmjs.com/package/pcp-server-nodejs-sdk)
 
-**NOTE:** This SDK is still under development. Some things may be broken, features may change in non-compatible ways or will be removed completely.
-
 Welcome to the Node SDK for the PAYONE Commerce Platform! This repository contains a powerful, easy-to-use software development kit (SDK) designed to simplify the integration of online payment processing into your applications.
 
 ## Table of Contents
