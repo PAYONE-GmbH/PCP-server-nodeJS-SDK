@@ -1,0 +1,153 @@
+import { describe, test, expect } from 'vitest';
+import { ExtendedCheckoutStatus } from '../models/ExtendedCheckoutStatus.js';
+import { PaymentChannel } from '../models/PaymentChannel.js';
+import { StatusCheckout } from '../models/StatusCheckout.js';
+import { GetCheckoutsQuery } from './GetCheckoutsQuery.js';
+
+describe('GetCheckoutsQuery', () => {
+  test('toQueryMap', () => {
+    const query = new GetCheckoutsQuery();
+    query.setOffset(1);
+    query.setSize(10);
+    query.setFromDate('2021-01-01');
+    query.setToDate('2021-01-31');
+    query.setFromCheckoutAmount(100);
+    query.setToCheckoutAmount(200);
+    query.setFromOpenAmount(50);
+    query.setToOpenAmount(150);
+    query.setFromCollectedAmount(10);
+    query.setToCollectedAmount(20);
+    query.setFromCancelledAmount(5);
+    query.setToCancelledAmount(15);
+    query.setFromRefundAmount(1);
+    query.setToRefundAmount(2);
+    query.setFromChargebackAmount(100);
+    query.setToChargebackAmount(200);
+    query.setCheckoutId('123456');
+    query.setMerchantReference('7890');
+    query.setMerchantCustomerId('1234');
+    query.setIncludePaymentProductId([12, 456]);
+    query.setIncludeCheckoutStatus([StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED]);
+    query.setIncludeExtendedCheckoutStatus([ExtendedCheckoutStatus.OPEN, ExtendedCheckoutStatus.DELETED]);
+    query.setIncludePaymentChannel([PaymentChannel.ECOMMERCE, PaymentChannel.POS]);
+    query.setPaymentReference('1234');
+    query.setPaymentId('5678');
+    query.setFirstName('John');
+    query.setSurname('Doe');
+    query.setEmail('john.doe@example.com');
+    query.setPhoneNumber('1234567890');
+    query.setDateOfBirth('1980-01-01');
+    query.setCompanyInformation('Company Inc.');
+
+    const queryMap = query.toQueryMap();
+
+    expect(queryMap.get('offset')).toEqual('1');
+    expect(queryMap.get('size')).toEqual('10');
+    expect(queryMap.get('fromDate')).toEqual('2021-01-01');
+    expect(queryMap.get('toDate')).toEqual('2021-01-31');
+    expect(queryMap.get('fromCheckoutAmount')).toEqual('100');
+    expect(queryMap.get('toCheckoutAmount')).toEqual('200');
+    expect(queryMap.get('fromOpenAmount')).toEqual('50');
+    expect(queryMap.get('toOpenAmount')).toEqual('150');
+    expect(queryMap.get('fromCollectedAmount')).toEqual('10');
+    expect(queryMap.get('toCollectedAmount')).toEqual('20');
+    expect(queryMap.get('fromCancelledAmount')).toEqual('5');
+    expect(queryMap.get('toCancelledAmount')).toEqual('15');
+    expect(queryMap.get('fromRefundAmount')).toEqual('1');
+    expect(queryMap.get('toRefundAmount')).toEqual('2');
+    expect(queryMap.get('fromChargebackAmount')).toEqual('100');
+    expect(queryMap.get('toChargebackAmount')).toEqual('200');
+    expect(queryMap.get('checkoutId')).toEqual('123456');
+    expect(queryMap.get('merchantReference')).toEqual('7890');
+    expect(queryMap.get('merchantCustomerId')).toEqual('1234');
+    expect(queryMap.get('includePaymentProductId')).toEqual('12,456');
+    expect(queryMap.get('includeCheckoutStatus')).toEqual('BILLED,CHARGEBACKED');
+    expect(queryMap.get('includeExtendedCheckoutStatus')).toEqual('OPEN,DELETED');
+    expect(queryMap.get('includePaymentChannel')).toEqual('ECOMMERCE,POS');
+    expect(queryMap.get('paymentReference')).toEqual('1234');
+    expect(queryMap.get('paymentId')).toEqual('5678');
+    expect(queryMap.get('firstName')).toEqual('John');
+    expect(queryMap.get('surname')).toEqual('Doe');
+    expect(queryMap.get('email')).toEqual('john.doe@example.com');
+    expect(queryMap.get('phoneNumber')).toEqual('1234567890');
+    expect(queryMap.get('dateOfBirth')).toEqual('1980-01-01');
+    expect(queryMap.get('companyInformation')).toEqual('Company Inc.');
+  });
+
+  test('getters', () => {
+    const query = new GetCheckoutsQuery();
+    query.setOffset(1);
+    query.setSize(10);
+    query.setFromDate('2021-01-01');
+    query.setToDate('2021-01-31');
+    query.setFromCheckoutAmount(100);
+    query.setToCheckoutAmount(200);
+    query.setFromOpenAmount(50);
+    query.setToOpenAmount(150);
+    query.setFromCollectedAmount(10);
+    query.setToCollectedAmount(20);
+    query.setFromCancelledAmount(5);
+    query.setToCancelledAmount(15);
+    query.setFromRefundAmount(1);
+    query.setToRefundAmount(2);
+    query.setFromChargebackAmount(100);
+    query.setToChargebackAmount(200);
+    query.setCheckoutId('123456');
+    query.setMerchantReference('7890');
+    query.setMerchantCustomerId('1234');
+    query.setIncludePaymentProductId([12, 456]);
+    query.setIncludeCheckoutStatus([StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED]);
+    query.setIncludeExtendedCheckoutStatus([ExtendedCheckoutStatus.OPEN, ExtendedCheckoutStatus.DELETED]);
+    query.setIncludePaymentChannel([PaymentChannel.ECOMMERCE, PaymentChannel.POS]);
+    query.setPaymentReference('1234');
+    query.setPaymentId('5678');
+    query.setFirstName('John');
+    query.setSurname('Doe');
+    query.setEmail('john.doe@example.com');
+    query.setPhoneNumber('1234567890');
+    query.setDateOfBirth('1980-01-01');
+    query.setCompanyInformation('Company Inc.');
+
+    expect(query.getOffset()).toEqual(1);
+    expect(query.getSize()).toEqual(10);
+    expect(query.getFromDate()).toEqual('2021-01-01');
+    expect(query.getToDate()).toEqual('2021-01-31');
+    expect(query.getFromCheckoutAmount()).toEqual(100);
+    expect(query.getToCheckoutAmount()).toEqual(200);
+    expect(query.getFromOpenAmount()).toEqual(50);
+    expect(query.getToOpenAmount()).toEqual(150);
+    expect(query.getFromCollectedAmount()).toEqual(10);
+    expect(query.getToCollectedAmount()).toEqual(20);
+    expect(query.getFromCancelledAmount()).toEqual(5);
+    expect(query.getToCancelledAmount()).toEqual(15);
+    expect(query.getFromRefundAmount()).toEqual(1);
+    expect(query.getToRefundAmount()).toEqual(2);
+    expect(query.getFromChargebackAmount()).toEqual(100);
+    expect(query.getToChargebackAmount()).toEqual(200);
+    expect(query.getCheckoutId()).toEqual('123456');
+    expect(query.getMerchantReference()).toEqual('7890');
+    expect(query.getMerchantCustomerId()).toEqual('1234');
+    expect(query.getIncludePaymentProductId()).toEqual([12, 456]);
+    expect(query.getIncludeCheckoutStatus()).toEqual([StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED]);
+    expect(query.getIncludeExtendedCheckoutStatus()).toEqual([
+      ExtendedCheckoutStatus.OPEN,
+      ExtendedCheckoutStatus.DELETED,
+    ]);
+    expect(query.getIncludePaymentChannel()).toEqual([PaymentChannel.ECOMMERCE, PaymentChannel.POS]);
+    expect(query.getPaymentReference()).toEqual('1234');
+    expect(query.getPaymentId()).toEqual('5678');
+    expect(query.getFirstName()).toEqual('John');
+    expect(query.getSurname()).toEqual('Doe');
+    expect(query.getEmail()).toEqual('john.doe@example.com');
+    expect(query.getPhoneNumber()).toEqual('1234567890');
+    expect(query.getDateOfBirth()).toEqual('1980-01-01');
+    expect(query.getCompanyInformation()).toEqual('Company Inc.');
+  });
+
+  test('nulls', () => {
+    const query = new GetCheckoutsQuery();
+    const queryMap = query.toQueryMap();
+
+    expect(Object.keys(queryMap).length).toBe(0);
+  });
+});

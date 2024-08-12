@@ -2,10 +2,10 @@
  * Current high-level status of the Checkout
  */
 export enum StatusCheckout {
-  Open = 'OPEN',
-  PendingCompletion = 'PENDING_COMPLETION',
-  Completed = 'COMPLETED',
-  Billed = 'BILLED',
-  Chargebacked = 'CHARGEBACKED',
-  Deleted = 'DELETED',
+  OPEN = 'OPEN',
+  PENDINGCOMPLETION = 'PENDING_COMPLETION',
+  COMPLETED = 'COMPLETED',
+  BILLED = 'BILLED',
+  CHARGEBACKED = 'CHARGEBACKED',
+  DELETED = 'DELETED',
 }

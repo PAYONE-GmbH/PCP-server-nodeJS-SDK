@@ -1,4 +1,4 @@
 export enum PaymentChannel {
-  Ecommerce = 'ECOMMERCE',
-  Pos = 'POS',
+  ECOMMERCE = 'ECOMMERCE',
+  POS = 'POS',
 }
