@@ -22,13 +22,13 @@ export class PaymentInformationApiClient extends BaseApiClient {
     payload: PaymentInformationRequest,
   ): Promise<PaymentInformationResponse> {
     if (!merchantId) {
-      throw new Error(MERCHANT_ID_REQUIRED_ERROR);
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error(COMMERCE_CASE_ID_REQUIRED_ERROR);
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error(CHECKOUT_ID_REQUIRED_ERROR);
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
@@ -54,16 +54,16 @@ export class PaymentInformationApiClient extends BaseApiClient {
     paymentInformationId: string,
   ): Promise<PaymentInformationResponse> {
     if (!merchantId) {
-      throw new Error(MERCHANT_ID_REQUIRED_ERROR);
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error(COMMERCE_CASE_ID_REQUIRED_ERROR);
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error(CHECKOUT_ID_REQUIRED_ERROR);
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
     if (!paymentInformationId) {
-      throw new Error(PAYMENT_INFORMATION_ID_REQUIRED_ERROR);
+      throw new TypeError(PAYMENT_INFORMATION_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
