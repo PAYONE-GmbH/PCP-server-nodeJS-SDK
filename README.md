@@ -9,10 +9,6 @@
 
 Welcome to the Node SDK for the PAYONE Commerce Platform! This repository contains a powerful, easy-to-use software development kit (SDK) designed to simplify the integration of online payment processing into your applications.
 
-### TODOS
-
-- [ ] Write more tests
-
 ## Table of Contents
 
 - [Features](#features)
