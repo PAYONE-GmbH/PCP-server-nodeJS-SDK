@@ -7,7 +7,7 @@ export interface CheckoutsResponse {
    * @description Number of found Checkouts
    * @example 3390
    */
-  numberOfCheckouts?: number;
+  numberOfCheckouts: number;
   /** @description List of Checkouts */
-  checkouts?: CheckoutResponse[];
+  checkouts: CheckoutResponse[];
 }
