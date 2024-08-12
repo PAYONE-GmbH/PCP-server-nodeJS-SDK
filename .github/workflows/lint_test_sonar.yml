@@ -1,4 +1,4 @@
-name: Quality Check (Lint, Test, Sonarcloud)
+name: Quality Check (Build, Lint, Test, Sonarcloud)
 on:
   push:
     branches:
@@ -24,6 +24,8 @@ jobs:
           node-version: '20.x'
       - name: Install dependencies
         run: npm ci
+      - name: Run Build
+        run: npm run build
       - name: Run Linting
         run: npm run lint
       - name: Run Tests
