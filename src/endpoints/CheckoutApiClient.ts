@@ -10,7 +10,7 @@ import type {
 } from '../models/index.js';
 
 import { GetCheckoutsQuery } from '../queries/index.js';
-import { BaseApiClient } from './BaseApiClient.js';
+import { BaseApiClient, CHECKOUT_ID_REQUIRED_ERROR, COMMERCE_CASE_ID_REQUIRED_ERROR, MERCHANT_ID_REQUIRED_ERROR } from './BaseApiClient.js';
 
 export class CheckoutApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {
@@ -23,13 +23,10 @@ export class CheckoutApiClient extends BaseApiClient {
     payload: CreateCheckoutRequest,
   ): Promise<CreateCheckoutResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
-    }
-    if (!payload) {
-      throw new Error('Payload is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(`/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts`, this.getConfig().getHost());
@@ -51,13 +48,13 @@ export class CheckoutApiClient extends BaseApiClient {
     checkoutId: string,
   ): Promise<CheckoutResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
@@ -75,7 +72,7 @@ export class CheckoutApiClient extends BaseApiClient {
 
   public async getCheckoutsRequest(merchantId: string, queryParams?: GetCheckoutsQuery): Promise<CheckoutsResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(`/v1/${merchantId}/checkouts`, this.getConfig().getHost());
@@ -100,16 +97,13 @@ export class CheckoutApiClient extends BaseApiClient {
     payload: PatchCheckoutRequest,
   ): Promise<void> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
-    }
-    if (!payload) {
-      throw new Error('Payload is required');
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
@@ -125,18 +119,18 @@ export class CheckoutApiClient extends BaseApiClient {
       body: JSON.stringify(payload),
     };
 
-    await this.makeApiCall(url.toString(), requestInit);
+    await this.makeApiCall(url.toString(), requestInit, BaseApiClient.parseVoid);
   }
 
   public async removeCheckoutRequest(merchantId: string, commerceCaseId: string, checkoutId: string): Promise<void> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
@@ -149,6 +143,6 @@ export class CheckoutApiClient extends BaseApiClient {
       headers: new Headers(),
     };
 
-    await this.makeApiCall(url.toString(), requestInit);
+    await this.makeApiCall(url.toString(), requestInit, BaseApiClient.parseVoid);
   }
 }
