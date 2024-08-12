@@ -8,7 +8,7 @@ import type {
   Customer,
 } from '../models/index.js';
 import { GetCommerceCasesQuery } from '../queries/GetCommerceCasesQuery.js';
-import { BaseApiClient } from './BaseApiClient.js';
+import { BaseApiClient, COMMERCE_CASE_ID_REQUIRED_ERROR, MERCHANT_ID_REQUIRED_ERROR } from './BaseApiClient.js';
 
 export class CommerceCaseApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {
@@ -20,12 +20,8 @@ export class CommerceCaseApiClient extends BaseApiClient {
     payload: CreateCommerceCaseRequest,
   ): Promise<CreateCommerceCaseResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
-    if (!payload) {
-      throw new Error('Payload is required');
-    }
-    console.log(payload);
     const url = new URL(`/v1/${merchantId}/commerce-cases`, this.getConfig().getHost());
 
     const requestInit: RequestInit = {
@@ -41,10 +37,10 @@ export class CommerceCaseApiClient extends BaseApiClient {
 
   public async getCommerceCaseRequest(merchantId: string, commerceCaseId: string): Promise<CommerceCaseResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(`/v1/${merchantId}/commerce-cases/${commerceCaseId}`, this.getConfig().getHost());
@@ -62,7 +58,7 @@ export class CommerceCaseApiClient extends BaseApiClient {
     queryParams?: GetCommerceCasesQuery,
   ): Promise<CommerceCaseResponse[]> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(`/v1/${merchantId}/commerce-cases`, this.getConfig().getHost());
@@ -86,13 +82,10 @@ export class CommerceCaseApiClient extends BaseApiClient {
     customer: Customer,
   ): Promise<void> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
-    }
-    if (!customer) {
-      throw new Error('Customer is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(`/v1/${merchantId}/commerce-cases/${commerceCaseId}`, this.getConfig().getHost());
@@ -105,6 +98,6 @@ export class CommerceCaseApiClient extends BaseApiClient {
       body: JSON.stringify({ customer }),
     };
 
-    await this.makeApiCall(url.toString(), requestInit);
+    await this.makeApiCall(url.toString(), requestInit, BaseApiClient.parseVoid);
   }
 }
