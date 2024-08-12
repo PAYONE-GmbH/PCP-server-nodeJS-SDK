@@ -10,36 +10,11 @@
  * Do not edit the class manually.
  */
 
-import { CreatePaymentResponse } from './CreatePaymentResponse.js';
-import { ShoppingCartResult } from './ShoppingCartResult.js';
+import type { CreatePaymentResponse } from './CreatePaymentResponse.js';
+import type { ShoppingCartResult } from './ShoppingCartResult.js';
 
-/**
- * Object that contains details on the created payment in case one has been created.
- */
-export class OrderResponse {
-  'createPaymentResponse'?: CreatePaymentResponse;
-  'shoppingCart'?: ShoppingCartResult;
-
-  static readonly discriminator: string | undefined = undefined;
-
-  static readonly attributeTypeMap: Array<{ name: string; baseName: string; type: string; format: string }> = [
-    {
-      name: 'createPaymentResponse',
-      baseName: 'createPaymentResponse',
-      type: 'CreatePaymentResponse',
-      format: '',
-    },
-    {
-      name: 'shoppingCart',
-      baseName: 'shoppingCart',
-      type: 'ShoppingCartResult',
-      format: '',
-    },
-  ];
-
-  static getAttributeTypeMap() {
-    return OrderResponse.attributeTypeMap;
-  }
-
-  public constructor() {}
+/** @description Object that contains details on the created payment in case one has been created. */
+export interface OrderResponse {
+  createPaymentResponse?: CreatePaymentResponse;
+  shoppingCart?: ShoppingCartResult;
 }

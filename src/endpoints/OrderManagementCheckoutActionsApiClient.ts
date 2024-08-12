@@ -1,6 +1,6 @@
-import { Headers, RequestInit } from 'node-fetch';
+import { Headers, type RequestInit } from 'node-fetch';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
-import {
+import type {
   CancelRequest,
   CancelResponse,
   DeliverRequest,
@@ -10,7 +10,7 @@ import {
   ReturnRequest,
   ReturnResponse,
 } from '../models/index.js';
-import { BaseApiClient } from './BaseApiClient.js';
+import { BaseApiClient, CHECKOUT_ID_REQUIRED_ERROR, COMMERCE_CASE_ID_REQUIRED_ERROR, MERCHANT_ID_REQUIRED_ERROR } from './BaseApiClient.js';
 
 export class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {
@@ -24,16 +24,13 @@ export class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
     payload: OrderRequest,
   ): Promise<OrderResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
-    }
-    if (!payload) {
-      throw new Error('Payload is required');
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
@@ -59,16 +56,13 @@ export class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
     payload: DeliverRequest,
   ): Promise<DeliverResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
-    }
-    if (!payload) {
-      throw new Error('Payload is required');
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
@@ -94,16 +88,13 @@ export class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
     payload: ReturnRequest,
   ): Promise<ReturnResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
-    }
-    if (!payload) {
-      throw new Error('Payload is required');
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
@@ -129,16 +120,13 @@ export class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
     payload: CancelRequest,
   ): Promise<CancelResponse> {
     if (!merchantId) {
-      throw new Error('Merchant ID is required');
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
     if (!commerceCaseId) {
-      throw new Error('Commerce Case ID is required');
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
     if (!checkoutId) {
-      throw new Error('Checkout ID is required');
-    }
-    if (!payload) {
-      throw new Error('Payload is required');
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
     }
 
     const url = new URL(
