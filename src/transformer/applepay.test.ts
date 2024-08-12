@@ -3,10 +3,10 @@ import type { ApplePayPayment } from '../models/applepay/ApplePayPayment.js';
 import type { MobilePaymentMethodSpecificInput } from '../models/MobilePaymentMethodSpecificInput.js';
 import { ApplePayPaymentMethodType } from '../models/applepay/ApplePayPaymentMethodType.js';
 import { Network } from '../models/Network.js';
-import { applePayPaymentToMobilePaymentMethodSpecificInput } from '../transformer/applepay.js';
+import { transformApplePayPaymentToMobilePaymentMethodSpecificInput } from '../transformer/applepay.js';
 
 describe('applepay transformer', () => {
-  describe('applePayPaymentToMobilePaymentMethodSpecificInput', () => {
+  describe('transformApplePayPaymentToMobilePaymentMethodSpecificInput', () => {
     test('converts a full ApplePayPayment correctly', () => {
       const payment: ApplePayPayment = {
         token: {
@@ -60,7 +60,7 @@ describe('applepay transformer', () => {
         },
       };
 
-      expect(applePayPaymentToMobilePaymentMethodSpecificInput(payment)).toEqual(expected);
+      expect(transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment)).toEqual(expected);
     });
   });
 });

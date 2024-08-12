@@ -17,7 +17,8 @@
     "format:write": "prettier --write \"src/**/!(*.d).ts\"",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
-    "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0 --config ./changelog.config.cjs"
+    "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0 --config ./changelog.config.cjs",
+    "version": "./version.sh"
   },
   "keywords": [
     "payone",

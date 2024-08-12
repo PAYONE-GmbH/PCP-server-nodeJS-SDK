@@ -89,7 +89,7 @@ describe('CheckoutApiClient', () => {
         merchantCustomerId: 'cust-1234',
         references: { merchantReference: 'com-12345' },
         amountOfMoney: { currencyCode: 'YEN', amount: 1000 },
-        checkoutStatus: StatusCheckout.Open,
+        checkoutStatus: StatusCheckout.OPEN,
       };
 
       mockedFetch.mockResolvedValueOnce(createResponseMock<CheckoutResponse>(200, expectedResponse));

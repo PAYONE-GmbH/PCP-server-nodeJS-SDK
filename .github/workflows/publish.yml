@@ -1,9 +1,10 @@
 name: Publish package to npm
 on:
   workflow_dispatch:
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
       packages: write
@@ -15,6 +16,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@payone'
       - run: npm ci
+      - run: npm run build
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
