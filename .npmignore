@@ -1,28 +1,8 @@
-src
-node_modules
-coverage
-example-app
+# Exclude everything
+*
 
-temp
-images
-
-.github
-.vscode
-.idea
-*.iml
-
-.DS_Store
-Thumbs.db
-
-vitest.config.ts
-tsconfig.json
-sonar-project.properties
-prepare_release.sh
-lefthook.yml
-eslint.config.mjs
-.prettierrc
-commitlint.config.js
-.husky
-
-*.tar.gz
-*.tgz
+# But include these files and directories
+!package.json
+!README.md
+!dist/
+!dist/**

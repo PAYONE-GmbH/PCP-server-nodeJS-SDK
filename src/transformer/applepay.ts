@@ -31,7 +31,7 @@ function versionFromString(value: string): ApplePaymentTokenVersion {
   }
 }
 
-export function applePayPaymentToMobilePaymentMethodSpecificInput(
+export function transformApplePayPaymentToMobilePaymentMethodSpecificInput(
   payment: ApplePayPayment,
 ): MobilePaymentMethodSpecificInput {
   return {
