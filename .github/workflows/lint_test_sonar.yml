@@ -22,13 +22,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
-          cache: 'yarn'
       - name: Install dependencies
-        run: yarn install --immutable
+        run: npm ci
       - name: Run Linting
-        run: yarn run lint
-      - name: Run Tests with Coverage
-        run: yarn run coverage
+        run: npm run lint
+      - name: Run Tests
+        run: npm run coverage
       - name: Run SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:

@@ -2,8 +2,12 @@
   "name": "pcp-server-nodejs-sdk",
   "version": "0.0.1",
   "description": "",
-  "type": "module",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/index.ts",
@@ -12,17 +16,32 @@
     "format:check": "prettier --check \"src/**/!(*.d).ts\"",
     "format:write": "prettier --write \"src/**/!(*.d).ts\"",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0 --config ./changelog.config.cjs"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "payone",
+    "server",
+    "node",
+    "sdk"
+  ],
   "license": "MIT",
+  "author": "PAYONE-GmbH",
+  "homepage": "https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK.git"
+  },
   "devDependencies": {
+    "@commitlint/cli": "19.4.0",
+    "@commitlint/config-conventional": "19.2.2",
     "@eslint/js": "9.8.0",
     "@types/node": "22.1.0",
-    "@vitest/coverage-v8": "^2.0.5",
+    "@vitest/coverage-v8": "2.0.5",
+    "conventional-changelog-cli": "5.0.0",
     "eslint": "9.8.0",
     "globals": "15.9.0",
+    "lefthook": "1.7.12",
     "prettier": "3.3.3",
     "ts-node": "10.9.2",
     "typescript": "5.5.4",

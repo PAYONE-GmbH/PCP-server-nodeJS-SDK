@@ -34,8 +34,6 @@ export class GetCheckoutsQuery implements QueryConfig {
   private dateOfBirth?: string;
   private companyInformation?: string;
 
-  constructor() {}
-
   public setOffset(offset: number): this {
     this.offset = offset;
     return this;

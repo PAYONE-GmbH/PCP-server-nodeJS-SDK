@@ -38,7 +38,7 @@ export class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
 
     const url = new URL(
       `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/order`,
-      this.getConfig()?.getHost(),
+      this.getConfig().getHost(),
     );
 
     const requestInit: RequestInit = {
@@ -73,7 +73,7 @@ export class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
 
     const url = new URL(
       `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/deliver`,
-      this.getConfig()?.getHost(),
+      this.getConfig().getHost(),
     );
 
     const requestInit: RequestInit = {
@@ -108,7 +108,7 @@ export class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
 
     const url = new URL(
       `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/return`,
-      this.getConfig()?.getHost(),
+      this.getConfig().getHost(),
     );
 
     const requestInit: RequestInit = {
@@ -143,7 +143,7 @@ export class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
 
     const url = new URL(
       `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/cancel`,
-      this.getConfig()?.getHost(),
+      this.getConfig().getHost(),
     );
 
     const requestInit: RequestInit = {
