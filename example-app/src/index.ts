@@ -23,11 +23,11 @@ const run = async () => {
   const commerceCaseApiClientExample = new CommerceCaseApiExample(communicatorConfiguration);
 
   // await commerceCaseApiClientExample.runPostOne();
-  // await commerceCaseApiClientExample.runGetAll();
+  await commerceCaseApiClientExample.runGetAll();
 
   // await commerceCaseApiClientExample.runGetOne();
 
-  await commerceCaseApiClientExample.runUpdateOne();
+  // await commerceCaseApiClientExample.runUpdateOne();
 };
 
 run();

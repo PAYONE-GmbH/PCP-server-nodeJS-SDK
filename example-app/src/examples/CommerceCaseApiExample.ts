@@ -16,7 +16,7 @@ export class CommerceCaseApiExample {
   }
 
   async runPostOne() {
-    const payload = new CreateCommerceCaseRequest();
+    const payload: CreateCommerceCaseRequest = {};
     const res = await this.client.createCommerceCaseRequest(this.merchantId, payload);
     console.log(res);
   }

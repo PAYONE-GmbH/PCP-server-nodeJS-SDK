@@ -8,11 +8,11 @@ import { ServerMetaInfo } from './utils/ServerMetaInfo.js';
 export class RequestHeaderGenerator {
   public static readonly SERVER_META_INFO_HEADER_NAME = 'X-GCS-ServerMetaInfo';
   public static readonly CLIENT_META_INFO_HEADER_NAME = 'X-GCS-ClientMetaInfo';
+  public static readonly AUTHORIZATION_HEADER_NAME = 'Authorization';
+  public static readonly DATE_HEADER_NAME = 'Date';
+  public static readonly CONTENT_TYPE_HEADER_NAME = 'Content-Type';
   private static readonly ALGORITHM = 'sha256';
   private static readonly WHITESPACE_REGEX = /\r?\n[h]*/g;
-  private static readonly DATE_HEADER_NAME = 'Date';
-  private static readonly AUTHORIZATION_HEADER_NAME = 'Authorization';
-  private static readonly CONTENT_TYPE_HEADER_NAME = 'Content-Type';
 
   private readonly config: CommunicatorConfiguration;
 

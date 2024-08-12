@@ -16,7 +16,7 @@
     "format:check": "prettier --check \"src/**/!(*.d).ts\"",
     "format:write": "prettier --write \"src/**/!(*.d).ts\"",
     "test": "vitest",
-    "coverage": "vitest run --coverage",
+    "test:coverage": "vitest run --coverage",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0 --config ./changelog.config.cjs"
   },
   "keywords": [
