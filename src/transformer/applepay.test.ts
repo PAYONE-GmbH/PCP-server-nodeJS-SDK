@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest';
-import type { ApplePayPayment } from '../../models/applepay/ApplePayPayment.js';
-import type { MobilePaymentMethodSpecificInput } from '../../models/MobilePaymentMethodSpecificInput.js';
-import { ApplePayPaymentMethodType } from '../../models/applepay/ApplePayPaymentMethodType.js';
-import { Network } from '../../models/Network.js';
-import { applePayPaymentToMobilePaymentMethodSpecificInput } from '../../transformer/applepay.js';
+import type { ApplePayPayment } from '../models/applepay/ApplePayPayment.js';
+import type { MobilePaymentMethodSpecificInput } from '../models/MobilePaymentMethodSpecificInput.js';
+import { ApplePayPaymentMethodType } from '../models/applepay/ApplePayPaymentMethodType.js';
+import { Network } from '../models/Network.js';
+import { applePayPaymentToMobilePaymentMethodSpecificInput } from '../transformer/applepay.js';
 
 describe('applepay transformer', () => {
   describe('applePayPaymentToMobilePaymentMethodSpecificInput', () => {
