@@ -99,15 +99,7 @@ API_KEY=api_key API_SECRET=api_secret MERCHANT_ID=123 COMMERCE_CASE_ID=234 CHECK
 
 ## Contributing
 
-We welcome contributions from the community. If you want to contribute, please follow these steps:
-
-Fork the repository.
-Create a new branch (`git checkout -b feature-branch`).
-Make your changes.
-Commit your changes (`git commit -am 'Add new feature'`).
-Push to the branch (`git push origin feature-branch`).
-Create a new Pull Request.
-Please make sure to follow the coding standards and write appropriate tests for your changes.
+See [Contributing](./CONTRIBUTING.md)
 
 ### Build the library
 
