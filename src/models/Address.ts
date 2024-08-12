@@ -36,4 +36,3 @@ export interface Address {
    */
   zip?: string;
 }
-

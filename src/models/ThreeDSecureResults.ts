@@ -1,4 +1,4 @@
-import type { AppliedExemption } from "./AppliedExemption.js";
+import type { AppliedExemption } from './AppliedExemption.js';
 
 /** @description 3D Secure results object */
 export interface ThreeDSecureResults {

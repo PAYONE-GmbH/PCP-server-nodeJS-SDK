@@ -72,11 +72,11 @@ describe('CheckoutApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required params is empty, throw an error', () => {
-      expect(() => checkoutApiClient.createCheckoutRequest('', 'commerceCaseId', {})).rejects.toThrow(
+    test('a required params is empty, throw an error', async () => {
+      await expect(() => checkoutApiClient.createCheckoutRequest('', 'commerceCaseId', {})).rejects.toThrow(
         'Merchant ID is required',
       );
-      expect(() => checkoutApiClient.createCheckoutRequest('merchantId', '', {})).rejects.toThrow(
+      await expect(() => checkoutApiClient.createCheckoutRequest('merchantId', '', {})).rejects.toThrow(
         'Commerce Case ID is required',
       );
     });
@@ -120,14 +120,14 @@ describe('CheckoutApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required params is empty, throw an error', () => {
-      expect(() => checkoutApiClient.getCheckoutRequest('', 'commerceCaseId', 'checkoutId')).rejects.toThrow(
+    test('a required params is empty, throw an error', async () => {
+      await expect(() => checkoutApiClient.getCheckoutRequest('', 'commerceCaseId', 'checkoutId')).rejects.toThrow(
         'Merchant ID is required',
       );
-      expect(() => checkoutApiClient.getCheckoutRequest('merchantId', '', 'checkoutId')).rejects.toThrow(
+      await expect(() => checkoutApiClient.getCheckoutRequest('merchantId', '', 'checkoutId')).rejects.toThrow(
         'Commerce Case ID is required',
       );
-      expect(() => checkoutApiClient.getCheckoutRequest('merchantId', 'commerceCaseId', '')).rejects.toThrow(
+      await expect(() => checkoutApiClient.getCheckoutRequest('merchantId', 'commerceCaseId', '')).rejects.toThrow(
         'Checkout ID is required',
       );
     });
@@ -179,8 +179,8 @@ describe('CheckoutApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required params is empty, throw an error', () => {
-      expect(() => checkoutApiClient.getCheckoutsRequest('')).rejects.toThrow('Merchant ID is required');
+    test('a required params is empty, throw an error', async () => {
+      await expect(() => checkoutApiClient.getCheckoutsRequest('')).rejects.toThrow('Merchant ID is required');
     });
   });
   describe('updateCheckoutRequest', async () => {
@@ -216,14 +216,14 @@ describe('CheckoutApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required params is empty, throw an error', () => {
-      expect(() =>
+    test('a required params is empty, throw an error', async () => {
+      await expect(() =>
         checkoutApiClient.updateCheckoutRequest('', 'commerceCaseId', 'checkoutId', payload),
       ).rejects.toThrow('Merchant ID is required');
-      expect(() => checkoutApiClient.updateCheckoutRequest('merchantId', '', 'checkoutId', payload)).rejects.toThrow(
-        'Commerce Case ID is required',
-      );
-      expect(() =>
+      await expect(() =>
+        checkoutApiClient.updateCheckoutRequest('merchantId', '', 'checkoutId', payload),
+      ).rejects.toThrow('Commerce Case ID is required');
+      await expect(() =>
         checkoutApiClient.updateCheckoutRequest('merchantId', 'commerceCaseId', '', payload),
       ).rejects.toThrow('Checkout ID is required');
     });
@@ -258,14 +258,14 @@ describe('CheckoutApiClient', () => {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
-    test('a required params is empty, throw an error', () => {
-      expect(() => checkoutApiClient.removeCheckoutRequest('', 'commerceCaseId', 'checkoutId')).rejects.toThrow(
+    test('a required params is empty, throw an error', async () => {
+      await expect(() => checkoutApiClient.removeCheckoutRequest('', 'commerceCaseId', 'checkoutId')).rejects.toThrow(
         'Merchant ID is required',
       );
-      expect(() => checkoutApiClient.removeCheckoutRequest('merchantId', '', 'checkoutId')).rejects.toThrow(
+      await expect(() => checkoutApiClient.removeCheckoutRequest('merchantId', '', 'checkoutId')).rejects.toThrow(
         'Commerce Case ID is required',
       );
-      expect(() => checkoutApiClient.removeCheckoutRequest('merchantId', 'commerceCaseId', '')).rejects.toThrow(
+      await expect(() => checkoutApiClient.removeCheckoutRequest('merchantId', 'commerceCaseId', '')).rejects.toThrow(
         'Checkout ID is required',
       );
     });
