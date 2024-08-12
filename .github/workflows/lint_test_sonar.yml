@@ -1,4 +1,4 @@
-name: Quality Check (Build, Lint, Test, Sonarcloud)
+name: Quality Check (Build, Lint, Format, Test, Sonarcloud)
 on:
   push:
     branches:
@@ -28,6 +28,8 @@ jobs:
         run: npm run build
       - name: Run Linting
         run: npm run lint
+      - name: Run Format Check
+        run: npm run format:check
       - name: Run Tests
         run: npm run test:coverage
       - name: Run SonarCloud Scan
