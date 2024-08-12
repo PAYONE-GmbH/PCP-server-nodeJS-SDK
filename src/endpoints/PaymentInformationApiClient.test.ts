@@ -2,23 +2,11 @@ import fetch from 'node-fetch';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import {
-  CancellationReason,
   PaymentChannel,
   PaymentType,
-  StatusValue,
-  type CancelPaymentRequest,
-  type CancelPaymentResponse,
-  type CapturePaymentRequest,
-  type CapturePaymentResponse,
-  type CompletePaymentRequest,
-  type CompletePaymentResponse,
-  type CreatePaymentResponse,
   type ErrorResponse,
-  type PaymentExecutionRequest,
   type PaymentInformationRequest,
   type PaymentInformationResponse,
-  type RefundPaymentResponse,
-  type RefundRequest,
 } from '../models/index.js';
 import { createResponseMock, createEmptyErrorResponseMock } from '../testutils/mock-response.js';
 import { ApiErrorResponseException } from '../errors/ApiErrorResponseException.js';
