@@ -14,7 +14,9 @@ Welcome to the Node SDK for the PAYONE Commerce Platform! This repository contai
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Configuration](#configuration)
+- [Error Handling](#error-handling)
+- [Client Side](#client-side)
+- [Apple Pay](#apple-pay)
 - [Contributing](#contributing)
   - [Build the library](#build-the-library)
   - [Run tests](#run-tests)
@@ -33,16 +35,66 @@ Welcome to the Node SDK for the PAYONE Commerce Platform! This repository contai
 
 ## Installation
 
+```sh
+# npm
+npm i pcp-server-nodejs-sdk
+# yarn
+yarn add pcp-server-nodejs-sdk
+```
+
 ## Usage
 
-### Configuration
+To use this SDK you need to construct a `CommunicatorConfiguration` which encapsulate everything needed to connect to the PAYONE Commerce Platform.
+
+```ts
+const apiKey = process.env.API_KEY;
+const apiSecret = process.env.API_SECRET;
+
+const config = new CommunicatorConfiguration(apiKey, apiSecret, "preprod.commerce-api.payone.com");
+```
+
+With the configuration you can create an API client for each reource you want to interact with. For example to create a commerce case you can use the `CommerceCaseApiClient`.
+
+
+```ts
+const commerceCaseClient = new CommerceCaseApiClient(config);
+```
+
+All payloads and reponses are availabe as ts interfaces exported from this library.
+For example, to create an empty commerce case you can pass an object with the `CreateCommerceCaseRequest` interface:
+
+
+```ts
+const createCommerceCaseRequest: CreateCommerceCaseRequest = {};
+
+const createCommerceCaseResponse: CreateCommerceCaseResponse = commerceCaseClient.createCommerceCaseRequest('merchant_id', createCommerceCaseRequest);
+```
+
+The models directly map to the API as described in [PAYONE Commerce Platform API Reference](https://docs.payone.com/pcp/commerce-platform-api).
+
+
+### Error Handling
+
+When making a request any client may throw a `ApiException`. There two subtypes of this exception:
+
+- `ApiErrorReponseException`: This exception is thrown when the API returns an well-formed error response. The given errors are deserialized into `APIError` objects which are availble via the `getErrors()` method on the exception. They usually contain useful information about what is wrong in your request or the state of the resource.
+- `ApiResponseRetrievalException`: This exception is a catch-all exception for any error that cannot be turned into a helpful error response. This includes malformed responses or unknown responses.
+
+
+### Client Side
+
+For most [payment methods](https://docs.payone.com/pcp/commerce-platform-payment-methods) some information from the client is needed, e.g. payment information given by Apple when a payment via ApplePay suceeds. PAYONE provides client side SDKs which helps you interact the third party payment providers. You can find the SDKs under the [PAYONE GitHub organization](https://github.com/PAYONE-GmbH). Either way ensure to never store or even send credit card information to your server. The PAYONE Commerce Platform never needs access to the credit card information. The client side is responsible for safely retrieving a credit card token. This token must be used with this SDK.
+
+### Apple Pay
+
+When a client is successfully made a payment via ApplePay it receives a [ApplePayPayment](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypayment). This structure is accessible as the `ApplePayPayment` class. You can use the `ApplePayTransformer` to map an `ApplePayPayment` to a `MobilePaymentMethodSpecificInput` which can be used for payment executions or order requests. The transformer has a static method `transformApplePayPaymentToMobilePaymentMethodSpecificInput()` which takes an `ApplePayPayment` and returns a `MobilePaymentMethodSpecificInput`. The transformer does not check if the response is complete, if anything is missing the field will be set to `undefined`.
 
 ### Run the example app
 
 ```sh
 cd example-app
-yarn
-API_KEY=api_key API_SECRET=api_secret MERCHANT_ID=123 COMMERCE_CASE_ID=234 CHECKOUT_ID=345 yarn dev
+npm i
+API_KEY=api_key API_SECRET=api_secret MERCHANT_ID=123 COMMERCE_CASE_ID=234 CHECKOUT_ID=345 npm run dev
 ```
 
 ## Contributing
@@ -82,15 +134,15 @@ npm run coverage
 git checkout -b release/0.1.0
 ```
 
-- Run prepare-release.sh script to set correct version
+- Apply versioning
 
 ```sh
-./prepare-release.sh
+npm version major|minor|patch
 ```
 
 #### Changelog Generation with Conventional Changelog
 
-After calling the `prepare_release.sh` script, it is recommended to manually trigger the changelog generation script (which uses [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)).
+After versioning, it is recommended to manually trigger the changelog generation script (which uses [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)).
 
 1. **Conventional Commit Messages**:
 
