@@ -39,12 +39,12 @@ describe('PaymentInformationApiClient', () => {
       },
       type: PaymentType.Sale,
       paymentProductId: 1331,
-      paymentChannel: PaymentChannel.Ecommerce,
+      paymentChannel: PaymentChannel.ECOMMERCE,
     };
 
     test('given request was successful, should return response', async () => {
       const expectedResponse: PaymentInformationResponse = {
-        paymentChannel: PaymentChannel.Pos,
+        paymentChannel: PaymentChannel.POS,
         terminalId: 'terminalId',
         cardPaymentDetails: {
           maskedCardNumber: '672559XXXXXX1108',
