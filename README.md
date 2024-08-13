@@ -132,7 +132,7 @@ npm version major|minor|patch
 
 #### Changelog Generation with Conventional Changelog
 
-After versioning, it is recommended to manually trigger the changelog generation script (which uses [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)).
+The changelog gets generated automatically when the npm version gets bumped via `npm version major|minor|patch` within the `version.sh` script.  
 
 1. **Conventional Commit Messages**:
 
