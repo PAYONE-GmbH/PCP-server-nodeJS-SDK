@@ -8,6 +8,9 @@ if [ -n "$NEW_VERSION" ]; then
         sed -i '' "s/NodeServerSDK\/v[0-9]*\.[0-9]*\.[0-9]*/NodeServerSDK\/v$NEW_VERSION/g" ${SERVER_META_INFO_TEST_PATH}
         git add $SERVER_META_INFO_PATH
         echo "Updated $SERVER_META_INFO_PATH with version $NEW_VERSION"
+        git add $SERVER_META_INFO_TEST_PATH
+        echo "Updated $SERVER_META_INFO_TEST_PATH with version $NEW_VERSION"
+
     else
         echo "Could not find $SERVER_META_INFO_PATH"
         exit 1
