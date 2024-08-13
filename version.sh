@@ -12,6 +12,9 @@ if [ -n "$NEW_VERSION" ]; then
         echo "Could not find $SERVER_META_INFO_PATH"
         exit 1
     fi
+    npm run changelog
+    git add CHANGELOG.md
+    echo "Updated CHANGELOG.md"
 
 else
     echo "Script can only be run as npm version hook"
