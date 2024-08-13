@@ -5,7 +5,7 @@ EXAMPLE_APP_PACKAGE_JSON_LOCK_PATH='./example-app/package-lock.json'
 NEW_VERSION=$npm_package_version
 
 if [ -n "$NEW_VERSION" ]; then
-    if [ -f $SERVER_META_INFO_PATH ]; then
+    if [[ -f $SERVER_META_INFO_PATH && -f $SERVER_META_INFO_TEST_PATH && -f $EXAMPLE_APP_PACKAGE_JSON_PATH && $EXAMPLE_APP_PACKAGE_JSON_LOCK_PATH ]]; then
         sed -i '' "s/NodeServerSDK\/v[0-9]*\.[0-9]*\.[0-9]*/NodeServerSDK\/v$NEW_VERSION/g" ${SERVER_META_INFO_PATH}
         sed -i '' "s/NodeServerSDK\/v[0-9]*\.[0-9]*\.[0-9]*/NodeServerSDK\/v$NEW_VERSION/g" ${SERVER_META_INFO_TEST_PATH}
         sed -i '' "s/\"pcp-server-nodejs-sdk\": \"[0-9]*\.[0-9]*\.[0-9]*\"/\"pcp-server-nodejs-sdk\": \"$NEW_VERSION\"/g" ${EXAMPLE_APP_PACKAGE_JSON_PATH}
@@ -21,7 +21,7 @@ if [ -n "$NEW_VERSION" ]; then
         echo "Updated $EXAMPLE_APP_PACKAGE_JSON_LOCK_PATH with version $NEW_VERSION"
 
     else
-        echo "Could not find $SERVER_META_INFO_PATH"
+        echo "Could not find some files to update"
         exit 1
     fi
     npm run changelog
