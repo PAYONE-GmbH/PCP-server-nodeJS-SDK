@@ -144,13 +144,6 @@ The changelog gets generated automatically when the npm version gets bumped via 
    - We enforce conventional commit messages using [Lefthook](https://github.com/evilmartians/lefthook) with [commitlint](https://github.com/conventional-changelog/commitlint).
    - This setup ensures that all commit messages are validated before they are committed.
 
-3. **Generate Changelog**:
-   - Run the changelog generation script to update the `CHANGELOG.md` file:
-     ```sh
-     npm run changelog
-     ```
-   - Review and commit the updated changelog before proceeding with the release.
-
 #### Merging the Release Branch
 
 - Create PR on develop branch
