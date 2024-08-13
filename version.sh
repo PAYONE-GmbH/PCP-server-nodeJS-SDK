@@ -12,12 +12,12 @@ if [ -n "$NEW_VERSION" ]; then
         sed -i '' "s/\"pcp-server-nodejs-sdk\": \"[0-9]*\.[0-9]*\.[0-9]*\"/\"pcp-server-nodejs-sdk\": \"$NEW_VERSION\"/g" ${EXAMPLE_APP_PACKAGE_JSON_LOCK_PATH}
 
         git add $SERVER_META_INFO_PATH
-        echo "Updated $SERVER_META_INFO_PATH with version $NEW_VERSION"
         git add $SERVER_META_INFO_TEST_PATH
-        echo "Updated $SERVER_META_INFO_TEST_PATH with version $NEW_VERSION"
         git add $EXAMPLE_APP_PACKAGE_JSON_PATH
-        echo "Updated $EXAMPLE_APP_PACKAGE_JSON_PATH with version $NEW_VERSION"
         git add $EXAMPLE_APP_PACKAGE_JSON_LOCK_PATH
+        echo "Updated $SERVER_META_INFO_PATH with version $NEW_VERSION"
+        echo "Updated $SERVER_META_INFO_TEST_PATH with version $NEW_VERSION"
+        echo "Updated $EXAMPLE_APP_PACKAGE_JSON_PATH with version $NEW_VERSION"
         echo "Updated $EXAMPLE_APP_PACKAGE_JSON_LOCK_PATH with version $NEW_VERSION"
 
     else
