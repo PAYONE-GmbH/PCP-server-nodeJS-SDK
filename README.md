@@ -5,8 +5,6 @@
 [![npm](https://img.shields.io/npm/v/pcp-server-nodejs-sdk)](https://www.npmjs.com/package/pcp-server-nodejs-sdk)
 [![npm downloads](https://img.shields.io/npm/dw/pcp-server-nodejs-sdk)](https://www.npmjs.com/package/pcp-server-nodejs-sdk)
 
-**NOTE:** This SDK is still under development. Some things may be broken, features may change in non-compatible ways or will be removed completely.
-
 Welcome to the Node SDK for the PAYONE Commerce Platform! This repository contains a powerful, easy-to-use software development kit (SDK) designed to simplify the integration of online payment processing into your applications.
 
 ## Table of Contents
@@ -134,7 +132,7 @@ npm version major|minor|patch
 
 #### Changelog Generation with Conventional Changelog
 
-After versioning, it is recommended to manually trigger the changelog generation script (which uses [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog)).
+The changelog gets generated automatically when the npm version gets bumped via `npm version major|minor|patch` within the `version.sh` script.  
 
 1. **Conventional Commit Messages**:
 
@@ -145,13 +143,6 @@ After versioning, it is recommended to manually trigger the changelog generation
 
    - We enforce conventional commit messages using [Lefthook](https://github.com/evilmartians/lefthook) with [commitlint](https://github.com/conventional-changelog/commitlint).
    - This setup ensures that all commit messages are validated before they are committed.
-
-3. **Generate Changelog**:
-   - Run the changelog generation script to update the `CHANGELOG.md` file:
-     ```sh
-     npm run changelog
-     ```
-   - Review and commit the updated changelog before proceeding with the release.
 
 #### Merging the Release Branch
 
