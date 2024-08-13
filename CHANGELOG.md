@@ -1,3 +1,9 @@
+## [0.0.3](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v0.0.2...v0.0.3) (2024-08-13)
+
+### Documentation
+
+* docs: remove dev note ([affd97ce41f4a0a6d335f003d15d513e09480f92](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/affd97ce41f4a0a6d335f003d15d513e09480f92))
+
 ## [0.0.2](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/e9a92f3001fe33df9bdad537b68f999b9e93e805...v0.0.2) (2024-08-12)
 
 ### Bug Fixes
