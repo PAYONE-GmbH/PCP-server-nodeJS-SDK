@@ -48,11 +48,10 @@ To use this SDK you need to construct a `CommunicatorConfiguration` which encaps
 const apiKey = process.env.API_KEY;
 const apiSecret = process.env.API_SECRET;
 
-const config = new CommunicatorConfiguration(apiKey, apiSecret, "preprod.commerce-api.payone.com");
+const config = new CommunicatorConfiguration(apiKey, apiSecret, 'api.preprod.commerce.payone.com');
 ```
 
 With the configuration you can create an API client for each reource you want to interact with. For example to create a commerce case you can use the `CommerceCaseApiClient`.
-
 
 ```ts
 const commerceCaseClient = new CommerceCaseApiClient(config);
@@ -61,15 +60,16 @@ const commerceCaseClient = new CommerceCaseApiClient(config);
 All payloads and reponses are availabe as ts interfaces exported from this library.
 For example, to create an empty commerce case you can pass an object with the `CreateCommerceCaseRequest` interface:
 
-
 ```ts
 const createCommerceCaseRequest: CreateCommerceCaseRequest = {};
 
-const createCommerceCaseResponse: CreateCommerceCaseResponse = commerceCaseClient.createCommerceCaseRequest('merchant_id', createCommerceCaseRequest);
+const createCommerceCaseResponse: CreateCommerceCaseResponse = commerceCaseClient.createCommerceCaseRequest(
+  'merchant_id',
+  createCommerceCaseRequest,
+);
 ```
 
 The models directly map to the API as described in [PAYONE Commerce Platform API Reference](https://docs.payone.com/pcp/commerce-platform-api).
-
 
 ### Error Handling
 
@@ -77,7 +77,6 @@ When making a request any client may throw a `ApiException`. There two subtypes 
 
 - `ApiErrorReponseException`: This exception is thrown when the API returns an well-formed error response. The given errors are deserialized into `APIError` objects which are availble via the `getErrors()` method on the exception. They usually contain useful information about what is wrong in your request or the state of the resource.
 - `ApiResponseRetrievalException`: This exception is a catch-all exception for any error that cannot be turned into a helpful error response. This includes malformed responses or unknown responses.
-
 
 ### Client Side
 
@@ -132,7 +131,7 @@ npm version major|minor|patch
 
 #### Changelog Generation with Conventional Changelog
 
-The changelog gets generated automatically when the npm version gets bumped via `npm version major|minor|patch` within the `version.sh` script.  
+The changelog gets generated automatically when the npm version gets bumped via `npm version major|minor|patch` within the `version.sh` script.
 
 1. **Conventional Commit Messages**:
 

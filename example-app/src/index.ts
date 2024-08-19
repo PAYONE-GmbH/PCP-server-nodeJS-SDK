@@ -17,7 +17,7 @@ const run = async () => {
   const communicatorConfiguration = new CommunicatorConfiguration(
     apiKey,
     apiSecret,
-    'https://preprod.commerce-api.payone.com',
+    'https://api.preprod.commerce.payone.com',
   );
 
   const commerceCaseApiClientExample = new CommerceCaseApiExample(communicatorConfiguration);
