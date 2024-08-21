@@ -158,7 +158,7 @@ The changelog gets generated automatically when the npm version gets bumped via 
 #### Merging the Release Branch
 
 - Create PR on `develop` branch
-- Merge develop in `main` branch
+- Merge `develop` in `main` branch
 
 #### GitHub Action for Release
 
