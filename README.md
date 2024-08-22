@@ -12,18 +12,18 @@ Welcome to the Node SDK for the PAYONE Commerce Platform! This repository contai
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Error Handling](#error-handling)
-- [Client Side](#client-side)
-- [Apple Pay](#apple-pay)
+  - [General](#general)
+  - [Error Handling](#error-handling)
+  - [Client Side](#client-side)
+  - [Apple Pay](#apple-pay)
+  - [Run the example app](#run-the-example-app)
 - [Contributing](#contributing)
-  - [Build the library](#build-the-library)
-  - [Run tests](#run-tests)
-  - [Releasing the library](#releasing-the-library)
-    - [Preparing the Release](#preparing-the-release)
-    - [Changelog Generation with Conventional Changelog](#changelog-generation-with-conventional-changelog)
-    - [Merging the Release Branch](#merging-the-release-branch)
-    - [GitHub Action for Release](#github-action-for-release)
-    - [Optional: Creating a GitHub Release](#optional-creating-a-github-release)
+- [Releasing the library](#releasing-the-library)
+  - [Preparing the Release](#preparing-the-release)
+  - [Changelog Generation with Conventional Changelog](#changelog-generation-with-conventional-changelog)
+  - [Merging the Release Branch](#merging-the-release-branch)
+  - [GitHub Action for Release](#github-action-for-release)
+  - [Optional: Creating a GitHub Release](#optional-creating-a-github-release)
 - [License](#license)
 
 ## Features
@@ -45,6 +45,8 @@ yarn add pcp-server-nodejs-sdk
 **[back to top](#table-of-contents)**
 
 ## Usage
+
+### General
 
 To use this SDK you need to construct a `CommunicatorConfiguration` which encapsulate everything needed to connect to the PAYONE Commerce Platform.
 
@@ -75,8 +77,6 @@ const createCommerceCaseResponse: CreateCommerceCaseResponse = commerceCaseClien
 
 The models directly map to the API as described in [PAYONE Commerce Platform API Reference](https://docs.payone.com/pcp/commerce-platform-api).
 
-**[back to top](#table-of-contents)**
-
 ### Error Handling
 
 When making a request any client may throw a `ApiException`. There two subtypes of this exception:
@@ -84,19 +84,13 @@ When making a request any client may throw a `ApiException`. There two subtypes 
 - `ApiErrorReponseException`: This exception is thrown when the API returns an well-formed error response. The given errors are deserialized into `APIError` objects which are availble via the `getErrors()` method on the exception. They usually contain useful information about what is wrong in your request or the state of the resource.
 - `ApiResponseRetrievalException`: This exception is a catch-all exception for any error that cannot be turned into a helpful error response. This includes malformed responses or unknown responses.
 
-**[back to top](#table-of-contents)**
-
 ### Client Side
 
 For most [payment methods](https://docs.payone.com/pcp/commerce-platform-payment-methods) some information from the client is needed, e.g. payment information given by Apple when a payment via ApplePay suceeds. PAYONE provides client side SDKs which helps you interact the third party payment providers. You can find the SDKs under the [PAYONE GitHub organization](https://github.com/PAYONE-GmbH). Either way ensure to never store or even send credit card information to your server. The PAYONE Commerce Platform never needs access to the credit card information. The client side is responsible for safely retrieving a credit card token. This token must be used with this SDK.
 
-**[back to top](#table-of-contents)**
-
 ### Apple Pay
 
 When a client is successfully made a payment via ApplePay it receives a [ApplePayPayment](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypayment). This structure is accessible as the `ApplePayPayment` class. You can use the `ApplePayTransformer` to map an `ApplePayPayment` to a `MobilePaymentMethodSpecificInput` which can be used for payment executions or order requests. The transformer has a static method `transformApplePayPaymentToMobilePaymentMethodSpecificInput()` which takes an `ApplePayPayment` and returns a `MobilePaymentMethodSpecificInput`. The transformer does not check if the response is complete, if anything is missing the field will be set to `undefined`.
-
-**[back to top](#table-of-contents)**
 
 ### Run the example app
 
@@ -106,27 +100,17 @@ npm i
 API_KEY=api_key API_SECRET=api_secret MERCHANT_ID=123 COMMERCE_CASE_ID=234 CHECKOUT_ID=345 npm run dev
 ```
 
+**[back to top](#table-of-contents)**
+
 ## Contributing
 
 See [Contributing](./CONTRIBUTING.md)
 
-### Build the library
+**[back to top](#table-of-contents)**
 
-```sh
-npm run build
-```
+## Releasing the library
 
-### Run tests
-
-```sh
-npm run test
-# or for coverage
-npm run coverage
-```
-
-### Releasing the library
-
-#### Preparing the Release
+### Preparing the Release
 
 - Checkout develop branch
 - Create release branch (release/0.1.0)
@@ -141,7 +125,7 @@ git checkout -b release/0.1.0
 npm version major|minor|patch
 ```
 
-#### Changelog Generation with Conventional Changelog
+### Changelog Generation with Conventional Changelog
 
 The changelog gets generated automatically when the npm version gets bumped via `npm version major|minor|patch` within the `version.sh` script.
 
@@ -155,12 +139,12 @@ The changelog gets generated automatically when the npm version gets bumped via 
    - We enforce conventional commit messages using [Lefthook](https://github.com/evilmartians/lefthook) with [commitlint](https://github.com/conventional-changelog/commitlint).
    - This setup ensures that all commit messages are validated before they are committed.
 
-#### Merging the Release Branch
+### Merging the Release Branch
 
 - Create PR on `develop` branch
 - Merge `develop` in `main` branch
 
-#### GitHub Action for Release
+### GitHub Action for Release
 
 After successfully merging all changes to the `main` branch, an admin can trigger a GitHub Action to finalize and publish the release. This action ensures that the release process is automated, consistent, and deploys the new release from the `main` branch.
 
@@ -170,7 +154,7 @@ After successfully merging all changes to the `main` branch, an admin can trigge
 - Ensure that all changes are committed to the `main` branch.
 - Navigate to the Actions tab on your GitHub repository and manually trigger the release action for the `main` branch.
 
-#### Optional: Creating a GitHub Release
+### Optional: Creating a GitHub Release
 
 Once the release has been published to npm, developers can start using the latest version of the SDK. However, if you want to make the release more visible and include detailed release notes, you can optionally create a GitHub release.
 
