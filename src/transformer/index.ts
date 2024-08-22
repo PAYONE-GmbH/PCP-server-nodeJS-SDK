@@ -1,1 +1,1 @@
-export { transformApplePayPaymentToMobilePaymentMethodSpecificInput } from './applepay.js';
+export { transformApplePayPaymentToMobilePaymentMethodSpecificInput } from './ApplePayTransformer.js';
