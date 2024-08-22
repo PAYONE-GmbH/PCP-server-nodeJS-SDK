@@ -3,9 +3,9 @@ import type { ApplePayPayment } from '../models/applepay/ApplePayPayment.js';
 import type { MobilePaymentMethodSpecificInput } from '../models/MobilePaymentMethodSpecificInput.js';
 import { ApplePayPaymentMethodType } from '../models/applepay/ApplePayPaymentMethodType.js';
 import { Network } from '../models/Network.js';
-import { transformApplePayPaymentToMobilePaymentMethodSpecificInput } from '../transformer/applepay.js';
+import { transformApplePayPaymentToMobilePaymentMethodSpecificInput } from './ApplePayTransformer.js';
 
-describe('applepay transformer', () => {
+describe('ApplePayTransformer', () => {
   describe('transformApplePayPaymentToMobilePaymentMethodSpecificInput', () => {
     test('converts a full ApplePayPayment correctly', () => {
       const payment: ApplePayPayment = {
