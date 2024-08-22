@@ -1,3 +1,10 @@
+# [1.0.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v0.0.3...v1.0.0) (2024-08-22)
+
+### Documentation
+
+* docs: remove manual changelog generation hint ([04b8d42de81097407f885793cbdd786d3c5afdce](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/04b8d42de81097407f885793cbdd786d3c5afdce))
+* docs: update changelog generation docs ([34e0d08efc83750f37951c495a901da6898fccbd](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/34e0d08efc83750f37951c495a901da6898fccbd))
+
 ## [0.0.3](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v0.0.2...v0.0.3) (2024-08-13)
 
 ### Documentation

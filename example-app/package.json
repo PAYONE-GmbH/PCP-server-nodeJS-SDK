@@ -10,7 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "pcp-server-nodejs-sdk": "0.0.3"
+    "pcp-server-nodejs-sdk": "1.0.0"
   },
   "devDependencies": {
     "tsx": "4.17.0",
