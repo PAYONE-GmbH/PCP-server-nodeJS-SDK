@@ -16,7 +16,7 @@ Welcome to the Node SDK for the PAYONE Commerce Platform! This repository contai
   - [Error Handling](#error-handling)
   - [Client Side](#client-side)
   - [Apple Pay](#apple-pay)
-  - [Run the example app](#run-the-example-app)
+- [Demo App](#demo-app)
 - [Contributing](#contributing)
 - [Releasing the library](#releasing-the-library)
   - [Preparing the Release](#preparing-the-release)
@@ -92,7 +92,9 @@ For most [payment methods](https://docs.payone.com/pcp/commerce-platform-payment
 
 When a client is successfully made a payment via ApplePay it receives a [ApplePayPayment](https://developer.apple.com/documentation/apple_pay_on_the_web/applepaypayment). This structure is accessible as the `ApplePayPayment` class. You can use the `ApplePayTransformer` to map an `ApplePayPayment` to a `MobilePaymentMethodSpecificInput` which can be used for payment executions or order requests. The transformer has a static method `transformApplePayPaymentToMobilePaymentMethodSpecificInput()` which takes an `ApplePayPayment` and returns a `MobilePaymentMethodSpecificInput`. The transformer does not check if the response is complete, if anything is missing the field will be set to `undefined`.
 
-### Run the example app
+**[back to top](#table-of-contents)**
+
+## Demo App
 
 ```sh
 cd example-app
