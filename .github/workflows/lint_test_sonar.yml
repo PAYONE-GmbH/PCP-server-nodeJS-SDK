@@ -34,6 +34,23 @@ jobs:
       - name: Run Format Check
         run: npm run format:check
       - name: Run Tests
+        run: npm run test
+
+  sonar:
+    needs: [test]
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Tests with coverage
         run: npm run test:coverage
       - name: Run SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
