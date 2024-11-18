@@ -35,6 +35,8 @@ Welcome to the Node SDK for the PAYONE Commerce Platform! This repository contai
 
 ## Installation
 
+[View in NPM](https://www.npmjs.com/package/pcp-server-nodejs-sdk)
+
 ```sh
 # npm
 npm i pcp-server-nodejs-sdk
