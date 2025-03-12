@@ -6,6 +6,8 @@ export enum StatusValue {
   Cancelled = 'CANCELLED',
   Rejected = 'REJECTED',
   RejectedCapture = 'REJECTED_CAPTURE',
+  RejectedPause = 'REJECTED_PAUSE',
+  RejectedUpdate = 'REJECTED_UPDATE',
   Redirected = 'REDIRECTED',
   PendingPayment = 'PENDING_PAYMENT',
   PendingCompletion = 'PENDING_COMPLETION',
@@ -25,4 +27,5 @@ export enum StatusValue {
   AccountDebited = 'ACCOUNT_DEBITED',
   PayoutRequested = 'PAYOUT_REQUESTED',
   RejectedCredit = 'REJECTED_CREDIT',
+  Updated = 'UPDATED',
 }

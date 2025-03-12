@@ -5,6 +5,8 @@ import {
   PaymentChannel,
   PaymentType,
   type ErrorResponse,
+  type PaymentInformationRefundRequest,
+  type PaymentInformationRefundResponse,
   type PaymentInformationRequest,
   type PaymentInformationResponse,
 } from '../models/index.js';
@@ -173,6 +175,99 @@ describe('PaymentInformationApiClient', () => {
       ).rejects.toThrowError('Checkout ID is required');
       await expect(() =>
         paymentInformationApiClient.getPaymentInformation('merchantId', 'commerceCaseId', 'checkoutId', ''),
+      ).rejects.toThrowError('Payment Information ID is required');
+    });
+  });
+  describe('refundPaymentInformation', () => {
+    const payload: PaymentInformationRefundRequest = {
+      amountOfMoney: {
+        amount: 1289,
+        currencyCode: 'EUR',
+      },
+    };
+
+    test('given request was successful, should return response', async () => {
+      const expectedResponse: PaymentInformationRefundResponse = {
+        payment: {},
+      };
+
+      mockedFetch.mockResolvedValueOnce(createResponseMock<PaymentInformationRefundResponse>(200, expectedResponse));
+
+      const res = await paymentInformationApiClient.refundPaymentInformation(
+        'merchantId',
+        'commerceCaseId',
+        'checkoutId',
+        'paymentInformationId',
+        payload,
+      );
+
+      expect(res).toEqual(expectedResponse);
+    });
+
+    test('given request was not successful (400), then return errorresponse', async () => {
+      const expectedResponse: ErrorResponse = { errorId: 'error-id' };
+
+      mockedFetch.mockResolvedValueOnce(createResponseMock<ErrorResponse>(400, expectedResponse));
+
+      expect.assertions(1);
+      try {
+        await paymentInformationApiClient.refundPaymentInformation(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentInformationId',
+          payload,
+        );
+      } catch (error) {
+        expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
+      }
+    });
+    test('given request was not successful (500), then return errorresponse', async () => {
+      mockedFetch.mockResolvedValueOnce(createEmptyErrorResponseMock(500));
+
+      expect.assertions(1);
+      try {
+        await paymentInformationApiClient.refundPaymentInformation(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentInformationId',
+          payload,
+        );
+      } catch (error) {
+        expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
+      }
+    });
+    test('a required param is empty, throw an error', async () => {
+      await expect(() =>
+        paymentInformationApiClient.refundPaymentInformation(
+          '',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentInformationId',
+          payload,
+        ),
+      ).rejects.toThrowError('Merchant ID is required');
+      await expect(() =>
+        paymentInformationApiClient.refundPaymentInformation(
+          'merchantId',
+          '',
+          'checkoutId',
+          'paymentInformationId',
+          payload,
+        ),
+      ).rejects.toThrowError('Commerce Case ID is required');
+      await expect(() =>
+        paymentInformationApiClient.refundPaymentInformation(
+          'merchantId',
+          'commerceCaseId',
+          '',
+          'paymentInformationId',
+          payload,
+        ),
+      ).rejects.toThrowError('Checkout ID is required');
+      await expect(() =>
+        paymentInformationApiClient.refundPaymentInformation('merchantId', 'commerceCaseId', 'checkoutId', '', payload),
       ).rejects.toThrowError('Payment Information ID is required');
     });
   });
