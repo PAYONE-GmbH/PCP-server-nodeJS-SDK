@@ -1,3 +1,13 @@
+# [1.1.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.0.0...v1.1.0) (2025-03-12)
+
+### Documentation
+
+* docs: add link to npm ([5352fe0114d93a250a6bba933f5c2d6bc2df2d33](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/5352fe0114d93a250a6bba933f5c2d6bc2df2d33))
+
+### Features
+
+* feat: implement api version 1.28.0 ([dc2d0f39ddc3ddb489504531d0da8efedb9011ab](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/dc2d0f39ddc3ddb489504531d0da8efedb9011ab))
+
 # [1.0.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v0.0.3...v1.0.0) (2024-08-22)
 
 ### Documentation
