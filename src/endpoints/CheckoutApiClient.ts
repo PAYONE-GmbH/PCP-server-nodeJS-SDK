@@ -4,6 +4,7 @@ import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import type {
   CheckoutResponse,
   CheckoutsResponse,
+  CompletePaymentResponse,
   CreateCheckoutRequest,
   CreateCheckoutResponse,
   PatchCheckoutRequest,
@@ -16,6 +17,7 @@ import {
   COMMERCE_CASE_ID_REQUIRED_ERROR,
   MERCHANT_ID_REQUIRED_ERROR,
 } from './BaseApiClient.js';
+import type { CompleteOrderRequest } from '../models/CompleteOrderRequest.js';
 
 export class CheckoutApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {
@@ -149,5 +151,37 @@ export class CheckoutApiClient extends BaseApiClient {
     };
 
     await this.makeApiCall(url.toString(), requestInit, BaseApiClient.parseVoid);
+  }
+
+  public async completeCheckoutRequest(
+    merchantId: string,
+    commerceCaseId: string,
+    checkoutId: string,
+    payload: CompleteOrderRequest,
+  ): Promise<CompletePaymentResponse> {
+    if (!merchantId) {
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
+    }
+    if (!commerceCaseId) {
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
+    }
+    if (!checkoutId) {
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
+    }
+
+    const url = new URL(
+      `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/complete-order`,
+      this.getConfig().getHost(),
+    );
+
+    const requestInit: RequestInit = {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(payload),
+    };
+
+    return this.makeApiCall<CompletePaymentResponse>(url.toString(), requestInit);
   }
 }

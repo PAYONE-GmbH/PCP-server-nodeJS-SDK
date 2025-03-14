@@ -1,24 +1,46 @@
 import type { AuthorizationMode } from './AuthorizationMode.js';
-import type { PaymentProduct320SpecificInput } from './PaymentProduct320SpecificInput.js';
+import type { MobilePaymentThreeDSecure } from './MobilePaymentThreeDSecure.js';
+import type { PaymentProduct302SpecificInput } from './PaymentProduct302SpecificInput.js';
 
-/** @description Object containing the specific input details for mobile payments. */
+/**
+ * @description Object containing the specific input details for mobile payments.
+ */
 export interface MobilePaymentMethodSpecificInput {
   /**
-   * Format: int32
    * @description Payment product identifier - please check product documentation for a full overview of possible values.
-   * @example 840
+   * @minimum 0
+   * @maximum 99999
    */
   paymentProductId?: number;
-  authorizationMode?: AuthorizationMode;
+
   /**
-   * @description The payment data if we will do the decryption of the encrypted payment data. Typically you'd use
-   *     encryptedCustomerInput in the root of the create payment request to provide the encrypted payment data
-   *     instead.
+   * @description Authorization mode for the mobile payment.
+   */
+  authorizationMode?: AuthorizationMode;
+
+  /**
+   * @description The encrypted payment data, if decryption is required.
+   * Typically, you'd use encryptedCustomerInput in the root of the create payment request instead.
    */
   encryptedPaymentData?: string;
-  /** @description Public Key Hash A unique identifier to retrieve key used by Apple to encrypt information. */
+
+  /**
+   * @description Public Key Hash - A unique identifier to retrieve the key used by Apple to encrypt information.
+   */
   publicKeyHash?: string;
-  /** @description Ephemeral Key A unique generated key used by Apple to encrypt data. */
+
+  /**
+   * @description Ephemeral Key - A unique generated key used by Apple to encrypt data.
+   */
   ephemeralKey?: string;
-  paymentProduct302SpecificInput?: PaymentProduct320SpecificInput;
+
+  /**
+   * @description Three-D Secure details for the mobile payment.
+   */
+  threeDSecure?: MobilePaymentThreeDSecure;
+
+  /**
+   * @description Specific input for payment product 302.
+   */
+  paymentProduct302SpecificInput?: PaymentProduct302SpecificInput;
 }

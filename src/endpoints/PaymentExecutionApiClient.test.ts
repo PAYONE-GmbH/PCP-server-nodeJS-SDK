@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import {
   CancellationReason,
+  RefreshType,
   StatusValue,
   type CancelPaymentRequest,
   type CancelPaymentResponse,
@@ -12,7 +13,11 @@ import {
   type CompletePaymentResponse,
   type CreatePaymentResponse,
   type ErrorResponse,
+  type PausePaymentRequest,
+  type PausePaymentResponse,
+  type PaymentExecution,
   type PaymentExecutionRequest,
+  type RefreshPaymentRequest,
   type RefundPaymentResponse,
   type RefundRequest,
 } from '../models/index.js';
@@ -348,6 +353,144 @@ describe('PaymentExecutionApiClient', () => {
       ).rejects.toThrowError('Checkout ID is required');
       await expect(() =>
         paymentExecutionApiClient.completePayment('merchantId', 'commerceCaseId', 'checkoutId', '', {}),
+      ).rejects.toThrowError('Payment Execution ID is required');
+    });
+  });
+  describe('pausePayment', () => {
+    const payload: PausePaymentRequest = {
+      refreshType: RefreshType.PAYMENT_EVENTS,
+    };
+    test('given request was successful, should return response', async () => {
+      const expectedResponse: PausePaymentResponse = {
+        status: StatusValue.Paused,
+      };
+
+      mockedFetch.mockResolvedValueOnce(createResponseMock<PausePaymentResponse>(200, expectedResponse));
+
+      const res = await paymentExecutionApiClient.pausePayment(
+        'merchantId',
+        'commerceCaseId',
+        'checkoutId',
+        'paymentExecutionId',
+        payload,
+      );
+      expect(res).toEqual(expectedResponse);
+    });
+    test('given request was not successful (400), then return errorresponse', async () => {
+      const expectedResponse: ErrorResponse = { errorId: 'error-id' };
+
+      mockedFetch.mockResolvedValueOnce(createResponseMock<ErrorResponse>(400, expectedResponse));
+
+      expect.assertions(1);
+      try {
+        await paymentExecutionApiClient.pausePayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          payload,
+        );
+      } catch (error) {
+        expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
+      }
+    });
+    test('given request was not successful (500), throw ApiResponseRetrievalException', async () => {
+      mockedFetch.mockResolvedValueOnce(createEmptyErrorResponseMock(500));
+
+      expect.assertions(1);
+      try {
+        await paymentExecutionApiClient.pausePayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          payload,
+        );
+      } catch (error) {
+        expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
+      }
+    });
+    test('a required param is empty, throw an error', async () => {
+      await expect(() =>
+        paymentExecutionApiClient.pausePayment('', 'commerceCaseId', 'checkoutId', 'paymentId', payload),
+      ).rejects.toThrowError('Merchant ID is required');
+      await expect(() =>
+        paymentExecutionApiClient.pausePayment('merchantId', '', 'checkoutId', 'paymentId', payload),
+      ).rejects.toThrowError('Commerce Case ID is required');
+      await expect(() =>
+        paymentExecutionApiClient.pausePayment('merchantId', 'commerceCaseId', '', 'paymentId', payload),
+      ).rejects.toThrowError('Checkout ID is required');
+      await expect(() =>
+        paymentExecutionApiClient.pausePayment('merchantId', 'commerceCaseId', 'checkoutId', '', payload),
+      ).rejects.toThrowError('Payment Execution ID is required');
+    });
+  });
+  describe('refreshPayment', () => {
+    const payload: RefreshPaymentRequest = {
+      refreshType: RefreshType.PAYMENT_EVENTS,
+    };
+    test('given request was successful, should return response', async () => {
+      const expectedResponse: PaymentExecution = {
+        paymentExecutionId: 'id',
+      };
+
+      mockedFetch.mockResolvedValueOnce(createResponseMock<PaymentExecution>(200, expectedResponse));
+
+      const res = await paymentExecutionApiClient.refreshPayment(
+        'merchantId',
+        'commerceCaseId',
+        'checkoutId',
+        'paymentExecutionId',
+        payload,
+      );
+      expect(res).toEqual(expectedResponse);
+    });
+    test('given request was not successful (400), then return errorresponse', async () => {
+      const expectedResponse: ErrorResponse = { errorId: 'error-id' };
+
+      mockedFetch.mockResolvedValueOnce(createResponseMock<ErrorResponse>(400, expectedResponse));
+
+      expect.assertions(1);
+      try {
+        await paymentExecutionApiClient.refreshPayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          payload,
+        );
+      } catch (error) {
+        expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
+      }
+    });
+    test('given request was not successful (500), throw ApiResponseRetrievalException', async () => {
+      mockedFetch.mockResolvedValueOnce(createEmptyErrorResponseMock(500));
+
+      expect.assertions(1);
+      try {
+        await paymentExecutionApiClient.refreshPayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          payload,
+        );
+      } catch (error) {
+        expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
+      }
+    });
+    test('a required param is empty, throw an error', async () => {
+      await expect(() =>
+        paymentExecutionApiClient.refreshPayment('', 'commerceCaseId', 'checkoutId', 'paymentId', payload),
+      ).rejects.toThrowError('Merchant ID is required');
+      await expect(() =>
+        paymentExecutionApiClient.refreshPayment('merchantId', '', 'checkoutId', 'paymentId', payload),
+      ).rejects.toThrowError('Commerce Case ID is required');
+      await expect(() =>
+        paymentExecutionApiClient.refreshPayment('merchantId', 'commerceCaseId', '', 'paymentId', payload),
+      ).rejects.toThrowError('Checkout ID is required');
+      await expect(() =>
+        paymentExecutionApiClient.refreshPayment('merchantId', 'commerceCaseId', 'checkoutId', '', payload),
       ).rejects.toThrowError('Payment Execution ID is required');
     });
   });

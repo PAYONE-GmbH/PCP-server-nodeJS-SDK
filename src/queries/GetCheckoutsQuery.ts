@@ -33,6 +33,8 @@ export class GetCheckoutsQuery implements QueryConfig {
   private phoneNumber?: string;
   private dateOfBirth?: string;
   private companyInformation?: string;
+  private terminalId?: string;
+  private reportingToken?: string;
 
   public setOffset(offset: number): this {
     this.offset = offset;
@@ -189,6 +191,16 @@ export class GetCheckoutsQuery implements QueryConfig {
     return this;
   }
 
+  public setTerminalId(terminalId: string): this {
+    this.terminalId = terminalId;
+    return this;
+  }
+
+  public setReportingToken(reportingToken: string): this {
+    this.reportingToken = reportingToken;
+    return this;
+  }
+
   public getOffset(): number | undefined {
     return this.offset;
   }
@@ -313,6 +325,14 @@ export class GetCheckoutsQuery implements QueryConfig {
     return this.companyInformation;
   }
 
+  public getTerminalId(): string | undefined {
+    return this.terminalId;
+  }
+
+  public getReportingToken(): string | undefined {
+    return this.reportingToken;
+  }
+
   public toQueryMap(): Map<string, string> {
     const query = new Map<string, string>();
 
@@ -409,6 +429,12 @@ export class GetCheckoutsQuery implements QueryConfig {
     }
     if (this.companyInformation !== undefined) {
       query.set('companyInformation', this.companyInformation);
+    }
+    if (this.terminalId !== undefined) {
+      query.set('terminalId', this.terminalId);
+    }
+    if (this.reportingToken !== undefined) {
+      query.set('reportingToken', this.reportingToken);
     }
     return query;
   }

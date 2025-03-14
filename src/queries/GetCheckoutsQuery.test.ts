@@ -38,6 +38,8 @@ describe('GetCheckoutsQuery', () => {
     query.setPhoneNumber('1234567890');
     query.setDateOfBirth('1980-01-01');
     query.setCompanyInformation('Company Inc.');
+    query.setTerminalId('1234');
+    query.setReportingToken('5678');
 
     const queryMap = query.toQueryMap();
 
@@ -72,6 +74,8 @@ describe('GetCheckoutsQuery', () => {
     expect(queryMap.get('phoneNumber')).toEqual('1234567890');
     expect(queryMap.get('dateOfBirth')).toEqual('1980-01-01');
     expect(queryMap.get('companyInformation')).toEqual('Company Inc.');
+    expect(queryMap.get('terminalId')).toEqual('1234');
+    expect(queryMap.get('reportingToken')).toEqual('5678');
   });
 
   test('getters', () => {
@@ -107,6 +111,8 @@ describe('GetCheckoutsQuery', () => {
     query.setPhoneNumber('1234567890');
     query.setDateOfBirth('1980-01-01');
     query.setCompanyInformation('Company Inc.');
+    query.setTerminalId('1234');
+    query.setReportingToken('5678');
 
     expect(query.getOffset()).toEqual(1);
     expect(query.getSize()).toEqual(10);
@@ -142,6 +148,8 @@ describe('GetCheckoutsQuery', () => {
     expect(query.getPhoneNumber()).toEqual('1234567890');
     expect(query.getDateOfBirth()).toEqual('1980-01-01');
     expect(query.getCompanyInformation()).toEqual('Company Inc.');
+    expect(query.getTerminalId()).toEqual('1234');
+    expect(query.getReportingToken()).toEqual('5678');
   });
 
   test('nulls', () => {
