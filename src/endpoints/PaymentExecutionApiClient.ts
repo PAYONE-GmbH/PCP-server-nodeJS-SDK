@@ -8,6 +8,7 @@ import type {
   CompletePaymentRequest,
   CompletePaymentResponse,
   CreatePaymentResponse,
+  PaymentExecution,
   PaymentExecutionRequest,
   RefundPaymentResponse,
   RefundRequest,
@@ -18,6 +19,9 @@ import {
   COMMERCE_CASE_ID_REQUIRED_ERROR,
   MERCHANT_ID_REQUIRED_ERROR,
 } from './BaseApiClient.js';
+import type { PausePaymentRequest } from '../models/PausePaymentRequest.js';
+import type { PausePaymentResponse } from '../models/PausePaymentResponse.js';
+import type { RefreshPaymentRequest } from '../models/RefreshPaymentRequest.js';
 
 const PAYMENT_EXECUTION_ID_REQUIRED_ERROR = 'Payment Execution ID is required';
 
@@ -200,5 +204,77 @@ export class PaymentExecutionApiClient extends BaseApiClient {
     };
 
     return this.makeApiCall<CompletePaymentResponse>(url.toString(), requestInit);
+  }
+
+  public async pausePayment(
+    merchantId: string,
+    commerceCaseId: string,
+    checkoutId: string,
+    paymentExecutionId: string,
+    payload: PausePaymentRequest,
+  ): Promise<PausePaymentResponse> {
+    if (!merchantId) {
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
+    }
+    if (!commerceCaseId) {
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
+    }
+    if (!checkoutId) {
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
+    }
+    if (!paymentExecutionId) {
+      throw new TypeError(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
+    }
+
+    const url = new URL(
+      `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/payment-executions/${paymentExecutionId}/pause`,
+      this.getConfig().getHost(),
+    );
+
+    const requestInit: RequestInit = {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(payload),
+    };
+
+    return this.makeApiCall<PausePaymentResponse>(url.toString(), requestInit);
+  }
+
+  public async refreshPayment(
+    merchantId: string,
+    commerceCaseId: string,
+    checkoutId: string,
+    paymentExecutionId: string,
+    payload: RefreshPaymentRequest,
+  ): Promise<PaymentExecution> {
+    if (!merchantId) {
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
+    }
+    if (!commerceCaseId) {
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
+    }
+    if (!checkoutId) {
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
+    }
+    if (!paymentExecutionId) {
+      throw new TypeError(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
+    }
+
+    const url = new URL(
+      `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/payment-executions/${paymentExecutionId}/refresh`,
+      this.getConfig().getHost(),
+    );
+
+    const requestInit: RequestInit = {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(payload),
+    };
+
+    return this.makeApiCall<PaymentExecution>(url.toString(), requestInit);
   }
 }

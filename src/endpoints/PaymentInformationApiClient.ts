@@ -7,6 +7,8 @@ import {
   COMMERCE_CASE_ID_REQUIRED_ERROR,
   MERCHANT_ID_REQUIRED_ERROR,
 } from './BaseApiClient.js';
+import type { PaymentInformationRefundRequest } from '../models/PaymentInformationRefundRequest.js';
+import type { PaymentInformationRefundResponse } from '../models/PaymentInformationRefundResponse.js';
 
 const PAYMENT_INFORMATION_ID_REQUIRED_ERROR = 'Payment Information ID is required';
 
@@ -32,7 +34,7 @@ export class PaymentInformationApiClient extends BaseApiClient {
     }
 
     const url = new URL(
-      `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/payment-informations`,
+      `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/payment-information`,
       this.getConfig().getHost(),
     );
 
@@ -67,7 +69,7 @@ export class PaymentInformationApiClient extends BaseApiClient {
     }
 
     const url = new URL(
-      `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/payment-informations/${paymentInformationId}`,
+      `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/payment-information/${paymentInformationId}`,
       this.getConfig().getHost(),
     );
 
@@ -77,5 +79,41 @@ export class PaymentInformationApiClient extends BaseApiClient {
     };
 
     return this.makeApiCall<PaymentInformationResponse>(url.toString(), requestInit);
+  }
+
+  public async refundPaymentInformation(
+    merchantId: string,
+    commerceCaseId: string,
+    checkoutId: string,
+    paymentInformationId: string,
+    payload: PaymentInformationRefundRequest,
+  ): Promise<PaymentInformationRefundResponse> {
+    if (!merchantId) {
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
+    }
+    if (!commerceCaseId) {
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
+    }
+    if (!checkoutId) {
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
+    }
+    if (!paymentInformationId) {
+      throw new TypeError('Payment Information ID is required');
+    }
+
+    const url = new URL(
+      `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/payment-information/${paymentInformationId}/refund`,
+      this.getConfig().getHost(),
+    );
+
+    const requestInit: RequestInit = {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(payload),
+    };
+
+    return this.makeApiCall<PaymentInformationRefundResponse>(url.toString(), requestInit);
   }
 }
