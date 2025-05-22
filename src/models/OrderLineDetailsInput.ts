@@ -38,8 +38,9 @@ export interface OrderLineDetailsInput {
   taxAmount?: number;
 
   /**
-   * @description If this is set to `true`, `taxAmount` will be interpreted as the tax
-   * amount per unit as opposed to the tax amount per line item.
+   * @description This field indicates if the `taxAmount` is to be interpreted as the tax
+   * amount per unit rather than for the entire line item. This field is included in the
+   * response only when `taxAmount` is set; otherwise, it will return as `null`.
    */
   taxAmountPerUnit?: boolean;
 

@@ -1,6 +1,8 @@
 import type { Address } from './Address.js';
+import type { BusinessRelation } from './BusinessRelation.js';
 import type { CompanyInformation } from './CompanyInformation.js';
 import type { ContactDetails } from './ContactDetails.js';
+import type { CustomerAccount } from './CustomerAccount.js';
 import type { PersonalInformation } from './PersonalInformation.js';
 
 /** @description Object containing the details of a customer. */
@@ -25,17 +27,7 @@ export interface Customer {
    *      * Sweden - Consumer (personnummer) with a length of 10 or 12 digits
    */
   fiscalNumber?: string;
-  /**
-   * @description Business relation to the customer. Possible values:
-   *     * B2C - Indicates business to consumer
-   *     * B2B - Indicates business to business
-   *
-   *     Mandatory for the the following payment methods:
-   *     * 3390 - PAYONE Secured Invoice
-   *     * 3391 - PAYONE Secured Installment
-   *     * 3392 - PAYONE Secured Direct Debit
-   */
-  businessRelation?: string;
+  businessRelation?: BusinessRelation;
   /**
    * @description The locale that the customer should be addressed in (for 3rd parties).
    *
@@ -44,4 +36,5 @@ export interface Customer {
    */
   locale?: string;
   personalInformation?: PersonalInformation;
+  account?: CustomerAccount;
 }
