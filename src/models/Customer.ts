@@ -2,6 +2,7 @@ import type { Address } from './Address.js';
 import type { BusinessRelation } from './BusinessRelation.js';
 import type { CompanyInformation } from './CompanyInformation.js';
 import type { ContactDetails } from './ContactDetails.js';
+import type { CustomerAccount } from './CustomerAccount.js';
 import type { PersonalInformation } from './PersonalInformation.js';
 
 /** @description Object containing the details of a customer. */
@@ -35,4 +36,5 @@ export interface Customer {
    */
   locale?: string;
   personalInformation?: PersonalInformation;
+  account?: CustomerAccount;
 }
