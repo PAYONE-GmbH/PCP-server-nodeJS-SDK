@@ -10,6 +10,7 @@ import type { ErrorResponse } from '../models/ErrorResponse.js';
 import type { CommerceCaseResponse } from '../models/CommerceCaseResponse.js';
 import type { Customer } from '../models/Customer.js';
 import { GetCommerceCasesQuery } from '../queries/GetCommerceCasesQuery.js';
+import { BusinessRelation } from '../models/BusinessRelation.js';
 
 vi.mock('node-fetch', async importOriginal => {
   return {
@@ -34,7 +35,7 @@ describe('CheckoutApiClient', () => {
       const expectedResponse: CreateCommerceCaseResponse = {
         commerceCaseId: 'id-5513',
         customer: {
-          businessRelation: 'B2C',
+          businessRelation: BusinessRelation.B2C,
           billingAddress: {
             countryCode: 'DE',
             zip: '40474',
@@ -54,7 +55,7 @@ describe('CheckoutApiClient', () => {
       const payload: CreateCommerceCaseResponse = {
         merchantReference: 'id-from-shop-45',
         customer: {
-          businessRelation: 'B2C',
+          businessRelation: BusinessRelation.B2C,
           billingAddress: {
             countryCode: 'DE',
             zip: '40474',
@@ -101,7 +102,7 @@ describe('CheckoutApiClient', () => {
       const expectedResponse: CommerceCaseResponse = {
         commerceCaseId: 'id-4499',
         customer: {
-          businessRelation: 'B2B',
+          businessRelation: BusinessRelation.B2C,
           billingAddress: {
             countryCode: 'DE',
             zip: '24113',
