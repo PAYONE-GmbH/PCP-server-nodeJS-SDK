@@ -1,6 +1,9 @@
 import fetch from 'node-fetch';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
+import { ApiErrorResponseException } from '../errors/ApiErrorResponseException.js';
+import { ApiResponseRetrievalException } from '../errors/ApiResponseRetrievalException.js';
+import { ActionType } from '../models/ActionType.js';
 import {
   CancellationReason,
   RefreshType,
@@ -21,9 +24,7 @@ import {
   type RefundPaymentResponse,
   type RefundRequest,
 } from '../models/index.js';
-import { createResponseMock, createEmptyErrorResponseMock } from '../testutils/mock-response.js';
-import { ApiErrorResponseException } from '../errors/ApiErrorResponseException.js';
-import { ApiResponseRetrievalException } from '../errors/ApiResponseRetrievalException.js';
+import { createEmptyErrorResponseMock, createResponseMock } from '../testutils/mock-response.js';
 import { PaymentExecutionApiClient } from './PaymentExecutionApiClient.js';
 
 vi.mock('node-fetch', async importOriginal => {
@@ -288,7 +289,7 @@ describe('PaymentExecutionApiClient', () => {
     test('given request was successful, should return response', async () => {
       const expectedResponse: CompletePaymentResponse = {
         merchantAction: {
-          actionType: 'REDIRECT',
+          actionType: ActionType.REDIRECT,
           redirectData: {
             redirectURL: 'https://redirect.com',
           },
