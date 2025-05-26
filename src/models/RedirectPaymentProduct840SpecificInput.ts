@@ -9,4 +9,10 @@ export interface RedirectPaymentProduct840SpecificInput {
    *     "digital"
    */
   addressSelectionAtPayPal?: boolean;
+  /**
+   * @description A unique ID determined by the merchant, to link a Paypal transaction to a FraudNet PayPal risk session.
+   * Only applicable to customer-initiated transactions, when the FraudNet SDK is used, and to be passed in the API request the same tracking ID value
+   * (FraudNet Session Identifier).
+   */
+  fraudNetId?: string;
 }
