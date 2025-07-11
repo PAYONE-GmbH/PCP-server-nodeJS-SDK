@@ -10,7 +10,7 @@ describe('ServerMetaInfo', () => {
   test('initializes with correct values', () => {
     const serverMetaInfo = new ServerMetaInfo();
     expect(serverMetaInfo.platformIdentifier).toBe(`${os.platform()}, node version is: ${process.version}`);
-    expect(serverMetaInfo.sdkIdentifier).toBe('NodeServerSDK/v1.2.0');
+    expect(serverMetaInfo.sdkIdentifier).toBe('NodeServerSDK/v1.3.0');
     expect(serverMetaInfo.sdkCreator).toBe('PAYONE GmbH');
   });
 });

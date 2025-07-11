@@ -13,6 +13,7 @@ Welcome to the Node SDK for the PAYONE Commerce Platform (api-version 1.35.0)! T
 - [Installation](#installation)
 - [Usage](#usage)
   - [General](#general)
+  - [Authentication Token Retrieval](#authentication-token-retrieval)
   - [Error Handling](#error-handling)
   - [Client Side](#client-side)
   - [Apple Pay](#apple-pay)
@@ -47,6 +48,30 @@ yarn add pcp-server-nodejs-sdk
 **[back to top](#table-of-contents)**
 
 ## Usage
+
+
+### Authentication Token Retrieval
+
+To interact with certain client-side SDKs (such as the credit card tokenizer), you need to generate a short-lived authentication JWT token for your merchant. This token can be retrieved using the SDK as follows:
+
+```ts
+import { AuthenticationApiClient } from 'pcp-server-nodejs-sdk';
+import { CommunicatorConfiguration } from 'pcp-server-nodejs-sdk';
+
+const config = new CommunicatorConfiguration(apiKey, apiSecret, 'https://api.preprod.commerce.payone.com');
+const authenticationApiClient = new AuthenticationApiClient(config);
+const token = await authenticationApiClient.getAuthenticationTokens(merchantId);
+console.log('JWT Token:', token.token);
+console.log('Token ID:', token.id);
+console.log('Created:', token.creationDate);
+console.log('Expires:', token.expirationDate);
+```
+
+This token can then be used for secure operations such as initializing the credit card tokenizer or other client-side SDKs that require merchant authentication. The token is valid for a limited time (10 minutes) and should be handled securely.
+
+**Note:** The `getAuthenticationTokens` method requires a valid `merchantId`. Optionally, you can provide an `X-Request-ID` header for tracing requests.
+
+**[back to top](#table-of-contents)**
 
 ### General
 
