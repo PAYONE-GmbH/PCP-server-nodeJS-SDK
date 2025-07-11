@@ -1,3 +1,4 @@
+export * from './AuthenticationToken.js';
 export * from './APIError.js';
 export * from './Address.js';
 export * from './AddressPersonal.js';

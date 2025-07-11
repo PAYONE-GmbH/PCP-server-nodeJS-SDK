@@ -1,3 +1,8 @@
+# [1.3.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.2.0...v1.3.0) (2025-07-10)
+### Features
+
+* feat: add auth client ([507c9564d732bee330de46fd2b1543db3de9d6b2](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/507c9564d732bee330de46fd2b1543db3de9d6b2))
+
 # [1.2.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.1.0...v1.2.0) (2025-05-26)
 
 ### Documentation
