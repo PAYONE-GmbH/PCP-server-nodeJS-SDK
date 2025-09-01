@@ -27,11 +27,7 @@ interface HeadersLike {
 
 // Create a concrete test class since BaseApiClient is abstract-like
 class TestApiClient extends BaseApiClient {
-  public async testMakeApiCall<T>(
-    url: string,
-    requestInit: RequestInit,
-    parseBody?: (body: string) => T,
-  ): Promise<T> {
+  public async testMakeApiCall<T>(url: string, requestInit: RequestInit, parseBody?: (body: string) => T): Promise<T> {
     return this.makeApiCall(url, requestInit, parseBody);
   }
 }
@@ -86,7 +82,7 @@ describe('BaseApiClient', () => {
       'https://test.com/api',
       expect.objectContaining({
         method: 'GET',
-      })
+      }),
     );
   });
 
@@ -100,7 +96,7 @@ describe('BaseApiClient', () => {
       'apiKey',
       'apiSecret',
       'https://test.com',
-      globalFetchOptions
+      globalFetchOptions,
     );
     const clientWithGlobalOptions = new TestApiClient(configWithOptions);
 
@@ -153,7 +149,7 @@ describe('BaseApiClient', () => {
       'apiKey',
       'apiSecret',
       'https://test.com',
-      globalFetchOptions
+      globalFetchOptions,
     );
     const clientWithBothOptions = new TestApiClient(configWithOptions, clientFetchOptions);
 

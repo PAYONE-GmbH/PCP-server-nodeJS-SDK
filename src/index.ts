@@ -5,4 +5,3 @@ export * from './models/index.js';
 export * from './queries/index.js';
 export * from './transformer/index.js';
 export { type FetchOptions } from './types/FetchOptions.js';
-
