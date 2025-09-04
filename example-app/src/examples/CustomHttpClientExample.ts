@@ -1,4 +1,5 @@
 import { CommerceCaseApiClient, CommunicatorConfiguration, FetchOptions } from 'pcp-server-nodejs-sdk';
+import { HttpsProxyAgent } from 'https-proxy-agent';
 
 /**
  * Example demonstrating how to customize HTTP client behavior using fetch options.
@@ -42,12 +43,15 @@ export class CustomHttpClientExample {
    */
   static async proxyConfiguration() {
     console.log('=== Example 2: Proxy Configuration ===');
-    
+
     const proxyFetchOptions: FetchOptions = {
-      // Configure proxy agent for HTTPS requests
+      // Configure proxy agent for HTTPS requests with actual proxy endpoint
+      agent: new HttpsProxyAgent('http://proxy.company.com:8080'),
+
+      // Set timeout for requests through proxy
       signal: AbortSignal.timeout(45000),
-      
-      // Add proxy-related headers if needed
+
+      // Add proxy-related headers if authentication is needed
       headers: {
         'Proxy-Authorization': 'Basic ' + Buffer.from('username:password').toString('base64'),
       },
@@ -61,9 +65,10 @@ export class CustomHttpClientExample {
     );
 
     const commerceCaseClient = new CommerceCaseApiClient(config);
-    
+
     console.log('Configuration created with proxy settings');
-    console.log('All requests will go through the configured proxy');
+    console.log('All requests will go through the proxy at http://proxy.company.com:8080');
+    console.log('Proxy authentication will be handled via Proxy-Authorization header');
   }
 
   /**
