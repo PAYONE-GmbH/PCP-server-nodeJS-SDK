@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
       - name: Run Build
         run: npm run build
       - name: Run Linting
@@ -49,7 +49,7 @@ jobs:
         with:
           node-version: 22
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --legacy-peer-deps
       - name: Run Tests with coverage
         run: npm run test:coverage
       - name: Run SonarCloud Scan
