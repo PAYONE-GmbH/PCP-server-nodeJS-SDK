@@ -13,6 +13,7 @@ Welcome to the Node SDK for the PAYONE Commerce Platform (api-version 1.35.0)! T
 - [Installation](#installation)
 - [Usage](#usage)
   - [General](#general)
+  - [Custom HTTP Client Configuration](#custom-http-client-configuration)
   - [Authentication Token Retrieval](#authentication-token-retrieval)
   - [Error Handling](#error-handling)
   - [Client Side](#client-side)
@@ -103,6 +104,108 @@ const createCommerceCaseResponse: CreateCommerceCaseResponse = commerceCaseClien
 ```
 
 The models directly map to the API as described in [PAYONE Commerce Platform API Reference](https://docs.payone.com/pcp/commerce-platform-api).
+
+**[back to top](#table-of-contents)**
+
+### Custom HTTP Client Configuration
+
+The SDK allows you to customize HTTP client behavior by providing custom fetch options. This enables you to configure timeouts, proxy settings, custom headers, SSL/TLS settings, and more.
+
+#### Global Configuration
+
+You can set global fetch options that will be applied to all API clients:
+
+```ts
+import { CommunicatorConfiguration, FetchOptions } from 'pcp-server-nodejs-sdk';
+import { HttpsProxyAgent } from 'https-proxy-agent';
+
+const fetchOptions: FetchOptions = {
+  // Set a 30-second timeout for all requests
+  signal: AbortSignal.timeout(30000),
+
+  // Configure proxy settings
+  agent: new HttpsProxyAgent('http://proxy.company.com:8080'),
+
+  // Add custom headers
+  headers: {
+    'User-Agent': 'MyApp/1.0.0',
+    'X-Client-Version': '1.0.0',
+  },
+};
+
+const config = new CommunicatorConfiguration(
+  apiKey,
+  apiSecret,
+  'https://api.preprod.commerce.payone.com',
+  fetchOptions
+);
+```
+
+#### Client-Specific Configuration
+
+You can also override global settings for specific API clients:
+
+```ts
+const commerceCaseClient = new CommerceCaseApiClient(config);
+
+// Set client-specific options that override global settings
+const clientSpecificOptions: FetchOptions = {
+  signal: AbortSignal.timeout(60000), // Longer timeout for this client
+  headers: {
+    'X-Client-Specific': 'commerce-case-client',
+  },
+};
+
+commerceCaseClient.setFetchOptions(clientSpecificOptions);
+```
+
+#### Common Use Cases
+
+**Timeout Configuration:**
+```ts
+const fetchOptions: FetchOptions = {
+  signal: AbortSignal.timeout(30000),
+};
+```
+
+**Proxy Configuration:**
+```ts
+import { HttpsProxyAgent } from 'https-proxy-agent';
+
+const fetchOptions: FetchOptions = {
+  agent: new HttpsProxyAgent('http://proxy.company.com:8080'),
+  headers: {
+    'Proxy-Authorization': 'Basic ' + Buffer.from('username:password').toString('base64'),
+  },
+};
+```
+
+**Custom SSL/TLS Settings:**
+```ts
+import * as https from 'https';
+
+const customAgent = new https.Agent({
+  rejectUnauthorized: true,
+  keepAlive: true,
+  maxSockets: 50,
+  // Add custom certificates if needed
+  // ca: fs.readFileSync('custom-ca.pem'),
+});
+
+const fetchOptions: FetchOptions = {
+  agent: customAgent,
+};
+```
+
+**Priority Order:**
+1. SDK headers (Authorization, Date, etc.) - highest priority
+2. Request-specific headers - medium priority
+3. Client-specific fetch options - medium priority
+4. Global fetch options - lowest priority
+
+The SDK ensures that authentication and other critical headers are never overridden by custom options.
+
+**[back to top](#table-of-contents)**
 
 ### Error Handling
 
