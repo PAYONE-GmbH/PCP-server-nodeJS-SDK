@@ -1,12 +1,8 @@
-# [1.3.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.2.0...v1.3.0) (2025-07-10)
-### Features
-
-* feat: add auth client ([507c9564d732bee330de46fd2b1543db3de9d6b2](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/507c9564d732bee330de46fd2b1543db3de9d6b2))
-
-# [1.2.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.1.0...v1.2.0) (2025-05-26)
+## [1.3.1](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.0.0...v1.3.1) (2025-09-09)
 
 ### Documentation
 
+* docs: add link to npm ([5352fe0114d93a250a6bba933f5c2d6bc2df2d33](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/5352fe0114d93a250a6bba933f5c2d6bc2df2d33))
 * docs: improve description for taxAmountPerUnit field in OrderLineDetailsInput interface ([91e9c6c62ebd94413d023506b1dfac520b0aa72b](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/91e9c6c62ebd94413d023506b1dfac520b0aa72b))
 * docs: update description for category field in APIError interface for clarity ([606a252c27bfa4a632d619a0ed39e4eaae65beea](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/606a252c27bfa4a632d619a0ed39e4eaae65beea))
 * docs: update docs ([be11f7de4c00943dd843538f40cbba35c7b3298f](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/be11f7de4c00943dd843538f40cbba35c7b3298f))
@@ -14,21 +10,13 @@
 ### Features
 
 * feat: add ActionType enum and update MerchantAction interface to use it ([0a820a89be3d7270bde5a168120bf464a33bd971](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/0a820a89be3d7270bde5a168120bf464a33bd971))
+* feat: add auth client ([507c9564d732bee330de46fd2b1543db3de9d6b2](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/507c9564d732bee330de46fd2b1543db3de9d6b2))
 * feat: add AvsResult enum and integrate it into CardFraudResults interface ([a8831eca61f2c81adb6175a5b61d0a16d04a121c](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/a8831eca61f2c81adb6175a5b61d0a16d04a121c))
 * feat: add BusinessRelation enum and integrate it into Customer interface ([8a5ebacdb2e6d6cc6d24e8095f4d6a631786c149](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/8a5ebacdb2e6d6cc6d24e8095f4d6a631786c149))
 * feat: add CustomerAccount interface and integrate it into Customer model ([bb5c2f24431f1bae2e3f80fcfb258812a67f50c5](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/bb5c2f24431f1bae2e3f80fcfb258812a67f50c5))
 * feat: add fraudNetId field to RedirectPaymentProduct840SpecificInput interface ([12830d6d693699a0950fc465223ace852c69feca](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/12830d6d693699a0950fc465223ace852c69feca))
-* feat: introduce RecurringPaymentSequenceIndicator enum and update CardRecurrenceDetails interface ([d5479e86552314b9351de25ea08f5c80100cbf42](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/d5479e86552314b9351de25ea08f5c80100cbf42))
-
-# [1.1.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.0.0...v1.1.0) (2025-03-12)
-
-### Documentation
-
-* docs: add link to npm ([5352fe0114d93a250a6bba933f5c2d6bc2df2d33](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/5352fe0114d93a250a6bba933f5c2d6bc2df2d33))
-
-### Features
-
 * feat: implement api version 1.28.0 ([dc2d0f39ddc3ddb489504531d0da8efedb9011ab](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/dc2d0f39ddc3ddb489504531d0da8efedb9011ab))
+* feat: introduce RecurringPaymentSequenceIndicator enum and update CardRecurrenceDetails interface ([d5479e86552314b9351de25ea08f5c80100cbf42](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/d5479e86552314b9351de25ea08f5c80100cbf42))
 
 # [1.0.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v0.0.3...v1.0.0) (2024-08-22)
 
