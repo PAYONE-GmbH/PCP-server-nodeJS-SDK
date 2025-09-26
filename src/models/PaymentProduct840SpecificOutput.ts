@@ -6,4 +6,5 @@ export interface PaymentProduct840SpecificOutput {
   billingAddress?: Address;
   customerAccount?: PaymentProduct840CustomerAccount;
   shippingAddress?: Address;
+  payPalTransactionId: string;
 }
