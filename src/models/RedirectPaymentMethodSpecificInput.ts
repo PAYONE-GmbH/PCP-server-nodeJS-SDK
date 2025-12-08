@@ -14,11 +14,13 @@ export interface RedirectPaymentMethodSpecificInput {
   requiresApproval?: boolean;
   /**
    * @description ID of the token to use to create the payment.
+   * @maxLength 40
    * @example 0ca037cc-9079-4df7-8f6f-f2a3443ee521
    */
   paymentProcessingToken?: string;
   /**
    * @description Token to identify the card in the reporting.
+   * @maxLength 40
    * @example 12a037cc-833d-8b45-8f6f-11c34171f4e1
    */
   readonly reportingToken?: string;
@@ -26,7 +28,8 @@ export interface RedirectPaymentMethodSpecificInput {
    * @description Indicates if this transaction should be tokenized
    *       * true - Tokenize the transaction.
    *       * false - Do not tokenize the transaction, unless it would be tokenized by other means such as auto-
-   *     tokenization of recurring payments. example: false
+   *     tokenization of recurring payments.
+   * @example false
    */
   tokenize?: boolean;
   /**

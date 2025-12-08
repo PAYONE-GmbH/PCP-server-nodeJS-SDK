@@ -9,6 +9,7 @@ export interface RedirectionData {
    *     on mobile devices a custom protocol can be used in the form of protocol://. This protocol must be registered
    *     on the device first.
    *     URLs without a protocol will be rejected.
+   * @maxLength 200
    * @example https://secure.ogone.com/ncol/test/displayparams.asp
    */
   returnUrl: string;
