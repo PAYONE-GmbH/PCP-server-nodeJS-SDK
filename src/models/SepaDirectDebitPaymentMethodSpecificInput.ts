@@ -1,4 +1,5 @@
 import type { SepaDirectDebitPaymentProduct771SpecificInput } from './SepaDirectDebitPaymentProduct771SpecificInput.js';
+import type { PaymentProductId } from './PaymentProductId.js';
 
 /** @description Object containing the specific input details for SEPA direct debit payments */
 export interface SepaDirectDebitPaymentMethodSpecificInput {
@@ -8,5 +9,5 @@ export interface SepaDirectDebitPaymentMethodSpecificInput {
    * @description Payment product identifier - please check product documentation for a full overview of possible values.
    * @example 840
    */
-  paymentProductId?: number;
+  paymentProductId?: PaymentProductId;
 }

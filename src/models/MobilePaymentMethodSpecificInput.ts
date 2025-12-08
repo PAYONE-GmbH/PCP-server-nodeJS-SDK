@@ -1,5 +1,6 @@
 import type { AuthorizationMode } from './AuthorizationMode.js';
 import type { MobilePaymentThreeDSecure } from './MobilePaymentThreeDSecure.js';
+import type { PaymentProductId } from './PaymentProductId.js';
 import type { PaymentProduct302SpecificInput } from './PaymentProduct302SpecificInput.js';
 
 /**
@@ -11,7 +12,7 @@ export interface MobilePaymentMethodSpecificInput {
    * @minimum 0
    * @maximum 99999
    */
-  paymentProductId?: number;
+  paymentProductId?: PaymentProductId;
 
   /**
    * @description Authorization mode for the mobile payment.

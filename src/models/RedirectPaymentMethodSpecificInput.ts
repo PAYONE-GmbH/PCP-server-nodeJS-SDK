@@ -1,3 +1,4 @@
+import type { PaymentProductId } from './PaymentProductId.js';
 import type { RedirectPaymentProduct840SpecificInput } from './RedirectPaymentProduct840SpecificInput.js';
 import type { RedirectionData } from './RedirectionData.js';
 
@@ -33,7 +34,7 @@ export interface RedirectPaymentMethodSpecificInput {
    * @description Payment product identifier - please check product documentation for a full overview of possible values.
    * @example 840
    */
-  paymentProductId?: number;
+  paymentProductId?: PaymentProductId;
   paymentProduct840SpecificInput?: RedirectPaymentProduct840SpecificInput;
   redirectionData?: RedirectionData;
 }

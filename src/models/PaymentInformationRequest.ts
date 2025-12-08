@@ -1,5 +1,6 @@
 import type { AmountOfMoney } from './AmountOfMoney.js';
 import type { PaymentChannel } from './PaymentChannel.js';
+import type { PaymentProductId } from './PaymentProductId.js';
 import type { PaymentType } from './PaymentType.js';
 
 export interface PaymentInformationRequest {
@@ -10,7 +11,7 @@ export interface PaymentInformationRequest {
    * Format: int32
    * @description Payment method identifier - please check the product documentation for a full overview of possible values.
    */
-  paymentProductId: number;
+  paymentProductId: PaymentProductId;
   /**
    * @description Unique reference of the PaymentInformation. In case of card present transactions, the reference from the ECR
    *     or terminal will be used. It is always the reference for external transactions.

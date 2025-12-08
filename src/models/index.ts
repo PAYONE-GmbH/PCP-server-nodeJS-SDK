@@ -104,6 +104,7 @@ export * from './PaymentProduct3392SpecificInput.js';
 export * from './PaymentProduct771SpecificOutput.js';
 export * from './PaymentProduct840CustomerAccount.js';
 export * from './PaymentProduct840SpecificOutput.js';
+export * from './PaymentProductId.js';
 export * from './PaymentReferences.js';
 export * from './PaymentResponse.js';
 export * from './PaymentStatus.js';
