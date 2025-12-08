@@ -1,6 +1,7 @@
 import type { CompleteFinancingPaymentMethodSpecificInput } from './CompleteFinancingPaymentMethodSpecificInput.js';
 import type { CustomerDevice } from './CustomerDevice.js';
 import type { Order } from './Order.js';
+import type { CompleteRedirectPaymentMethodSpecificInput } from './CompleteRedirectPaymentMethodSpecificInput.js';
 
 /**
  * @description The Complete request is the last step to finalize the initially created Payment.
@@ -9,6 +10,7 @@ import type { Order } from './Order.js';
  */
 export interface CompletePaymentRequest {
   financingPaymentMethodSpecificInput?: CompleteFinancingPaymentMethodSpecificInput;
+  redirectPaymentMethodSpecificInput?: CompleteRedirectPaymentMethodSpecificInput;
   order?: Order;
   device?: CustomerDevice;
 }

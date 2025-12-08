@@ -1,9 +1,5 @@
 /**
- * @description Payment product identifier – please refer to the product documentation for valid values.
- *
- * Examples:
- * - 302  (Apple Pay)
- * - 3391 (PAYONE Secured Installment)
- * - 840  (PayPal)
+ * @description Payment product identifier - please check product documentation for a full overview of possible values.
+ * @example 840
  */
 export type PaymentProductId = number;
