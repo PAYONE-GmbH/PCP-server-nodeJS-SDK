@@ -2,6 +2,7 @@ import type { AuthorizationMode } from './AuthorizationMode.js';
 import type { CardInfo } from './CardInfo.js';
 import type { CardOnFileRecurringFrequency } from './CardOnFileRecurringFrequency.js';
 import type { CardRecurrenceDetails } from './CardRecurrenceDetails.js';
+import type { PaymentProductId } from './PaymentProductId.js';
 import type { TransactionChannel } from './TransactionChannel.js';
 import type { UnscheduledCardOnFileRequestor } from './UnscheduledCardOnFileRequestor.js';
 import type { UnscheduledCardOnFileSequenceIndicator } from './UnscheduledCardOnFileSequenceIndicator.js';
@@ -23,12 +24,7 @@ export interface CardPaymentMethodSpecificInput {
   transactionChannel?: TransactionChannel;
   unscheduledCardOnFileRequestor?: UnscheduledCardOnFileRequestor;
   unscheduledCardOnFileSequenceIndicator?: UnscheduledCardOnFileSequenceIndicator;
-  /**
-   * Format: int32
-   * @description Payment product identifier - please check product documentation for a full overview of possible values.
-   * @example 840
-   */
-  paymentProductId?: number;
+  paymentProductId?: PaymentProductId;
   card?: CardInfo;
   /**
    * @description The URL that the customer is redirect to after the payment flow has finished. You can add any number of key

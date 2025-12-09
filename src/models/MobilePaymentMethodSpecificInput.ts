@@ -1,21 +1,14 @@
 import type { AuthorizationMode } from './AuthorizationMode.js';
 import type { MobilePaymentThreeDSecure } from './MobilePaymentThreeDSecure.js';
+import type { PaymentProductId } from './PaymentProductId.js';
 import type { PaymentProduct302SpecificInput } from './PaymentProduct302SpecificInput.js';
 
 /**
  * @description Object containing the specific input details for mobile payments.
  */
 export interface MobilePaymentMethodSpecificInput {
-  /**
-   * @description Payment product identifier - please check product documentation for a full overview of possible values.
-   * @minimum 0
-   * @maximum 99999
-   */
-  paymentProductId?: number;
+  paymentProductId?: PaymentProductId;
 
-  /**
-   * @description Authorization mode for the mobile payment.
-   */
   authorizationMode?: AuthorizationMode;
 
   /**
@@ -34,13 +27,7 @@ export interface MobilePaymentMethodSpecificInput {
    */
   ephemeralKey?: string;
 
-  /**
-   * @description Three-D Secure details for the mobile payment.
-   */
   threeDSecure?: MobilePaymentThreeDSecure;
 
-  /**
-   * @description Specific input for payment product 302.
-   */
   paymentProduct302SpecificInput?: PaymentProduct302SpecificInput;
 }

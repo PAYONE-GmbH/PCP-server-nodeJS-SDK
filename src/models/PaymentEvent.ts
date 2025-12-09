@@ -27,9 +27,10 @@ export interface PaymentEvent {
    * @description Reason for payment cancellation.
    */
   cancellationReason?: CancellationReason;
-
   /**
-   * @description Reason for refund (e.g., communicated by or to the customer).
+   * @description Reason of the Refund (e.g. communicated by or to the costumer).
+   * @maxLength 255
+   * @example Customer complained
    */
   returnReason?: string;
 

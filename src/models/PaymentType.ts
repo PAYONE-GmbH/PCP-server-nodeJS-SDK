@@ -7,6 +7,7 @@ export enum PaymentType {
   Capture = 'CAPTURE',
   Refund = 'REFUND',
   Reversal = 'REVERSAL',
+  Chargeback = 'CHARGEBACK',
   ChargebackReversal = 'CHARGEBACK_REVERSAL',
   CreditNote = 'CREDIT_NOTE',
   DebitNote = 'DEBIT_NOTE',
