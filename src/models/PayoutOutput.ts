@@ -5,14 +5,8 @@ import type { PaymentReferences } from './PaymentReferences.js';
  * @description Object containing details from the created payout.
  */
 export interface PayoutOutput {
-  /**
-   * @description Amount of money details.
-   */
   amountOfMoney?: AmountOfMoney;
 
-  /**
-   * @description Payment references associated with the payout.
-   */
   references?: PaymentReferences;
 
   /**

@@ -24,11 +24,6 @@ export interface CardPaymentMethodSpecificInput {
   transactionChannel?: TransactionChannel;
   unscheduledCardOnFileRequestor?: UnscheduledCardOnFileRequestor;
   unscheduledCardOnFileSequenceIndicator?: UnscheduledCardOnFileSequenceIndicator;
-  /**
-   * Format: int32
-   * @description Payment product identifier - please check product documentation for a full overview of possible values.
-   * @example 840
-   */
   paymentProductId?: PaymentProductId;
   card?: CardInfo;
   /**

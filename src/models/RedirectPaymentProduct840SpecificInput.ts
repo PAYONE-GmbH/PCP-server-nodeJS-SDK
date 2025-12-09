@@ -16,13 +16,13 @@ export interface RedirectPaymentProduct840SpecificInput {
    */
   fraudNetId?: string;
   /**
-   * @description Required parameter which defines how PayPal is being integrated inside the checkout page.
-   *    * true = the current integration uses PayPal SDK
-   *    * false = classic usage with PayPal Redirect flow
+   * @description Indicates whether the PayPal JavaScript SDK flow is used.
+   *    * true = The PayPal JavaScript SDK flow is used.
+   *    * false = The PayPal JavaScript SDK flow is not used.
+   *
+   *   Default value is false.
+   * @default false
+   * @example true
    */
   javaScriptSdkFlow: boolean;
-  /**
-   * @description Required parameter for a COMPLETE CALL (not only an ORDER CALL) which one value "CONFIRM_ORDER_STATUS" it signals process is finished on merchant side.
-   */
-  action?: 'CONFIRM_ORDER_STATUS';
 }

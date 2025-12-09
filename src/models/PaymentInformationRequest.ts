@@ -7,10 +7,6 @@ export interface PaymentInformationRequest {
   amountOfMoney: AmountOfMoney;
   type: PaymentType;
   paymentChannel: PaymentChannel;
-  /**
-   * Format: int32
-   * @description Payment method identifier - please check the product documentation for a full overview of possible values.
-   */
   paymentProductId: PaymentProductId;
   /**
    * @description Unique reference of the PaymentInformation. In case of card present transactions, the reference from the ECR

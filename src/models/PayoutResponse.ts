@@ -6,19 +6,10 @@ import type { StatusValue } from './StatusValue.js';
  * @description Object that holds the payment related properties for the refund of a Payment Information.
  */
 export interface PayoutResponse {
-  /**
-   * @description Payout output details.
-   */
   payoutOutput?: PayoutOutput;
 
-  /**
-   * @description Status of the payout.
-   */
   status?: StatusValue;
 
-  /**
-   * @description Category of the payout status.
-   */
   statusCategory?: StatusCategoryValue;
 
   /**

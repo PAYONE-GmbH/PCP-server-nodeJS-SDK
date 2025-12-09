@@ -3,11 +3,6 @@ import type { PaymentProductId } from './PaymentProductId.js';
 
 /** @description Object containing the redirect payment product details. */
 export interface RedirectPaymentMethodSpecificOutput {
-  /**
-   * Format: int32
-   * @description <- Payment product identifier - please check product documentation for a full overview of possible values.
-   * @example 840
-   */
   paymentProductId?: PaymentProductId;
   paymentProduct840SpecificOutput?: PaymentProduct840SpecificOutput;
   /**

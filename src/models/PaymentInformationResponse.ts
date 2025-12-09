@@ -27,14 +27,8 @@ export interface PaymentInformationResponse {
    */
   paymentInformationId?: string;
 
-  /**
-   * @description Payment channel used for this payment.
-   */
   paymentChannel?: PaymentChannel;
 
-  /**
-   * @description Payment product identifier - please check product documentation for possible values.
-   */
   paymentProductId?: PaymentProductId;
 
   /**
@@ -62,13 +56,7 @@ export interface PaymentInformationResponse {
    */
   lastUpdated?: string;
 
-  /**
-   * @description Card payment details related to the transaction.
-   */
   cardPaymentDetails?: CardPaymentDetails;
 
-  /**
-   * @description List of payment events related to the transaction.
-   */
   events?: PaymentEvent[];
 }

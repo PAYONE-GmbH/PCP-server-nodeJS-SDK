@@ -32,11 +32,7 @@ export interface RedirectPaymentMethodSpecificInput {
    * @example false
    */
   tokenize?: boolean;
-  /**
-   * Format: int32
-   * @description Payment product identifier - please check product documentation for a full overview of possible values.
-   * @example 840
-   */
+
   paymentProductId?: PaymentProductId;
   paymentProduct840SpecificInput?: RedirectPaymentProduct840SpecificInput;
   redirectionData?: RedirectionData;
