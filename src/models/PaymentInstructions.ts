@@ -1,7 +1,7 @@
 import type { Payee } from './Payee.js';
 
 /**
- * @description Object containing information on payment instructions details (e.g. on invoice payments).
+ * @description Object containing information on payment instructions details (e.g. on the invoice payments).
  */
 export interface PaymentInstructions {
   /**
@@ -11,6 +11,7 @@ export interface PaymentInstructions {
 
   /**
    * @description Due date of the payment in the format: YYYYMMDD.
+   * @maxLength 8
    */
   dueDate: string;
 
@@ -20,7 +21,7 @@ export interface PaymentInstructions {
   referenceNumber: string;
 
   /**
-   * @description Status, usually describing the status of the invoice (e.g., paid, overdue, open).
+   * @description Status, usually describing the status of the invoice if paid, overdue, open...
    */
   status?: string;
 }

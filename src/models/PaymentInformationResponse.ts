@@ -1,6 +1,7 @@
-import type { PaymentChannel } from './PaymentChannel.js';
 import type { CardPaymentDetails } from './CardPaymentDetails.js';
 import type { PaymentEvent } from './PaymentEvent.js';
+import type { PaymentChannel } from './PaymentChannel.js';
+import type { PaymentProductId } from './PaymentProductId.js';
 
 /**
  * @description Object containing the related data of the created Payment Information.
@@ -26,15 +27,9 @@ export interface PaymentInformationResponse {
    */
   paymentInformationId?: string;
 
-  /**
-   * @description Payment channel used for this payment.
-   */
   paymentChannel?: PaymentChannel;
 
-  /**
-   * @description Payment product identifier - please check product documentation for possible values.
-   */
-  paymentProductId?: number;
+  paymentProductId?: PaymentProductId;
 
   /**
    * @description Unique identifier of the POS terminal of the payment transaction.
@@ -61,13 +56,7 @@ export interface PaymentInformationResponse {
    */
   lastUpdated?: string;
 
-  /**
-   * @description Card payment details related to the transaction.
-   */
   cardPaymentDetails?: CardPaymentDetails;
 
-  /**
-   * @description List of payment events related to the transaction.
-   */
   events?: PaymentEvent[];
 }

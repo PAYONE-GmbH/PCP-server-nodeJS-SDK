@@ -1,4 +1,4 @@
-import * as os from 'os';
+import * as os from 'node:os';
 
 export class ServerMetaInfo {
   public platformIdentifier: string;
@@ -8,7 +8,7 @@ export class ServerMetaInfo {
 
   constructor(integrator?: string) {
     this.platformIdentifier = `${os.platform()}, node version is: ${process.version}`;
-    this.sdkIdentifier = 'NodeServerSDK/v1.4.0'; // version gets updated automatically after calling npm version <major|minor|patch>
+    this.sdkIdentifier = 'NodeServerSDK/v1.5.0'; // version gets updated automatically after calling npm version <major|minor|patch>
     this.sdkCreator = 'PAYONE GmbH';
     this.integrator = integrator || '';
   }

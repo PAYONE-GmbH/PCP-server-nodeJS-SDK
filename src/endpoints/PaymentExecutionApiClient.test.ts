@@ -299,6 +299,13 @@ describe('PaymentExecutionApiClient', () => {
       mockedFetch.mockResolvedValueOnce(createResponseMock<CompletePaymentResponse>(200, expectedResponse));
 
       const payload: CompletePaymentRequest = {
+        redirectPaymentMethodSpecificInput: {
+          paymentProductId: 840,
+          paymentProduct840SpecificInput: {
+            action: 'CONFIRM_ORDER_STATUS',
+            javaScriptSdkFlow: true,
+          },
+        },
         order: {
           amountOfMoney: { amount: 3720, currencyCode: 'EUR' },
           references: {
