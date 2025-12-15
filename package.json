@@ -1,6 +1,6 @@
 {
   "name": "pcp-server-nodejs-sdk",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -38,7 +38,7 @@
     "@commitlint/config-conventional": "19.2.2",
     "@eslint/js": "9.8.0",
     "@types/node": "22.1.0",
-    "@vitest/coverage-v8": "2.0.5",
+    "@vitest/coverage-v8": "2.1.9",
     "conventional-changelog-cli": "5.0.0",
     "eslint": "9.8.0",
     "globals": "15.9.0",
@@ -47,7 +47,7 @@
     "ts-node": "10.9.2",
     "typescript": "5.5.4",
     "typescript-eslint": "8.0.1",
-    "vitest": "2.0.5"
+    "vitest": "2.1.9"
   },
   "dependencies": {
     "node-fetch": "3.3.2"
