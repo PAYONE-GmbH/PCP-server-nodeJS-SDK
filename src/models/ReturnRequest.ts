@@ -1,3 +1,4 @@
+import type { FundSplit } from './FundSplit.js';
 import type { ReturnItem } from './ReturnItem.js';
 import type { ReturnType } from './ReturnType.js';
 
@@ -18,4 +19,5 @@ export interface ReturnRequest {
    */
   returnReason?: string; // Reason for the refund
   returnItems?: ReturnItem[];
+  fundSplit?: FundSplit;
 }

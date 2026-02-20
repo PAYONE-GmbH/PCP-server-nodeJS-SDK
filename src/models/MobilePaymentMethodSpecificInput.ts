@@ -2,6 +2,7 @@ import type { AuthorizationMode } from './AuthorizationMode.js';
 import type { MobilePaymentThreeDSecure } from './MobilePaymentThreeDSecure.js';
 import type { PaymentProductId } from './PaymentProductId.js';
 import type { PaymentProduct302SpecificInput } from './PaymentProduct302SpecificInput.js';
+import type { PaymentProduct5002SpecificInput } from './PaymentProduct5002SpecificInput.js';
 
 /**
  * @description Object containing the specific input details for mobile payments.
@@ -30,4 +31,6 @@ export interface MobilePaymentMethodSpecificInput {
   threeDSecure?: MobilePaymentThreeDSecure;
 
   paymentProduct302SpecificInput?: PaymentProduct302SpecificInput;
+
+  paymentProduct5002SpecificInput?: PaymentProduct5002SpecificInput;
 }

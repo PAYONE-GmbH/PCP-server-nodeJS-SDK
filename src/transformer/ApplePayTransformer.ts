@@ -1,22 +1,22 @@
 import type { ApplePayPayment } from '../models/applepay/ApplePayPayment.js';
 import { ApplePaymentTokenVersion } from '../models/ApplePaymentTokenVersion.js';
 import type { MobilePaymentMethodSpecificInput } from '../models/MobilePaymentMethodSpecificInput.js';
-import { Network } from '../models/Network.js';
+import { MobilePaymentNetwork } from '../models/MobilePaymentNetwork.js';
 
-function networkFromString(value: string): Network {
+function networkFromString(value: string): MobilePaymentNetwork {
   switch (value.toUpperCase()) {
-    case Network.MASTERCARD:
-      return Network.MASTERCARD;
-    case Network.VISA:
-      return Network.VISA;
-    case Network.AMEX:
-      return Network.AMEX;
-    case Network.GIROCARD:
-      return Network.GIROCARD;
-    case Network.DISCOVER:
-      return Network.DISCOVER;
-    case Network.JCB:
-      return Network.JCB;
+    case MobilePaymentNetwork.MASTERCARD:
+      return MobilePaymentNetwork.MASTERCARD;
+    case MobilePaymentNetwork.VISA:
+      return MobilePaymentNetwork.VISA;
+    case MobilePaymentNetwork.AMEX:
+      return MobilePaymentNetwork.AMEX;
+    case MobilePaymentNetwork.GIROCARD:
+      return MobilePaymentNetwork.GIROCARD;
+    case MobilePaymentNetwork.DISCOVER:
+      return MobilePaymentNetwork.DISCOVER;
+    case MobilePaymentNetwork.JCB:
+      return MobilePaymentNetwork.JCB;
     default:
       throw new TypeError(`'${value}' can't represent a Network`);
   }

@@ -1,4 +1,5 @@
 import type { CardFraudResults } from './CardFraudResults.js';
+import type { MobilePaymentNetwork } from './MobilePaymentNetwork.js';
 import type { ThreeDSecureResults } from './ThreeDSecureResults.js';
 
 /** @description Object containing the mobile payment method details. */
@@ -14,5 +15,5 @@ export interface MobilePaymentMethodSpecificOutput {
   fraudResults?: CardFraudResults;
   threeDSecureResults?: ThreeDSecureResults;
   /** @description The card network that was used for a mobile payment method operation */
-  network?: string;
+  network?: MobilePaymentNetwork;
 }

@@ -1,4 +1,5 @@
 import type { AmountOfMoney } from './AmountOfMoney.js';
+import type { FundSplit } from './FundSplit.js';
 import type { References } from './References.js';
 import type { ShoppingCartInput } from './ShoppingCartInput.js';
 
@@ -14,4 +15,5 @@ export interface PaymentExecutionSpecificInput {
   amountOfMoney?: AmountOfMoney;
   shoppingCart?: ShoppingCartInput;
   paymentReferences: References;
+  fundSplit?: FundSplit;
 }
