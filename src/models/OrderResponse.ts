@@ -11,12 +11,10 @@
  */
 
 import type { CreatePaymentResponse } from './CreatePaymentResponse.js';
-import type { FundSplit } from './FundSplit.js';
 import type { ShoppingCartResult } from './ShoppingCartResult.js';
 
 /** @description Object that contains details on the created payment in case one has been created. */
 export interface OrderResponse {
   createPaymentResponse?: CreatePaymentResponse;
   shoppingCart?: ShoppingCartResult;
-  fundSplit?: FundSplit;
 }
