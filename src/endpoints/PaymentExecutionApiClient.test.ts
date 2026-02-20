@@ -365,9 +365,7 @@ describe('PaymentExecutionApiClient', () => {
     });
   });
   describe('pausePayment', () => {
-    const payload: PausePaymentRequest = {
-      refreshType: RefreshType.PAYMENT_EVENTS,
-    };
+    const payload: PausePaymentRequest = {};
     test('given request was successful, should return response', async () => {
       const expectedResponse: PausePaymentResponse = {
         status: StatusValue.Paused,
