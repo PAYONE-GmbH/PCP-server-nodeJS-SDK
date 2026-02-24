@@ -18,7 +18,7 @@ export class CustomHttpClientExample {
 
     const globalFetchOptions: FetchOptions = {
       // Set a 30-second timeout for all requests
-      timeout: 30000,
+      signal: AbortSignal.timeout(30000),
 
       // Add custom headers that will be included in all requests
       headers: {
@@ -82,7 +82,7 @@ export class CustomHttpClientExample {
 
     // Global configuration with default settings
     const globalFetchOptions: FetchOptions = {
-      timeout: 30000,
+      signal: AbortSignal.timeout(30000),
       headers: {
         'X-Global-Header': 'global-value',
         'X-Shared-Header': 'global-shared',
@@ -101,7 +101,7 @@ export class CustomHttpClientExample {
 
     // Override settings for this specific client
     const clientSpecificOptions: FetchOptions = {
-      timeout: 60000, // Longer timeout for this client
+      signal: AbortSignal.timeout(60000), // Longer timeout for this client
       headers: {
         'X-Client-Header': 'client-value',
         'X-Shared-Header': 'client-shared', // This will override the global value
@@ -164,7 +164,7 @@ export class CustomHttpClientExample {
 
     const sslFetchOptions: FetchOptions = {
       agent: customAgent,
-      timeout: 30000,
+      signal: AbortSignal.timeout(30000),
 
       headers: {
         'X-SSL-Config': 'custom',
@@ -194,7 +194,7 @@ export class CustomHttpClientExample {
     // debugging headers that can help with tracing.
 
     const debugFetchOptions: FetchOptions = {
-      timeout: 30000,
+      signal: AbortSignal.timeout(30000),
 
       headers: {
         'X-Request-ID': `req-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
