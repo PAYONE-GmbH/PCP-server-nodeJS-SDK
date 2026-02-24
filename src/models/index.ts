@@ -76,7 +76,6 @@ export * from './MobilePaymentMethodSpecificInput.js';
 export * from './MobilePaymentMethodSpecificOutput.js';
 export * from './MobilePaymentNetwork.js';
 export * from './MobilePaymentThreeDSecure.js';
-export * from './Network.js';
 export * from './Order.js';
 export * from './OrderItem.js';
 export * from './OrderLineDetailsInput.js';
