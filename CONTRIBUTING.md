@@ -54,7 +54,7 @@ We use [Conventional Commits](https://www.conventionalcommits.org/) for our comm
 ### Code Style
 
 - Follow the project's existing code style.
-- Use tools like [ESLint](https://eslint.org/) and [Prettier](https://prettier.io/) to maintain code quality and consistency.
+- Use tools like [Biome](https://biomejs.dev/) to maintain code quality and consistency.
 - Ensure your editor/IDE is configured to follow the project's coding standards.
 
 ### Testing
