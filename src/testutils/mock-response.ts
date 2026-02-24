@@ -7,7 +7,10 @@ export const createResponseMock = <T>(statusCode: number, body?: T) => {
   });
 };
 
-export const createEmptyErrorResponseMock = (statusCode: number = 500, body: string | undefined = undefined) => {
+export const createEmptyErrorResponseMock = (
+  statusCode: number = 500,
+  body: string | undefined = undefined,
+) => {
   const usedBody = body ? JSON.stringify(body) : undefined;
   return new Response(usedBody, {
     status: statusCode,

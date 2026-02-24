@@ -1,6 +1,8 @@
-import { Headers, type RequestInit } from 'node-fetch';
 import { URLSearchParams } from 'url';
+
+import { Headers, type RequestInit } from 'node-fetch';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
+import type { CompleteOrderRequest } from '../models/CompleteOrderRequest.js';
 import type {
   CheckoutResponse,
   CheckoutsResponse,
@@ -9,7 +11,6 @@ import type {
   CreateCheckoutResponse,
   PatchCheckoutRequest,
 } from '../models/index.js';
-
 import { GetCheckoutsQuery } from '../queries/index.js';
 import {
   BaseApiClient,
@@ -17,7 +18,6 @@ import {
   COMMERCE_CASE_ID_REQUIRED_ERROR,
   MERCHANT_ID_REQUIRED_ERROR,
 } from './BaseApiClient.js';
-import type { CompleteOrderRequest } from '../models/CompleteOrderRequest.js';
 
 export class CheckoutApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {
@@ -36,7 +36,10 @@ export class CheckoutApiClient extends BaseApiClient {
       throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
     }
 
-    const url = new URL(`/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts`, this.getConfig().getHost());
+    const url = new URL(
+      `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts`,
+      this.getConfig().getHost(),
+    );
 
     const requestInit: RequestInit = {
       method: 'POST',
@@ -77,7 +80,10 @@ export class CheckoutApiClient extends BaseApiClient {
     return this.makeApiCall<CheckoutResponse>(url.toString(), requestInit);
   }
 
-  public async getCheckoutsRequest(merchantId: string, queryParams?: GetCheckoutsQuery): Promise<CheckoutsResponse> {
+  public async getCheckoutsRequest(
+    merchantId: string,
+    queryParams?: GetCheckoutsQuery,
+  ): Promise<CheckoutsResponse> {
     if (!merchantId) {
       throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
@@ -129,7 +135,11 @@ export class CheckoutApiClient extends BaseApiClient {
     await this.makeApiCall(url.toString(), requestInit, BaseApiClient.parseVoid);
   }
 
-  public async removeCheckoutRequest(merchantId: string, commerceCaseId: string, checkoutId: string): Promise<void> {
+  public async removeCheckoutRequest(
+    merchantId: string,
+    commerceCaseId: string,
+    checkoutId: string,
+  ): Promise<void> {
     if (!merchantId) {
       throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }

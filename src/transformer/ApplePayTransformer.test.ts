@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
+import { ApplePaymentTokenVersion } from '../models/ApplePaymentTokenVersion.js';
 import type { ApplePayPayment } from '../models/applepay/ApplePayPayment.js';
 import { ApplePayPaymentMethodType } from '../models/applepay/ApplePayPaymentMethodType.js';
-import { ApplePaymentTokenVersion } from '../models/ApplePaymentTokenVersion.js';
 import type { MobilePaymentMethodSpecificInput } from '../models/MobilePaymentMethodSpecificInput.js';
 import { MobilePaymentNetwork } from '../models/MobilePaymentNetwork.js';
 import { transformApplePayPaymentToMobilePaymentMethodSpecificInput } from './ApplePayTransformer.js';
@@ -84,7 +84,9 @@ describe('ApplePayTransformer', () => {
         },
       };
 
-      expect(transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment2)).toEqual(expected2);
+      expect(transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment2)).toEqual(
+        expected2,
+      );
     });
 
     test('converts an ApplePayPayment with different networks correctly', () => {
@@ -115,7 +117,9 @@ describe('ApplePayTransformer', () => {
           },
         };
 
-        expect(transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment3)).toEqual(expected3);
+        expect(transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment3)).toEqual(
+          expected3,
+        );
       });
     });
 
@@ -131,7 +135,9 @@ describe('ApplePayTransformer', () => {
         },
       };
 
-      expect(() => transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment5)).toThrowError(TypeError);
+      expect(() =>
+        transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment5),
+      ).toThrowError(TypeError);
     });
 
     test('throws an error when the payment data version is not recognized', () => {
@@ -146,7 +152,9 @@ describe('ApplePayTransformer', () => {
         },
       };
 
-      expect(() => transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment6)).toThrowError(TypeError);
+      expect(() =>
+        transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment6),
+      ).toThrowError(TypeError);
     });
   });
 });

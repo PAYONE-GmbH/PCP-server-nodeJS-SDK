@@ -1,6 +1,6 @@
 import { CommunicatorConfiguration } from 'pcp-server-nodejs-sdk';
-import { CommerceCaseApiExample } from './examples/CommerceCaseApiExample';
 import { AuthenticationApiExample } from './examples/AuthenticationApiExample';
+import { CommerceCaseApiExample } from './examples/CommerceCaseApiExample';
 
 const run = async () => {
   const apiKey = process.env.API_KEY;
@@ -22,7 +22,10 @@ const run = async () => {
   );
 
   const commerceCaseApiClientExample = new CommerceCaseApiExample(communicatorConfiguration);
-  const authenticationApiExample = new AuthenticationApiExample(communicatorConfiguration, merchantId);
+  const authenticationApiExample = new AuthenticationApiExample(
+    communicatorConfiguration,
+    merchantId,
+  );
 
   // Demo: Retrieve authentication token for the merchant
   await authenticationApiExample.runGetToken();

@@ -1,6 +1,6 @@
 import type { CardPaymentDetails } from './CardPaymentDetails.js';
-import type { PaymentEvent } from './PaymentEvent.js';
 import type { PaymentChannel } from './PaymentChannel.js';
+import type { PaymentEvent } from './PaymentEvent.js';
 import type { PaymentProductId } from './PaymentProductId.js';
 
 /**

@@ -1,4 +1,4 @@
-import type { PaymentChannel, StatusCheckout, ExtendedCheckoutStatus } from '../models/index.js';
+import type { ExtendedCheckoutStatus, PaymentChannel, StatusCheckout } from '../models/index.js';
 import type { QueryConfig } from '../utils/QueryConfig.js';
 
 export class GetCheckoutsQuery implements QueryConfig {
@@ -141,7 +141,9 @@ export class GetCheckoutsQuery implements QueryConfig {
     return this;
   }
 
-  public setIncludeExtendedCheckoutStatus(includeExtendedCheckoutStatus: ExtendedCheckoutStatus[]): this {
+  public setIncludeExtendedCheckoutStatus(
+    includeExtendedCheckoutStatus: ExtendedCheckoutStatus[],
+  ): this {
     this.includeExtendedCheckoutStatus = includeExtendedCheckoutStatus;
     return this;
   }
@@ -394,7 +396,7 @@ export class GetCheckoutsQuery implements QueryConfig {
       query.set('merchantCustomerId', this.merchantCustomerId);
     }
     if (this.includePaymentProductId !== undefined) {
-      const productIdList = this.includePaymentProductId.map(productId => productId.toString());
+      const productIdList = this.includePaymentProductId.map((productId) => productId.toString());
       query.set('includePaymentProductId', productIdList.join(','));
     }
     if (this.includeCheckoutStatus !== undefined) {

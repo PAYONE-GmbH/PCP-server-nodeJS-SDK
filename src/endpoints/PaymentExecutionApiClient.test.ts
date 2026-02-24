@@ -6,8 +6,6 @@ import { ApiResponseRetrievalException } from '../errors/ApiResponseRetrievalExc
 import { ActionType } from '../models/ActionType.js';
 import {
   CancellationReason,
-  RefreshType,
-  StatusValue,
   type CancelPaymentRequest,
   type CancelPaymentResponse,
   type CapturePaymentRequest,
@@ -21,13 +19,15 @@ import {
   type PaymentExecution,
   type PaymentExecutionRequest,
   type RefreshPaymentRequest,
+  RefreshType,
   type RefundPaymentResponse,
   type RefundRequest,
+  StatusValue,
 } from '../models/index.js';
 import { createEmptyErrorResponseMock, createResponseMock } from '../testutils/mock-response.js';
 import { PaymentExecutionApiClient } from './PaymentExecutionApiClient.js';
 
-vi.mock('node-fetch', async importOriginal => {
+vi.mock('node-fetch', async (importOriginal) => {
   return {
     ...(await importOriginal<typeof import('node-fetch')>()),
     default: vi.fn(),
@@ -49,7 +49,9 @@ describe('PaymentExecutionApiClient', () => {
     test('given request was successful, should return response', async () => {
       const expectedResponse: CreatePaymentResponse = {};
 
-      mockedFetch.mockResolvedValueOnce(createResponseMock<CreatePaymentResponse>(200, expectedResponse));
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<CreatePaymentResponse>(200, expectedResponse),
+      );
 
       const payload: PaymentExecutionRequest = {
         paymentExecutionSpecificInput: {
@@ -57,7 +59,12 @@ describe('PaymentExecutionApiClient', () => {
           amountOfMoney: { amount: 3720, currencyCode: 'EUR' },
         },
       };
-      const res = await paymentExecutionApiClient.createPayment('merchantId', 'commerceCaseId', 'checkoutId', payload);
+      const res = await paymentExecutionApiClient.createPayment(
+        'merchantId',
+        'commerceCaseId',
+        'checkoutId',
+        payload,
+      );
 
       expect(res).toEqual(expectedResponse);
     });
@@ -68,7 +75,12 @@ describe('PaymentExecutionApiClient', () => {
 
       expect.assertions(1);
       try {
-        await paymentExecutionApiClient.createPayment('merchantId', 'commerceCaseId', 'checkoutId', {});
+        await paymentExecutionApiClient.createPayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
       }
@@ -78,7 +90,12 @@ describe('PaymentExecutionApiClient', () => {
 
       expect.assertions(1);
       try {
-        await paymentExecutionApiClient.createPayment('merchantId', 'commerceCaseId', 'checkoutId', {});
+        await paymentExecutionApiClient.createPayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
@@ -99,7 +116,9 @@ describe('PaymentExecutionApiClient', () => {
     test('given request was successful, should return response', async () => {
       const expectedResponse: CapturePaymentResponse = {};
 
-      mockedFetch.mockResolvedValueOnce(createResponseMock<CapturePaymentResponse>(200, expectedResponse));
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<CapturePaymentResponse>(200, expectedResponse),
+      );
 
       const payload: CapturePaymentRequest = {
         isFinal: true,
@@ -124,9 +143,15 @@ describe('PaymentExecutionApiClient', () => {
 
       expect.assertions(1);
       try {
-        await paymentExecutionApiClient.capturePayment('merchantId', 'commerceCaseId', 'checkoutId', 'paymentId', {
-          isFinal: false,
-        });
+        await paymentExecutionApiClient.capturePayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          {
+            isFinal: false,
+          },
+        );
       } catch (error) {
         expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
       }
@@ -136,25 +161,39 @@ describe('PaymentExecutionApiClient', () => {
 
       expect.assertions(1);
       try {
-        await paymentExecutionApiClient.capturePayment('merchantId', 'commerceCaseId', 'checkoutId', 'paymentId', {
-          isFinal: false,
-        });
+        await paymentExecutionApiClient.capturePayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          {
+            isFinal: false,
+          },
+        );
       } catch (error) {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
     test('a required param is empty, throw an error', async () => {
       await expect(() =>
-        paymentExecutionApiClient.capturePayment('', 'commerceCaseId', 'checkoutId', 'paymentId', { isFinal: false }),
+        paymentExecutionApiClient.capturePayment('', 'commerceCaseId', 'checkoutId', 'paymentId', {
+          isFinal: false,
+        }),
       ).rejects.toThrowError('Merchant ID is required');
       await expect(() =>
-        paymentExecutionApiClient.capturePayment('merchantId', '', 'checkoutId', 'paymentId', { isFinal: false }),
+        paymentExecutionApiClient.capturePayment('merchantId', '', 'checkoutId', 'paymentId', {
+          isFinal: false,
+        }),
       ).rejects.toThrowError('Commerce Case ID is required');
       await expect(() =>
-        paymentExecutionApiClient.capturePayment('merchantId', 'commerceCaseId', '', 'paymentId', { isFinal: false }),
+        paymentExecutionApiClient.capturePayment('merchantId', 'commerceCaseId', '', 'paymentId', {
+          isFinal: false,
+        }),
       ).rejects.toThrowError('Checkout ID is required');
       await expect(() =>
-        paymentExecutionApiClient.capturePayment('merchantId', 'commerceCaseId', 'checkoutId', '', { isFinal: false }),
+        paymentExecutionApiClient.capturePayment('merchantId', 'commerceCaseId', 'checkoutId', '', {
+          isFinal: false,
+        }),
       ).rejects.toThrowError('Payment Execution ID is required');
     });
   });
@@ -170,7 +209,9 @@ describe('PaymentExecutionApiClient', () => {
         },
       };
 
-      mockedFetch.mockResolvedValueOnce(createResponseMock<CancelPaymentResponse>(200, expectedResponse));
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<CancelPaymentResponse>(200, expectedResponse),
+      );
 
       const payload: CancelPaymentRequest = {
         cancellationReason: CancellationReason.CONSUMER_REQUEST,
@@ -191,7 +232,13 @@ describe('PaymentExecutionApiClient', () => {
 
       expect.assertions(1);
       try {
-        await paymentExecutionApiClient.cancelPayment('merchantId', 'commerceCaseId', 'checkoutId', 'paymentId', {});
+        await paymentExecutionApiClient.cancelPayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
       }
@@ -201,23 +248,47 @@ describe('PaymentExecutionApiClient', () => {
 
       expect.assertions(1);
       try {
-        await paymentExecutionApiClient.cancelPayment('merchantId', 'commerceCaseId', 'checkoutId', 'paymentId', {});
+        await paymentExecutionApiClient.cancelPayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
     test('a required param is empty, throw an error', async () => {
       await expect(() =>
-        paymentExecutionApiClient.cancelPayment('', 'commerceCaseId', 'checkoutId', 'paymentId', {}),
+        paymentExecutionApiClient.cancelPayment(
+          '',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          {},
+        ),
       ).rejects.toThrowError('Merchant ID is required');
       await expect(() =>
         paymentExecutionApiClient.cancelPayment('merchantId', '', 'checkoutId', 'paymentId', {}),
       ).rejects.toThrowError('Commerce Case ID is required');
       await expect(() =>
-        paymentExecutionApiClient.cancelPayment('merchantId', 'commerceCaseId', '', 'paymentId', {}),
+        paymentExecutionApiClient.cancelPayment(
+          'merchantId',
+          'commerceCaseId',
+          '',
+          'paymentId',
+          {},
+        ),
       ).rejects.toThrowError('Checkout ID is required');
       await expect(() =>
-        paymentExecutionApiClient.cancelPayment('merchantId', 'commerceCaseId', 'checkoutId', '', {}),
+        paymentExecutionApiClient.cancelPayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          '',
+          {},
+        ),
       ).rejects.toThrowError('Payment Execution ID is required');
     });
   });
@@ -232,7 +303,9 @@ describe('PaymentExecutionApiClient', () => {
         },
       };
 
-      mockedFetch.mockResolvedValueOnce(createResponseMock<RefundPaymentResponse>(200, expectedResponse));
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<RefundPaymentResponse>(200, expectedResponse),
+      );
 
       const payload: RefundRequest = {
         return: {
@@ -255,7 +328,13 @@ describe('PaymentExecutionApiClient', () => {
 
       expect.assertions(1);
       try {
-        await paymentExecutionApiClient.refundPayment('merchantId', 'commerceCaseId', 'checkoutId', 'paymentId', {});
+        await paymentExecutionApiClient.refundPayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
       }
@@ -265,23 +344,47 @@ describe('PaymentExecutionApiClient', () => {
 
       expect.assertions(1);
       try {
-        await paymentExecutionApiClient.refundPayment('merchantId', 'commerceCaseId', 'checkoutId', 'paymentId', {});
+        await paymentExecutionApiClient.refundPayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
     test('a required param is empty, throw an error', async () => {
       await expect(() =>
-        paymentExecutionApiClient.refundPayment('', 'commerceCaseId', 'checkoutId', 'paymentId', {}),
+        paymentExecutionApiClient.refundPayment(
+          '',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          {},
+        ),
       ).rejects.toThrowError('Merchant ID is required');
       await expect(() =>
         paymentExecutionApiClient.refundPayment('merchantId', '', 'checkoutId', 'paymentId', {}),
       ).rejects.toThrowError('Commerce Case ID is required');
       await expect(() =>
-        paymentExecutionApiClient.refundPayment('merchantId', 'commerceCaseId', '', 'paymentId', {}),
+        paymentExecutionApiClient.refundPayment(
+          'merchantId',
+          'commerceCaseId',
+          '',
+          'paymentId',
+          {},
+        ),
       ).rejects.toThrowError('Checkout ID is required');
       await expect(() =>
-        paymentExecutionApiClient.refundPayment('merchantId', 'commerceCaseId', 'checkoutId', '', {}),
+        paymentExecutionApiClient.refundPayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          '',
+          {},
+        ),
       ).rejects.toThrowError('Payment Execution ID is required');
     });
   });
@@ -296,7 +399,9 @@ describe('PaymentExecutionApiClient', () => {
         },
       };
 
-      mockedFetch.mockResolvedValueOnce(createResponseMock<CompletePaymentResponse>(200, expectedResponse));
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<CompletePaymentResponse>(200, expectedResponse),
+      );
 
       const payload: CompletePaymentRequest = {
         redirectPaymentMethodSpecificInput: {
@@ -334,7 +439,13 @@ describe('PaymentExecutionApiClient', () => {
 
       expect.assertions(1);
       try {
-        await paymentExecutionApiClient.completePayment('merchantId', 'commerceCaseId', 'checkoutId', 'paymentId', {});
+        await paymentExecutionApiClient.completePayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
       }
@@ -344,23 +455,47 @@ describe('PaymentExecutionApiClient', () => {
 
       expect.assertions(1);
       try {
-        await paymentExecutionApiClient.completePayment('merchantId', 'commerceCaseId', 'checkoutId', 'paymentId', {});
+        await paymentExecutionApiClient.completePayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
     });
     test('a required param is empty, throw an error', async () => {
       await expect(() =>
-        paymentExecutionApiClient.completePayment('', 'commerceCaseId', 'checkoutId', 'paymentId', {}),
+        paymentExecutionApiClient.completePayment(
+          '',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          {},
+        ),
       ).rejects.toThrowError('Merchant ID is required');
       await expect(() =>
         paymentExecutionApiClient.completePayment('merchantId', '', 'checkoutId', 'paymentId', {}),
       ).rejects.toThrowError('Commerce Case ID is required');
       await expect(() =>
-        paymentExecutionApiClient.completePayment('merchantId', 'commerceCaseId', '', 'paymentId', {}),
+        paymentExecutionApiClient.completePayment(
+          'merchantId',
+          'commerceCaseId',
+          '',
+          'paymentId',
+          {},
+        ),
       ).rejects.toThrowError('Checkout ID is required');
       await expect(() =>
-        paymentExecutionApiClient.completePayment('merchantId', 'commerceCaseId', 'checkoutId', '', {}),
+        paymentExecutionApiClient.completePayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          '',
+          {},
+        ),
       ).rejects.toThrowError('Payment Execution ID is required');
     });
   });
@@ -371,7 +506,9 @@ describe('PaymentExecutionApiClient', () => {
         status: StatusValue.Paused,
       };
 
-      mockedFetch.mockResolvedValueOnce(createResponseMock<PausePaymentResponse>(200, expectedResponse));
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<PausePaymentResponse>(200, expectedResponse),
+      );
 
       const res = await paymentExecutionApiClient.pausePayment(
         'merchantId',
@@ -418,16 +555,40 @@ describe('PaymentExecutionApiClient', () => {
     });
     test('a required param is empty, throw an error', async () => {
       await expect(() =>
-        paymentExecutionApiClient.pausePayment('', 'commerceCaseId', 'checkoutId', 'paymentId', payload),
+        paymentExecutionApiClient.pausePayment(
+          '',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          payload,
+        ),
       ).rejects.toThrowError('Merchant ID is required');
       await expect(() =>
-        paymentExecutionApiClient.pausePayment('merchantId', '', 'checkoutId', 'paymentId', payload),
+        paymentExecutionApiClient.pausePayment(
+          'merchantId',
+          '',
+          'checkoutId',
+          'paymentId',
+          payload,
+        ),
       ).rejects.toThrowError('Commerce Case ID is required');
       await expect(() =>
-        paymentExecutionApiClient.pausePayment('merchantId', 'commerceCaseId', '', 'paymentId', payload),
+        paymentExecutionApiClient.pausePayment(
+          'merchantId',
+          'commerceCaseId',
+          '',
+          'paymentId',
+          payload,
+        ),
       ).rejects.toThrowError('Checkout ID is required');
       await expect(() =>
-        paymentExecutionApiClient.pausePayment('merchantId', 'commerceCaseId', 'checkoutId', '', payload),
+        paymentExecutionApiClient.pausePayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          '',
+          payload,
+        ),
       ).rejects.toThrowError('Payment Execution ID is required');
     });
   });
@@ -440,7 +601,9 @@ describe('PaymentExecutionApiClient', () => {
         paymentExecutionId: 'id',
       };
 
-      mockedFetch.mockResolvedValueOnce(createResponseMock<PaymentExecution>(200, expectedResponse));
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<PaymentExecution>(200, expectedResponse),
+      );
 
       const res = await paymentExecutionApiClient.refreshPayment(
         'merchantId',
@@ -487,16 +650,40 @@ describe('PaymentExecutionApiClient', () => {
     });
     test('a required param is empty, throw an error', async () => {
       await expect(() =>
-        paymentExecutionApiClient.refreshPayment('', 'commerceCaseId', 'checkoutId', 'paymentId', payload),
+        paymentExecutionApiClient.refreshPayment(
+          '',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentId',
+          payload,
+        ),
       ).rejects.toThrowError('Merchant ID is required');
       await expect(() =>
-        paymentExecutionApiClient.refreshPayment('merchantId', '', 'checkoutId', 'paymentId', payload),
+        paymentExecutionApiClient.refreshPayment(
+          'merchantId',
+          '',
+          'checkoutId',
+          'paymentId',
+          payload,
+        ),
       ).rejects.toThrowError('Commerce Case ID is required');
       await expect(() =>
-        paymentExecutionApiClient.refreshPayment('merchantId', 'commerceCaseId', '', 'paymentId', payload),
+        paymentExecutionApiClient.refreshPayment(
+          'merchantId',
+          'commerceCaseId',
+          '',
+          'paymentId',
+          payload,
+        ),
       ).rejects.toThrowError('Checkout ID is required');
       await expect(() =>
-        paymentExecutionApiClient.refreshPayment('merchantId', 'commerceCaseId', 'checkoutId', '', payload),
+        paymentExecutionApiClient.refreshPayment(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          '',
+          payload,
+        ),
       ).rejects.toThrowError('Payment Execution ID is required');
     });
   });

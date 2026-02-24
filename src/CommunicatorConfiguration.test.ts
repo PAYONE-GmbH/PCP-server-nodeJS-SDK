@@ -30,7 +30,12 @@ describe('CommunicatorConfiguration', () => {
       },
     };
 
-    const communicatorConfiguration = new CommunicatorConfiguration(apiKey, apiSecret, host, fetchOptions);
+    const communicatorConfiguration = new CommunicatorConfiguration(
+      apiKey,
+      apiSecret,
+      host,
+      fetchOptions,
+    );
     expect(communicatorConfiguration.getApiKey()).toBe(apiKey);
     expect(communicatorConfiguration.getApiSecret()).toBe(apiSecret);
     expect(communicatorConfiguration.getHost()).toBe(host);
@@ -38,7 +43,12 @@ describe('CommunicatorConfiguration', () => {
   });
 
   test('handles undefined fetch options', () => {
-    const communicatorConfiguration = new CommunicatorConfiguration('key', 'secret', 'host', undefined);
+    const communicatorConfiguration = new CommunicatorConfiguration(
+      'key',
+      'secret',
+      'host',
+      undefined,
+    );
     expect(communicatorConfiguration.getFetchOptions()).toBeUndefined();
   });
 });

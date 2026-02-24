@@ -1,8 +1,8 @@
 import type { AuthorizationMode } from './AuthorizationMode.js';
 import type { MobilePaymentThreeDSecure } from './MobilePaymentThreeDSecure.js';
-import type { PaymentProductId } from './PaymentProductId.js';
 import type { PaymentProduct302SpecificInput } from './PaymentProduct302SpecificInput.js';
 import type { PaymentProduct5002SpecificInput } from './PaymentProduct5002SpecificInput.js';
+import type { PaymentProductId } from './PaymentProductId.js';
 
 /**
  * @description Object containing the specific input details for mobile payments.

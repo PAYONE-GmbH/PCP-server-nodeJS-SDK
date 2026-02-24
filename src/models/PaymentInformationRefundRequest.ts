@@ -1,5 +1,5 @@
-import type { PositiveAmountOfMoney } from './PositiveAmountOfMoney.js';
 import type { PaymentReferences } from './PaymentReferences.js';
+import type { PositiveAmountOfMoney } from './PositiveAmountOfMoney.js';
 
 /**
  * @description Request to initiate a refund for a Payment Information of Checkout.

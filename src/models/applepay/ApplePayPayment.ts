@@ -1,5 +1,5 @@
-import type { ApplePayPaymentToken } from './ApplePayPaymentToken.js';
 import type { ApplePayPaymentContact } from './ApplePayPaymentContact.js';
+import type { ApplePayPaymentToken } from './ApplePayPaymentToken.js';
 
 /**
  * The result of authorizing a payment request that contains payment information.
