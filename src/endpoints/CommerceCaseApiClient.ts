@@ -1,4 +1,4 @@
-import { URL, URLSearchParams } from 'url';
+import { URL, URLSearchParams } from 'node:url';
 
 import { Headers, type RequestInit } from 'node-fetch';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';

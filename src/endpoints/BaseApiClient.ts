@@ -10,13 +10,10 @@ function isErrorResponse(parsed: unknown): parsed is ErrorResponse {
     return false;
   }
   const record = parsed as Record<string, unknown>;
-  if (
-    Object.prototype.hasOwnProperty.call(record, 'errorId') &&
-    typeof record['errorId'] !== 'string'
-  ) {
+  if (Object.hasOwn(record, 'errorId') && typeof record['errorId'] !== 'string') {
     return false;
   }
-  if (Object.prototype.hasOwnProperty.call(record, 'errorId') && !Array.isArray(record['errors'])) {
+  if (Object.hasOwn(record, 'errorId') && !Array.isArray(record['errors'])) {
     return false;
   }
   return true;
