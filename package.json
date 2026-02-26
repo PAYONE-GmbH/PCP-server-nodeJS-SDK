@@ -1,11 +1,13 @@
 {
   "name": "pcp-server-nodejs-sdk",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
-  "files": ["dist/**/*"],
+  "files": [
+    "dist/**/*"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/index.ts",
@@ -18,7 +20,12 @@
     "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0 --config ./changelog.config.cjs",
     "version": "./version.sh"
   },
-  "keywords": ["payone", "server", "node", "sdk"],
+  "keywords": [
+    "payone",
+    "server",
+    "node",
+    "sdk"
+  ],
   "license": "MIT",
   "author": "PAYONE-GmbH",
   "homepage": "https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK",
