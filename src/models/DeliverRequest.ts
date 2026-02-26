@@ -1,6 +1,7 @@
 import type { CancellationReason } from './CancellationReason.js';
 import type { DeliverItem } from './DeliverItem.js';
 import type { DeliverType } from './DeliverType.js';
+import type { FundSplit } from './FundSplit.js';
 
 /**
  * @description Request to mark items of the respective Checkout as delivered and to automatically execute a Capture.
@@ -23,7 +24,8 @@ export interface DeliverRequest {
    *
    * @default false
    */
-  isFinal: boolean;
+  isFinal?: boolean;
   cancellationReason?: CancellationReason;
   deliverItems?: DeliverItem[];
+  fundSplit?: FundSplit;
 }

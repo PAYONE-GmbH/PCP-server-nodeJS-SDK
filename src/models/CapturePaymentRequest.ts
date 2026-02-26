@@ -1,5 +1,6 @@
 import type { CancellationReason } from './CancellationReason.js';
 import type { DeliveryInformation } from './DeliveryInformation.js';
+import type { FundSplit } from './FundSplit.js';
 import type { PaymentReferences } from './PaymentReferences.js';
 
 /** @description If the shopping cart is specified, a Capture is made with the amount of the shopping cart for the items that are specified. */
@@ -18,8 +19,9 @@ export interface CapturePaymentRequest {
    *
    * @default false
    */
-  isFinal: boolean;
+  isFinal?: boolean;
   cancellationReason?: CancellationReason;
   references?: PaymentReferences;
   delivery?: DeliveryInformation;
+  fundSplit?: FundSplit;
 }
