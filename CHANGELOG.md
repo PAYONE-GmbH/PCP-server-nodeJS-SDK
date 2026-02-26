@@ -1,3 +1,5 @@
+# [1.7.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.5.1...v1.7.0) (2026-02-26)
+
 ## [1.5.1](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.5.0...v1.5.1) (2025-12-15)
 
 ### Documentation
