@@ -24,5 +24,5 @@ export interface RedirectPaymentProduct840SpecificInput {
    * @default false
    * @example true
    */
-  javaScriptSdkFlow: boolean;
+  javaScriptSdkFlow?: boolean;
 }

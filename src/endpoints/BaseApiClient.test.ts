@@ -4,7 +4,7 @@ import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import type { FetchOptions } from '../types/FetchOptions.js';
 import { BaseApiClient } from './BaseApiClient.js';
 
-vi.mock('node-fetch', async importOriginal => {
+vi.mock('node-fetch', async (importOriginal) => {
   return {
     ...(await importOriginal<typeof import('node-fetch')>()),
     default: vi.fn(),
@@ -27,7 +27,11 @@ interface HeadersLike {
 
 // Create a concrete test class since BaseApiClient is abstract-like
 class TestApiClient extends BaseApiClient {
-  public async testMakeApiCall<T>(url: string, requestInit: RequestInit, parseBody?: (body: string) => T): Promise<T> {
+  public async testMakeApiCall<T>(
+    url: string,
+    requestInit: RequestInit,
+    parseBody?: (body: string) => T,
+  ): Promise<T> {
     return this.makeApiCall(url, requestInit, parseBody);
   }
 }

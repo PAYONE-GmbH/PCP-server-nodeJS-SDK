@@ -1,3 +1,4 @@
+import type { FundSplit } from './FundSplit.js';
 import type { OrderItem } from './OrderItem.js';
 import type { OrderType } from './OrderType.js';
 import type { PaymentMethodSpecificInput } from './PaymentMethodSpecificInput.js';
@@ -18,4 +19,5 @@ export interface OrderRequest {
   orderReferences?: References;
   items?: OrderItem[];
   paymentMethodSpecificInput?: PaymentMethodSpecificInput;
+  fundSplit?: FundSplit;
 }

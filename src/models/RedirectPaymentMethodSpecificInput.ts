@@ -1,6 +1,6 @@
 import type { PaymentProductId } from './PaymentProductId.js';
-import type { RedirectPaymentProduct840SpecificInput } from './RedirectPaymentProduct840SpecificInput.js';
 import type { RedirectionData } from './RedirectionData.js';
+import type { RedirectPaymentProduct840SpecificInput } from './RedirectPaymentProduct840SpecificInput.js';
 
 /** @description Object containing the specific input details for payments that involve redirects to 3rd parties to complete, like iDeal and PayPal */
 export interface RedirectPaymentMethodSpecificInput {

@@ -1,8 +1,8 @@
-import type { PaymentType } from './PaymentType.js';
 import type { AmountOfMoney } from './AmountOfMoney.js';
-import type { StatusValue } from './StatusValue.js';
 import type { CancellationReason } from './CancellationReason.js';
 import type { PaymentInstructions } from './PaymentInstructions.js';
+import type { PaymentType } from './PaymentType.js';
+import type { StatusValue } from './StatusValue.js';
 
 /**
  * @description Detailed information regarding an occurred payment event.
@@ -38,4 +38,23 @@ export interface PaymentEvent {
    * @description Payment instructions associated with this payment event.
    */
   paymentInstructions?: PaymentInstructions;
+
+  /**
+   * Format: UUID
+   * @readonly
+   */
+  paymentEventId?: string;
+
+  /**
+   * Format: date-time
+   * @description The date and time when the payment event was created.
+   *
+   *     Format will be in one of the following formats:
+   *     * YYYY-MM-DD'T'HH:mm:ss'Z'
+   *     * YYYY-MM-DD'T'HH:mm:ss+XX:XX
+   *     * YYYY-MM-DD'T'HH:mm:ss-XX:XX
+   * @example 2022-01-01T00:00:00Z
+   * @readonly
+   */
+  creationDateTime?: string;
 }

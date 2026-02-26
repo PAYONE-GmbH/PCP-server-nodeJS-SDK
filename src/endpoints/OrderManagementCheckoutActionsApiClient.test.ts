@@ -1,26 +1,26 @@
 import fetch from 'node-fetch';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
+import { ApiErrorResponseException } from '../errors/ApiErrorResponseException.js';
+import { ApiResponseRetrievalException } from '../errors/ApiResponseRetrievalException.js';
 import {
+  type CancelRequest,
+  type CancelResponse,
+  CancelType,
   CartItemStatus,
-  OrderType,
   type DeliverRequest,
   type DeliverResponse,
   type ErrorResponse,
   type OrderRequest,
   type OrderResponse,
-  type ReturnResponse,
+  OrderType,
   type ReturnRequest,
-  type CancelResponse,
-  type CancelRequest,
-  CancelType,
+  type ReturnResponse,
 } from '../models/index.js';
-import { createResponseMock, createEmptyErrorResponseMock } from '../testutils/mock-response.js';
-import { ApiErrorResponseException } from '../errors/ApiErrorResponseException.js';
-import { ApiResponseRetrievalException } from '../errors/ApiResponseRetrievalException.js';
+import { createEmptyErrorResponseMock, createResponseMock } from '../testutils/mock-response.js';
 import { OrderManagementCheckoutActionsApiClient } from './OrderManagementCheckoutActionsApiClient.js';
 
-vi.mock('node-fetch', async importOriginal => {
+vi.mock('node-fetch', async (importOriginal) => {
   return {
     ...(await importOriginal<typeof import('node-fetch')>()),
     default: vi.fn(),
@@ -70,7 +70,12 @@ describe('CheckoutApiClient', () => {
 
       expect.assertions(1);
       try {
-        await orderManagementCheckoutActionsApiClient.createOrder('merchantId', 'commerceCaseId', 'checkoutId', {});
+        await orderManagementCheckoutActionsApiClient.createOrder(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
       }
@@ -80,7 +85,12 @@ describe('CheckoutApiClient', () => {
 
       expect.assertions(1);
       try {
-        await orderManagementCheckoutActionsApiClient.createOrder('merchantId', 'commerceCaseId', 'checkoutId', {});
+        await orderManagementCheckoutActionsApiClient.createOrder(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
@@ -164,13 +174,28 @@ describe('CheckoutApiClient', () => {
     });
     test('a required param is empty, throw an error', async () => {
       await expect(() =>
-        orderManagementCheckoutActionsApiClient.deliverOrder('', 'commerceCaseId', 'checkoutId', payload),
+        orderManagementCheckoutActionsApiClient.deliverOrder(
+          '',
+          'commerceCaseId',
+          'checkoutId',
+          payload,
+        ),
       ).rejects.toThrowError('Merchant ID is required');
       await expect(() =>
-        orderManagementCheckoutActionsApiClient.deliverOrder('merchantId', '', 'checkoutId', payload),
+        orderManagementCheckoutActionsApiClient.deliverOrder(
+          'merchantId',
+          '',
+          'checkoutId',
+          payload,
+        ),
       ).rejects.toThrowError('Commerce Case ID is required');
       await expect(() =>
-        orderManagementCheckoutActionsApiClient.deliverOrder('merchantId', 'commerceCaseId', '', payload),
+        orderManagementCheckoutActionsApiClient.deliverOrder(
+          'merchantId',
+          'commerceCaseId',
+          '',
+          payload,
+        ),
       ).rejects.toThrowError('Checkout ID is required');
     });
   });
@@ -205,7 +230,12 @@ describe('CheckoutApiClient', () => {
 
       expect.assertions(1);
       try {
-        await orderManagementCheckoutActionsApiClient.returnOrder('merchantId', 'commerceCaseId', 'checkoutId', {});
+        await orderManagementCheckoutActionsApiClient.returnOrder(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
       }
@@ -215,7 +245,12 @@ describe('CheckoutApiClient', () => {
 
       expect.assertions(1);
       try {
-        await orderManagementCheckoutActionsApiClient.returnOrder('merchantId', 'commerceCaseId', 'checkoutId', {});
+        await orderManagementCheckoutActionsApiClient.returnOrder(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
@@ -261,7 +296,12 @@ describe('CheckoutApiClient', () => {
 
       expect.assertions(1);
       try {
-        await orderManagementCheckoutActionsApiClient.cancelOrder('merchantId', 'commerceCaseId', 'checkoutId', {});
+        await orderManagementCheckoutActionsApiClient.cancelOrder(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
       }
@@ -271,7 +311,12 @@ describe('CheckoutApiClient', () => {
 
       expect.assertions(1);
       try {
-        await orderManagementCheckoutActionsApiClient.cancelOrder('merchantId', 'commerceCaseId', 'checkoutId', {});
+        await orderManagementCheckoutActionsApiClient.cancelOrder(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          {},
+        );
       } catch (error) {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }

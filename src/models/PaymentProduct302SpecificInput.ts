@@ -1,4 +1,5 @@
 import type { ApplePaymentDataTokenInformation } from './ApplePaymentDataTokenInformation.js';
+import type { MobilePaymentNetwork } from './MobilePaymentNetwork.js';
 
 /**
  * Object containing additional information needed for Apple Pay payment transactions.
@@ -13,14 +14,8 @@ export interface PaymentProduct302SpecificInput {
 
   /**
    * Network/Scheme of the card used for the payment.
-   * - `MASTERCARD`
-   * - `VISA`
-   * - `AMEX`
-   * - `GIROCARD`
-   * - `DISCOVER` (not supported yet)
-   * - `JCB` (not supported yet)
    */
-  network?: 'MASTERCARD' | 'VISA' | 'AMEX' | 'GIROCARD' | 'DISCOVER' | 'JCB';
+  network?: MobilePaymentNetwork;
 
   /**
    * Token containing Apple Pay payment data.
@@ -36,6 +31,7 @@ export interface PaymentProduct302SpecificInput {
   /**
    * Name of your Store. Needed for initializing the Apple Pay payment session
    * when `integrationType` is `MASS_ENABLEMENT`.
+   * @maxLength 64
    */
   displayName?: string;
 }

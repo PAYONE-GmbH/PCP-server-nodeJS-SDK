@@ -13,15 +13,15 @@ import type {
   RefundPaymentResponse,
   RefundRequest,
 } from '../models/index.js';
+import type { PausePaymentRequest } from '../models/PausePaymentRequest.js';
+import type { PausePaymentResponse } from '../models/PausePaymentResponse.js';
+import type { RefreshPaymentRequest } from '../models/RefreshPaymentRequest.js';
 import {
   BaseApiClient,
   CHECKOUT_ID_REQUIRED_ERROR,
   COMMERCE_CASE_ID_REQUIRED_ERROR,
   MERCHANT_ID_REQUIRED_ERROR,
 } from './BaseApiClient.js';
-import type { PausePaymentRequest } from '../models/PausePaymentRequest.js';
-import type { PausePaymentResponse } from '../models/PausePaymentResponse.js';
-import type { RefreshPaymentRequest } from '../models/RefreshPaymentRequest.js';
 
 const PAYMENT_EXECUTION_ID_REQUIRED_ERROR = 'Payment Execution ID is required';
 

@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest';
+import { ApplePaymentTokenVersion } from '../models/ApplePaymentTokenVersion.js';
 import type { ApplePayPayment } from '../models/applepay/ApplePayPayment.js';
 import { ApplePayPaymentMethodType } from '../models/applepay/ApplePayPaymentMethodType.js';
-import { ApplePaymentTokenVersion } from '../models/ApplePaymentTokenVersion.js';
 import type { MobilePaymentMethodSpecificInput } from '../models/MobilePaymentMethodSpecificInput.js';
-import { Network } from '../models/Network.js';
+import { MobilePaymentNetwork } from '../models/MobilePaymentNetwork.js';
 import { transformApplePayPaymentToMobilePaymentMethodSpecificInput } from './ApplePayTransformer.js';
 
 describe('ApplePayTransformer', () => {
@@ -84,17 +84,19 @@ describe('ApplePayTransformer', () => {
         },
       };
 
-      expect(transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment2)).toEqual(expected2);
+      expect(transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment2)).toEqual(
+        expected2,
+      );
     });
 
     test('converts an ApplePayPayment with different networks correctly', () => {
       const networks = [
-        { string: 'MasterCard', network: Network.MASTERCARD },
-        { string: 'Visa', network: Network.VISA },
-        { string: 'Amex', network: Network.AMEX },
-        { string: 'Girocard', network: Network.GIROCARD },
-        { string: 'Discover', network: Network.DISCOVER },
-        { string: 'JCB', network: Network.JCB },
+        { string: 'MasterCard', network: MobilePaymentNetwork.MASTERCARD },
+        { string: 'Visa', network: MobilePaymentNetwork.VISA },
+        { string: 'Amex', network: MobilePaymentNetwork.AMEX },
+        { string: 'Girocard', network: MobilePaymentNetwork.GIROCARD },
+        { string: 'Discover', network: MobilePaymentNetwork.DISCOVER },
+        { string: 'JCB', network: MobilePaymentNetwork.JCB },
       ];
       networks.forEach(({ string, network }) => {
         const payment3: ApplePayPayment = {
@@ -115,7 +117,9 @@ describe('ApplePayTransformer', () => {
           },
         };
 
-        expect(transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment3)).toEqual(expected3);
+        expect(transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment3)).toEqual(
+          expected3,
+        );
       });
     });
 
@@ -131,7 +135,9 @@ describe('ApplePayTransformer', () => {
         },
       };
 
-      expect(() => transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment5)).toThrowError(TypeError);
+      expect(() =>
+        transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment5),
+      ).toThrowError(TypeError);
     });
 
     test('throws an error when the payment data version is not recognized', () => {
@@ -146,7 +152,9 @@ describe('ApplePayTransformer', () => {
         },
       };
 
-      expect(() => transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment6)).toThrowError(TypeError);
+      expect(() =>
+        transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment6),
+      ).toThrowError(TypeError);
     });
   });
 });

@@ -2,17 +2,17 @@ import fetch from 'node-fetch';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import { CommerceCaseApiClient } from '../endpoints/CommerceCaseApiClient.js';
-import { createResponseMock, createEmptyErrorResponseMock } from '../testutils/mock-response.js';
 import { ApiErrorResponseException } from '../errors/ApiErrorResponseException.js';
 import { ApiResponseRetrievalException } from '../errors/ApiResponseRetrievalException.js';
-import type { CreateCommerceCaseResponse } from '../models/CreateCommerceCaseResponse.js';
-import type { ErrorResponse } from '../models/ErrorResponse.js';
-import type { CommerceCaseResponse } from '../models/CommerceCaseResponse.js';
-import type { Customer } from '../models/Customer.js';
-import { GetCommerceCasesQuery } from '../queries/GetCommerceCasesQuery.js';
 import { BusinessRelation } from '../models/BusinessRelation.js';
+import type { CommerceCaseResponse } from '../models/CommerceCaseResponse.js';
+import type { CreateCommerceCaseResponse } from '../models/CreateCommerceCaseResponse.js';
+import type { Customer } from '../models/Customer.js';
+import type { ErrorResponse } from '../models/ErrorResponse.js';
+import { GetCommerceCasesQuery } from '../queries/GetCommerceCasesQuery.js';
+import { createEmptyErrorResponseMock, createResponseMock } from '../testutils/mock-response.js';
 
-vi.mock('node-fetch', async importOriginal => {
+vi.mock('node-fetch', async (importOriginal) => {
   return {
     ...(await importOriginal<typeof import('node-fetch')>()),
     default: vi.fn(),
@@ -116,7 +116,10 @@ describe('CheckoutApiClient', () => {
 
       mockedFetch.mockResolvedValueOnce(createResponseMock(200, expectedResponse));
 
-      const res = await commerceCaseApiClient.getCommerceCaseRequest('merchantId', 'commerceCaseId');
+      const res = await commerceCaseApiClient.getCommerceCaseRequest(
+        'merchantId',
+        'commerceCaseId',
+      );
 
       expect(res).toEqual(expectedResponse);
     });
@@ -143,12 +146,12 @@ describe('CheckoutApiClient', () => {
       }
     });
     test('a required params is empty, throw an error', async () => {
-      await expect(() => commerceCaseApiClient.getCommerceCaseRequest('', 'commerceCaseId')).rejects.toThrow(
-        'Merchant ID is required',
-      );
-      await expect(() => commerceCaseApiClient.getCommerceCaseRequest('merchantId', '')).rejects.toThrow(
-        'Commerce Case ID is required',
-      );
+      await expect(() =>
+        commerceCaseApiClient.getCommerceCaseRequest('', 'commerceCaseId'),
+      ).rejects.toThrow('Merchant ID is required');
+      await expect(() =>
+        commerceCaseApiClient.getCommerceCaseRequest('merchantId', ''),
+      ).rejects.toThrow('Commerce Case ID is required');
     });
   });
   describe('getCommerceCasesRequest', () => {
@@ -198,7 +201,9 @@ describe('CheckoutApiClient', () => {
       }
     });
     test('a required params is empty, throw an error', async () => {
-      await expect(() => commerceCaseApiClient.getCommerceCasesRequest('')).rejects.toThrow('Merchant ID is required');
+      await expect(() => commerceCaseApiClient.getCommerceCasesRequest('')).rejects.toThrow(
+        'Merchant ID is required',
+      );
     });
   });
   describe('updateCommerceCaseRequest', () => {
@@ -208,7 +213,11 @@ describe('CheckoutApiClient', () => {
       const customer: Customer = {
         locale: '',
       };
-      await commerceCaseApiClient.updateCommerceCaseRequest('merchantId', 'commerceCaseId', customer);
+      await commerceCaseApiClient.updateCommerceCaseRequest(
+        'merchantId',
+        'commerceCaseId',
+        customer,
+      );
     });
     test('given request was not successful (400), then return errorresponse', async () => {
       const expectedResponse: ErrorResponse = { errorId: 'error-id' };
@@ -233,12 +242,12 @@ describe('CheckoutApiClient', () => {
       }
     });
     test('a required params is empty, throw an error', async () => {
-      await expect(() => commerceCaseApiClient.updateCommerceCaseRequest('', 'commerceCaseId', {})).rejects.toThrow(
-        'Merchant ID is required',
-      );
-      await expect(() => commerceCaseApiClient.updateCommerceCaseRequest('merchantId', '', {})).rejects.toThrow(
-        'Commerce Case ID is required',
-      );
+      await expect(() =>
+        commerceCaseApiClient.updateCommerceCaseRequest('', 'commerceCaseId', {}),
+      ).rejects.toThrow('Merchant ID is required');
+      await expect(() =>
+        commerceCaseApiClient.updateCommerceCaseRequest('merchantId', '', {}),
+      ).rejects.toThrow('Commerce Case ID is required');
     });
   });
 });

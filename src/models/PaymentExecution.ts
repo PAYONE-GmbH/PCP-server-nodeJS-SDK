@@ -1,6 +1,7 @@
 import type { BankPayoutMethodSpecificInput } from './BankPayoutMethodSpecificInput.js';
 import type { CardPaymentMethodSpecificInput } from './CardPaymentMethodSpecificInput.js';
 import type { FinancingPaymentMethodSpecificInput } from './FinancingPaymentMethodSpecificInput.js';
+import type { FundSplit } from './FundSplit.js';
 import type { MobilePaymentMethodSpecificInput } from './MobilePaymentMethodSpecificInput.js';
 import type { PaymentChannel } from './PaymentChannel.js';
 import type { PaymentEvent } from './PaymentEvent.js';
@@ -71,4 +72,9 @@ export interface PaymentExecution {
    * @description Payment events associated with this payment execution.
    */
   events?: PaymentEvent[];
+
+  /**
+   * @description Fund splits associated with this payment execution.
+   */
+  fundSplits?: FundSplit[];
 }

@@ -1,11 +1,4 @@
-import type { RefreshType } from './RefreshType.js';
-
 /**
- * @description Request to refresh the payment status of a specific payment.
+ * @description Request to pause a payment for a specific payment method.
  */
-export interface PausePaymentRequest {
-  /**
-   * @description Type of refresh action to be performed.
-   */
-  refreshType: RefreshType;
-}
+export type PausePaymentRequest = Record<string, never>;

@@ -1,3 +1,4 @@
+import type { FundSplit } from './FundSplit.js';
 import type { PaymentStatusOutput } from './PaymentStatusOutput.js';
 import type { RefundOutput } from './RefundOutput.js';
 import type { StatusValue } from './StatusValue.js';
@@ -11,6 +12,7 @@ export interface RefundPaymentResponse {
   refundOutput?: RefundOutput;
   status?: StatusValue;
   statusOutput?: PaymentStatusOutput;
+  fundSplit?: FundSplit;
   /**
    * @description Unique payment transaction identifier of the payment gateway.
    * @example 3066019730_1

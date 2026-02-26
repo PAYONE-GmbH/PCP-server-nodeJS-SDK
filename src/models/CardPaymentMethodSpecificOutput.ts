@@ -1,6 +1,6 @@
 import type { CardFraudResults } from './CardFraudResults.js';
-import type { ThreeDSecureResults } from './ThreeDSecureResults.js';
 import type { PaymentProductId } from './PaymentProductId.js';
+import type { ThreeDSecureResults } from './ThreeDSecureResults.js';
 
 /** @description Object containing the card payment method details.    */
 export interface CardPaymentMethodSpecificOutput {

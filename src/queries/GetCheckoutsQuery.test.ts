@@ -1,4 +1,4 @@
-import { describe, test, expect } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { ExtendedCheckoutStatus } from '../models/ExtendedCheckoutStatus.js';
 import { PaymentChannel } from '../models/PaymentChannel.js';
 import { StatusCheckout } from '../models/StatusCheckout.js';
@@ -28,7 +28,10 @@ describe('GetCheckoutsQuery', () => {
     query.setMerchantCustomerId('1234');
     query.setIncludePaymentProductId([12, 456]);
     query.setIncludeCheckoutStatus([StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED]);
-    query.setIncludeExtendedCheckoutStatus([ExtendedCheckoutStatus.OPEN, ExtendedCheckoutStatus.DELETED]);
+    query.setIncludeExtendedCheckoutStatus([
+      ExtendedCheckoutStatus.OPEN,
+      ExtendedCheckoutStatus.DELETED,
+    ]);
     query.setIncludePaymentChannel([PaymentChannel.ECOMMERCE, PaymentChannel.POS]);
     query.setPaymentReference('1234');
     query.setPaymentId('5678');
@@ -101,7 +104,10 @@ describe('GetCheckoutsQuery', () => {
     query.setMerchantCustomerId('1234');
     query.setIncludePaymentProductId([12, 456]);
     query.setIncludeCheckoutStatus([StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED]);
-    query.setIncludeExtendedCheckoutStatus([ExtendedCheckoutStatus.OPEN, ExtendedCheckoutStatus.DELETED]);
+    query.setIncludeExtendedCheckoutStatus([
+      ExtendedCheckoutStatus.OPEN,
+      ExtendedCheckoutStatus.DELETED,
+    ]);
     query.setIncludePaymentChannel([PaymentChannel.ECOMMERCE, PaymentChannel.POS]);
     query.setPaymentReference('1234');
     query.setPaymentId('5678');
@@ -134,12 +140,18 @@ describe('GetCheckoutsQuery', () => {
     expect(query.getMerchantReference()).toEqual('7890');
     expect(query.getMerchantCustomerId()).toEqual('1234');
     expect(query.getIncludePaymentProductId()).toEqual([12, 456]);
-    expect(query.getIncludeCheckoutStatus()).toEqual([StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED]);
+    expect(query.getIncludeCheckoutStatus()).toEqual([
+      StatusCheckout.BILLED,
+      StatusCheckout.CHARGEBACKED,
+    ]);
     expect(query.getIncludeExtendedCheckoutStatus()).toEqual([
       ExtendedCheckoutStatus.OPEN,
       ExtendedCheckoutStatus.DELETED,
     ]);
-    expect(query.getIncludePaymentChannel()).toEqual([PaymentChannel.ECOMMERCE, PaymentChannel.POS]);
+    expect(query.getIncludePaymentChannel()).toEqual([
+      PaymentChannel.ECOMMERCE,
+      PaymentChannel.POS,
+    ]);
     expect(query.getPaymentReference()).toEqual('1234');
     expect(query.getPaymentId()).toEqual('5678');
     expect(query.getFirstName()).toEqual('John');

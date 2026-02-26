@@ -1,7 +1,7 @@
 import * as crypto from 'crypto';
-import { Headers, type RequestInit } from 'node-fetch';
 import { URL } from 'url';
 
+import { Headers, type RequestInit } from 'node-fetch';
 import { CommunicatorConfiguration } from './CommunicatorConfiguration.js';
 import { ServerMetaInfo } from './utils/ServerMetaInfo.js';
 
@@ -33,7 +33,10 @@ export class RequestHeaderGenerator {
       headers.set(RequestHeaderGenerator.CLIENT_META_INFO_HEADER_NAME, this.getClientMetaInfo());
     }
     if (!headers.has(RequestHeaderGenerator.AUTHORIZATION_HEADER_NAME)) {
-      headers.set(RequestHeaderGenerator.AUTHORIZATION_HEADER_NAME, this.getAuthHeader(url, request, headers));
+      headers.set(
+        RequestHeaderGenerator.AUTHORIZATION_HEADER_NAME,
+        this.getAuthHeader(url, request, headers),
+      );
     }
 
     return {

@@ -1,4 +1,4 @@
-import { describe, test, expect } from 'vitest';
+import { describe, expect, test } from 'vitest';
 import { PaymentChannel } from '../models/PaymentChannel.js';
 import { StatusCheckout } from '../models/StatusCheckout.js';
 import { GetCommerceCasesQuery } from './GetCommerceCasesQuery.js';
@@ -48,8 +48,14 @@ describe('GetCommerceCasesQuery', () => {
     expect(query.getCommerceCaseId()).toEqual('123456');
     expect(query.getMerchantReference()).toEqual('7890');
     expect(query.getMerchantCustomerId()).toEqual('1234');
-    expect(query.getIncludeCheckoutStatus()).toEqual([StatusCheckout.BILLED, StatusCheckout.CHARGEBACKED]);
-    expect(query.getIncludePaymentChannel()).toEqual([PaymentChannel.ECOMMERCE, PaymentChannel.POS]);
+    expect(query.getIncludeCheckoutStatus()).toEqual([
+      StatusCheckout.BILLED,
+      StatusCheckout.CHARGEBACKED,
+    ]);
+    expect(query.getIncludePaymentChannel()).toEqual([
+      PaymentChannel.ECOMMERCE,
+      PaymentChannel.POS,
+    ]);
   });
 
   test('nulls', () => {

@@ -42,7 +42,6 @@ import type { RequestInit } from 'node-fetch';
  */
 
 // We explicitly introduce an empty interface to be not too depdendend on node-fetch incase we want to change the HTTP client in the future
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface FetchOptions extends RequestInit {
   // Inherits all standard RequestInit properties:
   // - method?: string
