@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.5.1...v1.7.0) (2026-02-26)
+
+### Features
+
+* refactor: implement api definition 1.47.0 ([6d674173288d42c2cae59fd76c47e374310641af](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/6d674173288d42c2cae59fd76c47e374310641af))
+* refactor: update API version to 1.48.0 ([264422c6871e81244af5972982225ba228970a82](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/264422c6871e81244af5972982225ba228970a82))
+
 ## [1.5.1](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.5.0...v1.5.1) (2025-12-15)
 
 ### Documentation
