@@ -1,8 +1,10 @@
 import fetch from 'node-fetch';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
+import { CheckoutApiClient } from '../endpoints/CheckoutApiClient.js';
+import { ApiErrorResponseException } from '../errors/ApiErrorResponseException.js';
+import { ApiResponseRetrievalException } from '../errors/ApiResponseRetrievalException.js';
 import {
-  StatusCheckout,
   type CheckoutResponse,
   type CheckoutsResponse,
   type CompleteOrderRequest,
@@ -10,14 +12,12 @@ import {
   type CreateCheckoutResponse,
   type ErrorResponse,
   type PatchCheckoutRequest,
+  StatusCheckout,
 } from '../models/index.js';
-import { CheckoutApiClient } from '../endpoints/CheckoutApiClient.js';
-import { createResponseMock, createEmptyErrorResponseMock } from '../testutils/mock-response.js';
-import { ApiErrorResponseException } from '../errors/ApiErrorResponseException.js';
-import { ApiResponseRetrievalException } from '../errors/ApiResponseRetrievalException.js';
 import { GetCheckoutsQuery } from '../queries/GetCheckoutsQuery.js';
+import { createEmptyErrorResponseMock, createResponseMock } from '../testutils/mock-response.js';
 
-vi.mock('node-fetch', async importOriginal => {
+vi.mock('node-fetch', async (importOriginal) => {
   return {
     ...(await importOriginal<typeof import('node-fetch')>()),
     default: vi.fn(),
@@ -30,7 +30,9 @@ describe('CheckoutApiClient', () => {
   let checkoutApiClient: CheckoutApiClient;
 
   beforeEach(() => {
-    checkoutApiClient = new CheckoutApiClient(new CommunicatorConfiguration('apiKey', 'apiSecret', 'https://test.com'));
+    checkoutApiClient = new CheckoutApiClient(
+      new CommunicatorConfiguration('apiKey', 'apiSecret', 'https://test.com'),
+    );
   });
 
   describe('createCheckoutRequest', () => {
@@ -42,11 +44,18 @@ describe('CheckoutApiClient', () => {
           amount: 799,
         },
         shoppingCart: {
-          items: [{ invoiceData: { description: 'A smoothie' }, orderLineDetails: { productPrice: 799, quantity: 1 } }],
+          items: [
+            {
+              invoiceData: { description: 'A smoothie' },
+              orderLineDetails: { productPrice: 799, quantity: 1 },
+            },
+          ],
         },
       };
 
-      mockedFetch.mockResolvedValueOnce(createResponseMock<CreateCheckoutResponse>(200, expectedResponse));
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<CreateCheckoutResponse>(200, expectedResponse),
+      );
 
       const res = await checkoutApiClient.createCheckoutRequest('merchantId', 'commerceCaseId', {});
 
@@ -75,12 +84,12 @@ describe('CheckoutApiClient', () => {
       }
     });
     test('a required params is empty, throw an error', async () => {
-      await expect(() => checkoutApiClient.createCheckoutRequest('', 'commerceCaseId', {})).rejects.toThrow(
-        'Merchant ID is required',
-      );
-      await expect(() => checkoutApiClient.createCheckoutRequest('merchantId', '', {})).rejects.toThrow(
-        'Commerce Case ID is required',
-      );
+      await expect(() =>
+        checkoutApiClient.createCheckoutRequest('', 'commerceCaseId', {}),
+      ).rejects.toThrow('Merchant ID is required');
+      await expect(() =>
+        checkoutApiClient.createCheckoutRequest('merchantId', '', {}),
+      ).rejects.toThrow('Commerce Case ID is required');
     });
   });
   describe('getCheckoutRequest', () => {
@@ -94,9 +103,15 @@ describe('CheckoutApiClient', () => {
         checkoutStatus: StatusCheckout.OPEN,
       };
 
-      mockedFetch.mockResolvedValueOnce(createResponseMock<CheckoutResponse>(200, expectedResponse));
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<CheckoutResponse>(200, expectedResponse),
+      );
 
-      const res = await checkoutApiClient.getCheckoutRequest('merchantId', 'commerceCaseId', 'checkoutId');
+      const res = await checkoutApiClient.getCheckoutRequest(
+        'merchantId',
+        'commerceCaseId',
+        'checkoutId',
+      );
 
       expect(res).toEqual(expectedResponse);
     });
@@ -123,15 +138,15 @@ describe('CheckoutApiClient', () => {
       }
     });
     test('a required params is empty, throw an error', async () => {
-      await expect(() => checkoutApiClient.getCheckoutRequest('', 'commerceCaseId', 'checkoutId')).rejects.toThrow(
-        'Merchant ID is required',
-      );
-      await expect(() => checkoutApiClient.getCheckoutRequest('merchantId', '', 'checkoutId')).rejects.toThrow(
-        'Commerce Case ID is required',
-      );
-      await expect(() => checkoutApiClient.getCheckoutRequest('merchantId', 'commerceCaseId', '')).rejects.toThrow(
-        'Checkout ID is required',
-      );
+      await expect(() =>
+        checkoutApiClient.getCheckoutRequest('', 'commerceCaseId', 'checkoutId'),
+      ).rejects.toThrow('Merchant ID is required');
+      await expect(() =>
+        checkoutApiClient.getCheckoutRequest('merchantId', '', 'checkoutId'),
+      ).rejects.toThrow('Commerce Case ID is required');
+      await expect(() =>
+        checkoutApiClient.getCheckoutRequest('merchantId', 'commerceCaseId', ''),
+      ).rejects.toThrow('Checkout ID is required');
     });
   });
   describe('getCheckoutsRequest', () => {
@@ -182,7 +197,9 @@ describe('CheckoutApiClient', () => {
       }
     });
     test('a required params is empty, throw an error', async () => {
-      await expect(() => checkoutApiClient.getCheckoutsRequest('')).rejects.toThrow('Merchant ID is required');
+      await expect(() => checkoutApiClient.getCheckoutsRequest('')).rejects.toThrow(
+        'Merchant ID is required',
+      );
     });
   });
   describe('updateCheckoutRequest', async () => {
@@ -192,7 +209,12 @@ describe('CheckoutApiClient', () => {
     test('given request was successful, then return response', async () => {
       mockedFetch.mockResolvedValueOnce(createResponseMock(200, undefined));
 
-      const res = await checkoutApiClient.updateCheckoutRequest('merchantId', 'commerceCaseId', 'checkoutId', payload);
+      const res = await checkoutApiClient.updateCheckoutRequest(
+        'merchantId',
+        'commerceCaseId',
+        'checkoutId',
+        payload,
+      );
 
       expect(res).toEqual(undefined);
     });
@@ -203,7 +225,12 @@ describe('CheckoutApiClient', () => {
 
       expect.assertions(1);
       try {
-        await checkoutApiClient.updateCheckoutRequest('merchantId', 'commerceCaseId', 'checkoutId', payload);
+        await checkoutApiClient.updateCheckoutRequest(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          payload,
+        );
       } catch (error) {
         expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
       }
@@ -213,7 +240,12 @@ describe('CheckoutApiClient', () => {
 
       expect.assertions(1);
       try {
-        await checkoutApiClient.updateCheckoutRequest('merchantId', 'commerceCaseId', 'checkoutId', payload);
+        await checkoutApiClient.updateCheckoutRequest(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          payload,
+        );
       } catch (error) {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }
@@ -234,7 +266,11 @@ describe('CheckoutApiClient', () => {
     test('given request was successful, then return response', async () => {
       mockedFetch.mockResolvedValueOnce(createResponseMock(200, undefined));
 
-      const res = await checkoutApiClient.removeCheckoutRequest('merchantId', 'commerceCaseId', 'checkoutId');
+      const res = await checkoutApiClient.removeCheckoutRequest(
+        'merchantId',
+        'commerceCaseId',
+        'checkoutId',
+      );
 
       expect(res).toEqual(undefined);
     });
@@ -261,15 +297,15 @@ describe('CheckoutApiClient', () => {
       }
     });
     test('a required params is empty, throw an error', async () => {
-      await expect(() => checkoutApiClient.removeCheckoutRequest('', 'commerceCaseId', 'checkoutId')).rejects.toThrow(
-        'Merchant ID is required',
-      );
-      await expect(() => checkoutApiClient.removeCheckoutRequest('merchantId', '', 'checkoutId')).rejects.toThrow(
-        'Commerce Case ID is required',
-      );
-      await expect(() => checkoutApiClient.removeCheckoutRequest('merchantId', 'commerceCaseId', '')).rejects.toThrow(
-        'Checkout ID is required',
-      );
+      await expect(() =>
+        checkoutApiClient.removeCheckoutRequest('', 'commerceCaseId', 'checkoutId'),
+      ).rejects.toThrow('Merchant ID is required');
+      await expect(() =>
+        checkoutApiClient.removeCheckoutRequest('merchantId', '', 'checkoutId'),
+      ).rejects.toThrow('Commerce Case ID is required');
+      await expect(() =>
+        checkoutApiClient.removeCheckoutRequest('merchantId', 'commerceCaseId', ''),
+      ).rejects.toThrow('Checkout ID is required');
     });
   });
   describe('completeCheckoutRequest', async () => {
@@ -279,7 +315,9 @@ describe('CheckoutApiClient', () => {
     test('given request was successful, then return response', async () => {
       const expectedResponse: CompletePaymentResponse = {};
 
-      mockedFetch.mockResolvedValueOnce(createResponseMock<CompletePaymentResponse>(200, expectedResponse));
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<CompletePaymentResponse>(200, expectedResponse),
+      );
 
       const res = await checkoutApiClient.completeCheckoutRequest(
         'merchantId',
@@ -297,7 +335,12 @@ describe('CheckoutApiClient', () => {
 
       expect.assertions(1);
       try {
-        await checkoutApiClient.completeCheckoutRequest('merchantId', 'commerceCaseId', 'checkoutId', payload);
+        await checkoutApiClient.completeCheckoutRequest(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          payload,
+        );
       } catch (error) {
         expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
       }
@@ -307,7 +350,12 @@ describe('CheckoutApiClient', () => {
 
       expect.assertions(1);
       try {
-        await checkoutApiClient.completeCheckoutRequest('merchantId', 'commerceCaseId', 'checkoutId', payload);
+        await checkoutApiClient.completeCheckoutRequest(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          payload,
+        );
       } catch (error) {
         expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
       }

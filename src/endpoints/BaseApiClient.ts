@@ -1,8 +1,8 @@
 import fetch, { type RequestInit } from 'node-fetch';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
-import { RequestHeaderGenerator } from '../RequestHeaderGenerator.js';
 import { ApiErrorResponseException, ApiResponseRetrievalException } from '../errors/index.js';
 import type { ErrorResponse } from '../models/ErrorResponse.js';
+import { RequestHeaderGenerator } from '../RequestHeaderGenerator.js';
 import type { FetchOptions } from '../types/FetchOptions.js';
 
 function isErrorResponse(parsed: unknown): parsed is ErrorResponse {
@@ -10,10 +10,10 @@ function isErrorResponse(parsed: unknown): parsed is ErrorResponse {
     return false;
   }
   const record = parsed as Record<string, unknown>;
-  if (Object.prototype.hasOwnProperty.call(record, 'errorId') && typeof record['errorId'] !== 'string') {
+  if (Object.hasOwn(record, 'errorId') && typeof record['errorId'] !== 'string') {
     return false;
   }
-  if (Object.prototype.hasOwnProperty.call(record, 'errorId') && !Array.isArray(record['errors'])) {
+  if (Object.hasOwn(record, 'errorId') && !Array.isArray(record['errors'])) {
     return false;
   }
   return true;
@@ -114,7 +114,11 @@ export class BaseApiClient {
     try {
       parsed = parseBody(body);
     } catch (error) {
-      throw new ApiResponseRetrievalException(response.status, body, error instanceof Error ? error : undefined);
+      throw new ApiResponseRetrievalException(
+        response.status,
+        body,
+        error instanceof Error ? error : undefined,
+      );
     }
 
     if (!response.ok) {

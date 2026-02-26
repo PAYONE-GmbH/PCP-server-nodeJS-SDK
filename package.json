@@ -5,27 +5,20 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "type": "module",
-  "files": [
-    "dist/**/*"
-  ],
+  "files": ["dist/**/*"],
   "scripts": {
     "build": "tsc",
     "dev": "ts-node src/index.ts",
-    "lint": "eslint -c ./eslint.config.mjs",
-    "lint:fix": "eslint -c ./eslint.config.mjs --fix",
-    "format:check": "prettier --check \"src/**/!(*.d).ts\"",
-    "format:write": "prettier --write \"src/**/!(*.d).ts\"",
+    "format:check": "biome format",
+    "format:write": "biome format --write",
+    "lint": "biome lint",
+    "biome:fix": "biome check --fix",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "changelog": "conventional-changelog -i CHANGELOG.md -s -r 0 --config ./changelog.config.cjs",
     "version": "./version.sh"
   },
-  "keywords": [
-    "payone",
-    "server",
-    "node",
-    "sdk"
-  ],
+  "keywords": ["payone", "server", "node", "sdk"],
   "license": "MIT",
   "author": "PAYONE-GmbH",
   "homepage": "https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK",
@@ -34,19 +27,16 @@
     "url": "https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK.git"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.4.2",
     "@commitlint/cli": "19.4.0",
     "@commitlint/config-conventional": "19.2.2",
-    "@eslint/js": "9.8.0",
     "@types/node": "22.1.0",
     "@vitest/coverage-v8": "2.1.9",
     "conventional-changelog-cli": "5.0.0",
-    "eslint": "9.8.0",
     "globals": "15.9.0",
     "lefthook": "1.7.12",
-    "prettier": "3.3.3",
     "ts-node": "10.9.2",
     "typescript": "5.5.4",
-    "typescript-eslint": "8.0.1",
     "vitest": "2.1.9"
   },
   "dependencies": {

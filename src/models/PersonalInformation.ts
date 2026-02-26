@@ -1,5 +1,5 @@
-import type { PersonalName } from './PersonalName.js';
 import type { Gender } from './Gender.js';
+import type { PersonalName } from './PersonalName.js';
 
 /** @description Object containing personal information like name, date of birth and gender. */
 export interface PersonalInformation {

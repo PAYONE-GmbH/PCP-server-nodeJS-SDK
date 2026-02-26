@@ -1,8 +1,8 @@
-import type { PaymentType } from './PaymentType.js';
 import type { AmountOfMoney } from './AmountOfMoney.js';
-import type { StatusValue } from './StatusValue.js';
 import type { CancellationReason } from './CancellationReason.js';
 import type { PaymentInstructions } from './PaymentInstructions.js';
+import type { PaymentType } from './PaymentType.js';
+import type { StatusValue } from './StatusValue.js';
 
 /**
  * @description Detailed information regarding an occurred payment event.

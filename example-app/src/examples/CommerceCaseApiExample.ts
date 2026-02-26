@@ -33,7 +33,10 @@ export class CommerceCaseApiExample {
     console.log(res);
   }
   async runUpdateOne() {
-    const getOneResponse = await this.client.getCommerceCaseRequest(this.merchantId, this.commerceCaseId);
+    const getOneResponse = await this.client.getCommerceCaseRequest(
+      this.merchantId,
+      this.commerceCaseId,
+    );
 
     if (!getOneResponse.customer) {
       throw new Error('Customer not found');
@@ -49,7 +52,11 @@ export class CommerceCaseApiExample {
       },
     };
 
-    const res = await this.client.updateCommerceCaseRequest(this.merchantId, this.commerceCaseId, modifiedCustomer);
+    const res = await this.client.updateCommerceCaseRequest(
+      this.merchantId,
+      this.commerceCaseId,
+      modifiedCustomer,
+    );
     console.log(res);
   }
 }

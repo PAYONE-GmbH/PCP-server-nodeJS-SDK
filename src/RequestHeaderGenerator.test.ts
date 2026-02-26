@@ -1,14 +1,18 @@
-import { expect, describe, test } from 'vitest';
-import { RequestHeaderGenerator } from './RequestHeaderGenerator.js';
-import { CommunicatorConfiguration } from './CommunicatorConfiguration.js';
 import { Headers, type RequestInit } from 'node-fetch';
+import { describe, expect, test } from 'vitest';
+import { CommunicatorConfiguration } from './CommunicatorConfiguration.js';
+import { RequestHeaderGenerator } from './RequestHeaderGenerator.js';
 import { ServerMetaInfo } from './utils/ServerMetaInfo.js';
 
 describe('RequestHeaderGenerator', () => {
   const TEST_API_KEY = 'KEY';
   const TEST_API_SECRET = 'Super duper Ethan Hunt level secret';
   const TEST_HOST = 'awesome-api.com';
-  const communicatorConfiguration = new CommunicatorConfiguration(TEST_API_KEY, TEST_API_SECRET, TEST_HOST);
+  const communicatorConfiguration = new CommunicatorConfiguration(
+    TEST_API_KEY,
+    TEST_API_SECRET,
+    TEST_HOST,
+  );
   test('constructs', () => {
     const requestHeaderGenerator = new RequestHeaderGenerator(communicatorConfiguration);
     expect(requestHeaderGenerator).toBeDefined();
@@ -83,7 +87,9 @@ describe('RequestHeaderGenerator', () => {
       request,
     );
     const updatedHeaders: Headers = new Headers(updatedRequest.headers!);
-    const serverMetaInfoHeaderBase64 = updatedHeaders.get(RequestHeaderGenerator.SERVER_META_INFO_HEADER_NAME);
+    const serverMetaInfoHeaderBase64 = updatedHeaders.get(
+      RequestHeaderGenerator.SERVER_META_INFO_HEADER_NAME,
+    );
     const meta = new ServerMetaInfo();
     const jsonString = JSON.stringify(meta);
     const expectedAsBase64 = Buffer.from(jsonString, 'utf-8').toString('base64');
@@ -102,7 +108,9 @@ describe('RequestHeaderGenerator', () => {
       request,
     );
     const updatedHeaders: Headers = new Headers(updatedRequest.headers!);
-    const clientMetaInfoHeaderBase64 = updatedHeaders.get(RequestHeaderGenerator.CLIENT_META_INFO_HEADER_NAME);
+    const clientMetaInfoHeaderBase64 = updatedHeaders.get(
+      RequestHeaderGenerator.CLIENT_META_INFO_HEADER_NAME,
+    );
     const jsonString = JSON.stringify('[]');
     const expectedAsBase64 = Buffer.from(jsonString, 'utf-8').toString('base64');
     expect(clientMetaInfoHeaderBase64).toEqual(expectedAsBase64);

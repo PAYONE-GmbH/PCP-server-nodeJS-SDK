@@ -1,6 +1,6 @@
-import { BaseApiClient } from './BaseApiClient.js';
-import type { AuthenticationToken } from '../models/AuthenticationToken.js';
 import { Headers, type RequestInit } from 'node-fetch';
+import type { AuthenticationToken } from '../models/AuthenticationToken.js';
+import { BaseApiClient } from './BaseApiClient.js';
 
 /**
  * Client for authentication token operations.
@@ -12,7 +12,10 @@ export class AuthenticationApiClient extends BaseApiClient {
    * @param requestId Optional X-Request-ID header value (may be null)
    * @returns AuthenticationToken
    */
-  public async getAuthenticationTokens(merchantId: string, requestId?: string): Promise<AuthenticationToken> {
+  public async getAuthenticationTokens(
+    merchantId: string,
+    requestId?: string,
+  ): Promise<AuthenticationToken> {
     if (!merchantId) {
       throw new Error('Merchant ID is required');
     }

@@ -1,6 +1,6 @@
-import { describe, test, expect } from 'vitest';
-import { ApiErrorResponseException } from './ApiErrorResponseException.js';
+import { describe, expect, test } from 'vitest';
 import type { APIError } from '../models/APIError.js';
+import { ApiErrorResponseException } from './ApiErrorResponseException.js';
 
 describe('ApiErrorResponseException', () => {
   test('constructor', () => {

@@ -1,14 +1,14 @@
 import { Headers, type RequestInit } from 'node-fetch';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import type { PaymentInformationRequest, PaymentInformationResponse } from '../models/index.js';
+import type { PaymentInformationRefundRequest } from '../models/PaymentInformationRefundRequest.js';
+import type { PaymentInformationRefundResponse } from '../models/PaymentInformationRefundResponse.js';
 import {
   BaseApiClient,
   CHECKOUT_ID_REQUIRED_ERROR,
   COMMERCE_CASE_ID_REQUIRED_ERROR,
   MERCHANT_ID_REQUIRED_ERROR,
 } from './BaseApiClient.js';
-import type { PaymentInformationRefundRequest } from '../models/PaymentInformationRefundRequest.js';
-import type { PaymentInformationRefundResponse } from '../models/PaymentInformationRefundResponse.js';
 
 const PAYMENT_INFORMATION_ID_REQUIRED_ERROR = 'Payment Information ID is required';
 

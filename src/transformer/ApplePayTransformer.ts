@@ -1,5 +1,5 @@
-import type { ApplePayPayment } from '../models/applepay/ApplePayPayment.js';
 import { ApplePaymentTokenVersion } from '../models/ApplePaymentTokenVersion.js';
+import type { ApplePayPayment } from '../models/applepay/ApplePayPayment.js';
 import type { MobilePaymentMethodSpecificInput } from '../models/MobilePaymentMethodSpecificInput.js';
 import { MobilePaymentNetwork } from '../models/MobilePaymentNetwork.js';
 
@@ -43,7 +43,9 @@ export function transformApplePayPaymentToMobilePaymentMethodSpecificInput(
         ? networkFromString(payment.token.paymentMethod.network)
         : undefined,
       token: {
-        version: payment.token?.paymentData?.version ? versionFromString(payment.token.paymentData.version) : undefined,
+        version: payment.token?.paymentData?.version
+          ? versionFromString(payment.token.paymentData.version)
+          : undefined,
         signature: payment.token?.paymentData?.signature,
         header: {
           transactionId: payment.token?.paymentData?.header?.transactionId,

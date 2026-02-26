@@ -1,5 +1,5 @@
-import type { ApplePayPaymentMethodType } from './ApplePayPaymentMethodType.js';
 import type { ApplePayPaymentContact } from './ApplePayPaymentContact.js';
+import type { ApplePayPaymentMethodType } from './ApplePayPaymentMethodType.js';
 /**
  * Information about the card used in the transaction.
  */

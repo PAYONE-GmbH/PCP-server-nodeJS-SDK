@@ -1,21 +1,21 @@
 import fetch from 'node-fetch';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
+import { ApiErrorResponseException } from '../errors/ApiErrorResponseException.js';
+import { ApiResponseRetrievalException } from '../errors/ApiResponseRetrievalException.js';
 import {
-  PaymentChannel,
-  PaymentType,
   type ErrorResponse,
+  PaymentChannel,
   type PaymentInformationRefundRequest,
   type PaymentInformationRefundResponse,
   type PaymentInformationRequest,
   type PaymentInformationResponse,
+  PaymentType,
 } from '../models/index.js';
-import { createResponseMock, createEmptyErrorResponseMock } from '../testutils/mock-response.js';
-import { ApiErrorResponseException } from '../errors/ApiErrorResponseException.js';
-import { ApiResponseRetrievalException } from '../errors/ApiResponseRetrievalException.js';
+import { createEmptyErrorResponseMock, createResponseMock } from '../testutils/mock-response.js';
 import { PaymentInformationApiClient } from './PaymentInformationApiClient.js';
 
-vi.mock('node-fetch', async importOriginal => {
+vi.mock('node-fetch', async (importOriginal) => {
   return {
     ...(await importOriginal<typeof import('node-fetch')>()),
     default: vi.fn(),
@@ -57,7 +57,9 @@ describe('PaymentInformationApiClient', () => {
         events: [],
       };
 
-      mockedFetch.mockResolvedValueOnce(createResponseMock<PaymentInformationResponse>(200, expectedResponse));
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<PaymentInformationResponse>(200, expectedResponse),
+      );
 
       const res = await paymentInformationApiClient.createPaymentInformation(
         'merchantId',
@@ -103,13 +105,28 @@ describe('PaymentInformationApiClient', () => {
     });
     test('a required param is empty, throw an error', async () => {
       await expect(() =>
-        paymentInformationApiClient.createPaymentInformation('', 'commerceCaseId', 'checkoutId', payload),
+        paymentInformationApiClient.createPaymentInformation(
+          '',
+          'commerceCaseId',
+          'checkoutId',
+          payload,
+        ),
       ).rejects.toThrowError('Merchant ID is required');
       await expect(() =>
-        paymentInformationApiClient.createPaymentInformation('merchantId', '', 'checkoutId', payload),
+        paymentInformationApiClient.createPaymentInformation(
+          'merchantId',
+          '',
+          'checkoutId',
+          payload,
+        ),
       ).rejects.toThrowError('Commerce Case ID is required');
       await expect(() =>
-        paymentInformationApiClient.createPaymentInformation('merchantId', 'commerceCaseId', '', payload),
+        paymentInformationApiClient.createPaymentInformation(
+          'merchantId',
+          'commerceCaseId',
+          '',
+          payload,
+        ),
       ).rejects.toThrowError('Checkout ID is required');
     });
   });
@@ -121,7 +138,9 @@ describe('PaymentInformationApiClient', () => {
         paymentProductId: 4040,
       };
 
-      mockedFetch.mockResolvedValueOnce(createResponseMock<PaymentInformationResponse>(200, expectedResponse));
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<PaymentInformationResponse>(200, expectedResponse),
+      );
 
       const res = await paymentInformationApiClient.getPaymentInformation(
         'merchantId',
@@ -165,16 +184,36 @@ describe('PaymentInformationApiClient', () => {
     });
     test('a required param is empty, throw an error', async () => {
       await expect(() =>
-        paymentInformationApiClient.getPaymentInformation('', 'commerceCaseId', 'checkoutId', 'paymentInformationId'),
+        paymentInformationApiClient.getPaymentInformation(
+          '',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentInformationId',
+        ),
       ).rejects.toThrowError('Merchant ID is required');
       await expect(() =>
-        paymentInformationApiClient.getPaymentInformation('merchantId', '', 'checkoutId', 'paymentInformationId'),
+        paymentInformationApiClient.getPaymentInformation(
+          'merchantId',
+          '',
+          'checkoutId',
+          'paymentInformationId',
+        ),
       ).rejects.toThrowError('Commerce Case ID is required');
       await expect(() =>
-        paymentInformationApiClient.getPaymentInformation('merchantId', 'commerceCaseId', '', 'paymentInformationId'),
+        paymentInformationApiClient.getPaymentInformation(
+          'merchantId',
+          'commerceCaseId',
+          '',
+          'paymentInformationId',
+        ),
       ).rejects.toThrowError('Checkout ID is required');
       await expect(() =>
-        paymentInformationApiClient.getPaymentInformation('merchantId', 'commerceCaseId', 'checkoutId', ''),
+        paymentInformationApiClient.getPaymentInformation(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          '',
+        ),
       ).rejects.toThrowError('Payment Information ID is required');
     });
   });
@@ -191,7 +230,9 @@ describe('PaymentInformationApiClient', () => {
         payment: {},
       };
 
-      mockedFetch.mockResolvedValueOnce(createResponseMock<PaymentInformationRefundResponse>(200, expectedResponse));
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<PaymentInformationRefundResponse>(200, expectedResponse),
+      );
 
       const res = await paymentInformationApiClient.refundPaymentInformation(
         'merchantId',
@@ -267,7 +308,13 @@ describe('PaymentInformationApiClient', () => {
         ),
       ).rejects.toThrowError('Checkout ID is required');
       await expect(() =>
-        paymentInformationApiClient.refundPaymentInformation('merchantId', 'commerceCaseId', 'checkoutId', '', payload),
+        paymentInformationApiClient.refundPaymentInformation(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          '',
+          payload,
+        ),
       ).rejects.toThrowError('Payment Information ID is required');
     });
   });

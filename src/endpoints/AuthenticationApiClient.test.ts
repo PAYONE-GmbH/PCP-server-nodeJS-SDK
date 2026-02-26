@@ -1,14 +1,13 @@
-import fetch from 'node-fetch';
+import fetch, { Headers, type RequestInit } from 'node-fetch';
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
-import { AuthenticationApiClient } from './AuthenticationApiClient.js';
 import type { AuthenticationToken } from '../models/index.js';
 import { createResponseMock } from '../testutils/mock-response.js';
-import { Headers, type RequestInit } from 'node-fetch';
+import { AuthenticationApiClient } from './AuthenticationApiClient.js';
 
 const mockedFetch = vi.mocked(fetch, true);
 
-vi.mock('node-fetch', async importOriginal => {
+vi.mock('node-fetch', async (importOriginal) => {
   return {
     ...(await importOriginal<typeof import('node-fetch')>()),
     default: vi.fn(),
@@ -28,7 +27,9 @@ describe('AuthenticationApiClient', () => {
   });
 
   test('should throw if merchantId is missing', async () => {
-    await expect(authenticationApiClient.getAuthenticationTokens('')).rejects.toThrow('Merchant ID is required');
+    await expect(authenticationApiClient.getAuthenticationTokens('')).rejects.toThrow(
+      'Merchant ID is required',
+    );
   });
 
   test('should return token for valid merchantId', async () => {
