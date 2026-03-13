@@ -6,7 +6,6 @@ import { ApiErrorResponseException } from '../errors/ApiErrorResponseException.j
 import { ApiResponseRetrievalException } from '../errors/ApiResponseRetrievalException.js';
 import { BusinessRelation } from '../models/BusinessRelation.js';
 import type { CommerceCaseResponse } from '../models/CommerceCaseResponse.js';
-import type { CommerceCasesResponse } from '../models/CommerceCasesResponse.js';
 import type { CreateCommerceCaseResponse } from '../models/CreateCommerceCaseResponse.js';
 import type { Customer } from '../models/Customer.js';
 import type { ErrorResponse } from '../models/ErrorResponse.js';
@@ -157,7 +156,7 @@ describe('CheckoutApiClient', () => {
   });
   describe('getCommerceCasesRequest', () => {
     test('given request was successful, then return response', async () => {
-      const expectedResponse: CommerceCasesResponse = [
+      const expectedResponse: CommerceCaseResponse[] = [
         {
           commerceCaseId: 'id-4499',
           checkouts: [

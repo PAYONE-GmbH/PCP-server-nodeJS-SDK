@@ -48,7 +48,6 @@ export * from './CheckoutReferences.js';
 export * from './CheckoutResponse.js';
 export * from './CheckoutsResponse.js';
 export * from './CommerceCaseResponse.js';
-export * from './CommerceCasesResponse.js';
 export * from './CompanyInformation.js';
 export * from './CompleteFinancingPaymentMethodSpecificInput.js';
 export * from './CompleteOrderRequest.js';

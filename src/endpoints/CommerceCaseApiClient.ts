@@ -4,7 +4,6 @@ import { Headers, type RequestInit } from 'node-fetch';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import type {
   CommerceCaseResponse,
-  CommerceCasesResponse,
   CreateCommerceCaseRequest,
   CreateCommerceCaseResponse,
   Customer,
@@ -68,7 +67,7 @@ export class CommerceCaseApiClient extends BaseApiClient {
   public async getCommerceCasesRequest(
     merchantId: string,
     queryParams?: GetCommerceCasesQuery,
-  ): Promise<CommerceCasesResponse> {
+  ): Promise<CommerceCaseResponse[]> {
     if (!merchantId) {
       throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
     }
@@ -85,7 +84,7 @@ export class CommerceCaseApiClient extends BaseApiClient {
       headers: new Headers(),
     };
 
-    return this.makeApiCall<CommerceCasesResponse>(url.toString(), requestInit);
+    return this.makeApiCall<CommerceCaseResponse[]>(url.toString(), requestInit);
   }
 
   public async updateCommerceCaseRequest(
