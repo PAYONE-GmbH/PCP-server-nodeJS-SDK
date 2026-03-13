@@ -34,7 +34,7 @@ function versionFromString(value: string): ApplePaymentTokenVersion {
 }
 
 export function tokenFromPaymentData(
-  paymentData?: ApplePayPaymentData
+  paymentData?: ApplePayPaymentData,
 ): ApplePaymentDataTokenInformation | undefined {
   const version = paymentData?.version ? versionFromString(paymentData.version) : undefined;
   const signature = paymentData?.signature;
