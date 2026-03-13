@@ -1,10 +1,14 @@
 import { describe, expect, test } from 'vitest';
 import { ApplePaymentTokenVersion } from '../models/ApplePaymentTokenVersion.js';
 import type { ApplePayPayment } from '../models/applepay/ApplePayPayment.js';
+import type { ApplePayPaymentData } from '../models/applepay/ApplePayPaymentData.js';
 import { ApplePayPaymentMethodType } from '../models/applepay/ApplePayPaymentMethodType.js';
 import type { MobilePaymentMethodSpecificInput } from '../models/MobilePaymentMethodSpecificInput.js';
 import { MobilePaymentNetwork } from '../models/MobilePaymentNetwork.js';
-import { transformApplePayPaymentToMobilePaymentMethodSpecificInput } from './ApplePayTransformer.js';
+import {
+  tokenFromPaymentData,
+  transformApplePayPaymentToMobilePaymentMethodSpecificInput,
+} from './ApplePayTransformer.js';
 
 describe('ApplePayTransformer', () => {
   const payment: ApplePayPayment = {
@@ -48,13 +52,7 @@ describe('ApplePayTransformer', () => {
     ephemeralKey: undefined,
     paymentProduct302SpecificInput: {
       network: undefined,
-      token: {
-        signature: undefined,
-        header: {
-          transactionId: 'transaction-101',
-          applicationData: undefined,
-        },
-      },
+      token: undefined,
     },
   };
   describe('transformApplePayPaymentToMobilePaymentMethodSpecificInput', () => {
@@ -70,6 +68,7 @@ describe('ApplePayTransformer', () => {
           paymentData: {
             ...payment.token!.paymentData,
             version: 'EC_V1',
+            signature: 'sig',
           },
         },
       };
@@ -78,8 +77,11 @@ describe('ApplePayTransformer', () => {
         paymentProduct302SpecificInput: {
           ...expected.paymentProduct302SpecificInput,
           token: {
-            ...expected.paymentProduct302SpecificInput!.token,
             version: ApplePaymentTokenVersion.EC_V1,
+            signature: 'sig',
+            header: {
+              transactionId: 'transaction-101',
+            },
           },
         },
       };
@@ -155,6 +157,59 @@ describe('ApplePayTransformer', () => {
       expect(() =>
         transformApplePayPaymentToMobilePaymentMethodSpecificInput(payment6),
       ).toThrowError(TypeError);
+    });
+  });
+
+  describe('tokenFromPaymentData', () => {
+    test('returns undefined when paymentData is undefined', () => {
+      expect(tokenFromPaymentData(undefined)).toBeUndefined();
+    });
+
+    test('returns undefined when version is missing', () => {
+      const paymentData: ApplePayPaymentData = {
+        signature: 'sig',
+        header: { transactionId: 'txn-1' },
+      };
+      expect(tokenFromPaymentData(paymentData)).toBeUndefined();
+    });
+
+    test('returns undefined when signature is missing', () => {
+      const paymentData: ApplePayPaymentData = {
+        version: 'EC_V1',
+        header: { transactionId: 'txn-1' },
+      };
+      expect(tokenFromPaymentData(paymentData)).toBeUndefined();
+    });
+
+    test('returns undefined when transactionId is missing', () => {
+      const paymentData: ApplePayPaymentData = {
+        version: 'EC_V1',
+        signature: 'sig',
+        header: {},
+      };
+      expect(tokenFromPaymentData(paymentData)).toBeUndefined();
+    });
+
+    test('returns token when all required fields are present', () => {
+      const paymentData: ApplePayPaymentData = {
+        version: 'EC_V1',
+        signature: 'sig',
+        header: { transactionId: 'txn-1', applicationData: 'appdata' },
+      };
+      expect(tokenFromPaymentData(paymentData)).toEqual({
+        version: ApplePaymentTokenVersion.EC_V1,
+        signature: 'sig',
+        header: { transactionId: 'txn-1', applicationData: 'appdata' },
+      });
+    });
+
+    test('throws when version is not recognized', () => {
+      const paymentData: ApplePayPaymentData = {
+        version: 'Unknown',
+        signature: 'sig',
+        header: { transactionId: 'txn-1' },
+      };
+      expect(() => tokenFromPaymentData(paymentData)).toThrowError(TypeError);
     });
   });
 });

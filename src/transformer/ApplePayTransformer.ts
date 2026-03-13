@@ -1,5 +1,7 @@
+import type { ApplePaymentDataTokenInformation } from '../models/ApplePaymentDataTokenInformation.js';
 import { ApplePaymentTokenVersion } from '../models/ApplePaymentTokenVersion.js';
 import type { ApplePayPayment } from '../models/applepay/ApplePayPayment.js';
+import type { ApplePayPaymentData } from '../models/applepay/ApplePayPaymentData.js';
 import type { MobilePaymentMethodSpecificInput } from '../models/MobilePaymentMethodSpecificInput.js';
 import { MobilePaymentNetwork } from '../models/MobilePaymentNetwork.js';
 
@@ -31,6 +33,27 @@ function versionFromString(value: string): ApplePaymentTokenVersion {
   }
 }
 
+export function tokenFromPaymentData(
+  paymentData?: ApplePayPaymentData
+): ApplePaymentDataTokenInformation | undefined {
+  const version = paymentData?.version ? versionFromString(paymentData.version) : undefined;
+  const signature = paymentData?.signature;
+  const transactionId = paymentData?.header?.transactionId;
+
+  if (version === undefined || signature === undefined || transactionId === undefined) {
+    return undefined;
+  }
+
+  return {
+    version,
+    signature,
+    header: {
+      transactionId,
+      applicationData: paymentData?.header?.applicationData,
+    },
+  };
+}
+
 export function transformApplePayPaymentToMobilePaymentMethodSpecificInput(
   payment: ApplePayPayment,
 ): MobilePaymentMethodSpecificInput {
@@ -42,16 +65,7 @@ export function transformApplePayPaymentToMobilePaymentMethodSpecificInput(
       network: payment.token?.paymentMethod?.network
         ? networkFromString(payment.token.paymentMethod.network)
         : undefined,
-      token: {
-        version: payment.token?.paymentData?.version
-          ? versionFromString(payment.token.paymentData.version)
-          : undefined,
-        signature: payment.token?.paymentData?.signature,
-        header: {
-          transactionId: payment.token?.paymentData?.header?.transactionId,
-          applicationData: payment.token?.paymentData?.header?.applicationData,
-        },
-      },
+      token: tokenFromPaymentData(payment.token?.paymentData),
     },
   };
 }

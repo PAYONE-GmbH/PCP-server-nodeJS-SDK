@@ -57,4 +57,11 @@ export interface PaymentEvent {
    * @readonly
    */
   creationDateTime?: string;
+
+  /**
+   * @description Unique reference from the merchant that was used when the event was created (e.g. from the capture request).
+   * @maxLength 20
+   * @example your-order-6372
+   */
+  merchantReference?: string;
 }

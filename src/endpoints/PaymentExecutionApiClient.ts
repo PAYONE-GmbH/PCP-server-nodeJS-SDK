@@ -211,7 +211,7 @@ export class PaymentExecutionApiClient extends BaseApiClient {
     commerceCaseId: string,
     checkoutId: string,
     paymentExecutionId: string,
-    payload: PausePaymentRequest,
+    payload?: PausePaymentRequest,
   ): Promise<PausePaymentResponse> {
     if (!merchantId) {
       throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
@@ -247,7 +247,7 @@ export class PaymentExecutionApiClient extends BaseApiClient {
     commerceCaseId: string,
     checkoutId: string,
     paymentExecutionId: string,
-    payload: RefreshPaymentRequest,
+    payload?: RefreshPaymentRequest,
   ): Promise<PaymentExecution> {
     if (!merchantId) {
       throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);

@@ -6,12 +6,12 @@ import type { ApplePaymentTokenVersion } from './ApplePaymentTokenVersion.js';
  *     of the payment data token before decryption.
  */
 export interface ApplePaymentDataTokenInformation {
-  version?: ApplePaymentTokenVersion;
+  version: ApplePaymentTokenVersion;
   /**
    * @description Detached PKCS #7 signature, Base64 encoded as string. Signature of the payment and header data. The
    *     signature includes the signing certificate, its intermediate CA certificate, and information about the
    *     signing algorithm.
    */
-  signature?: string;
-  header?: ApplePaymentDataTokenHeaderInformation;
+  signature: string;
+  header: ApplePaymentDataTokenHeaderInformation;
 }
