@@ -1,5 +1,5 @@
 import type { FundSplit } from './FundSplit.js';
-import type { PaymentReferences } from './PaymentReferences.js';
+import type { PaymentReferencesForRefund } from './PaymentReferencesForRefund.js';
 import type { PositiveAmountOfMoney } from './PositiveAmountOfMoney.js';
 import type { ReturnInformation } from './ReturnInformation.js';
 
@@ -10,7 +10,7 @@ import type { ReturnInformation } from './ReturnInformation.js';
  */
 export interface RefundRequest {
   amountOfMoney?: PositiveAmountOfMoney;
-  references?: PaymentReferences;
+  references?: PaymentReferencesForRefund;
   return?: ReturnInformation;
   fundSplit?: FundSplit;
 }

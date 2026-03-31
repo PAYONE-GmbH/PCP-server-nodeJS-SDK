@@ -90,7 +90,7 @@ export class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
     merchantId: string,
     commerceCaseId: string,
     checkoutId: string,
-    payload: ReturnRequest,
+    payload?: ReturnRequest,
   ): Promise<ReturnResponse> {
     if (!merchantId) {
       throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
@@ -122,7 +122,7 @@ export class OrderManagementCheckoutActionsApiClient extends BaseApiClient {
     merchantId: string,
     commerceCaseId: string,
     checkoutId: string,
-    payload: CancelRequest,
+    payload?: CancelRequest,
   ): Promise<CancelResponse> {
     if (!merchantId) {
       throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
