@@ -1,9 +1,16 @@
-# [1.7.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.5.1...v1.7.0) (2026-02-26)
+# [1.8.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.5.1...v1.8.0) (2026-03-31)
+
+### Bug Fixes
+
+* fix: add missing comma in tokenFromPaymentData function parameters ([f8b38dc94651a050a83d70c3215ff0ec1b13d291](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/f8b38dc94651a050a83d70c3215ff0ec1b13d291))
+
+### Documentation
+
+* docs: update changelog for version 1.7.0 with new API definitions ([be6e8fee1206b8f140403a2705599d2df01d97ee](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/be6e8fee1206b8f140403a2705599d2df01d97ee))
 
 ### Features
 
-* refactor: implement api definition 1.47.0 ([6d674173288d42c2cae59fd76c47e374310641af](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/6d674173288d42c2cae59fd76c47e374310641af))
-* refactor: update API version to 1.48.0 ([264422c6871e81244af5972982225ba228970a82](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/264422c6871e81244af5972982225ba228970a82))
+* feat: update API version to 1.49.0 ([e9e2e7427493478c97b43712963970574bf14bdc](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/e9e2e7427493478c97b43712963970574bf14bdc))
 
 ## [1.5.1](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.5.0...v1.5.1) (2025-12-15)
 
