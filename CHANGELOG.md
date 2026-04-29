@@ -1,3 +1,9 @@
+# [1.9.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.8.0...v1.9.0) (2026-04-29)
+
+### Features
+
+* feat: update API version to 1.50.0 ([460b50da75f30545795c777d66a6324b86f38a3b](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/commit/460b50da75f30545795c777d66a6324b86f38a3b))
+
 # [1.8.0](https://github.com/PAYONE-GmbH/PCP-server-nodeJS-SDK/compare/v1.5.1...v1.8.0) (2026-03-31)
 
 ### Bug Fixes
