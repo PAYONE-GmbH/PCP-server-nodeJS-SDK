@@ -14,6 +14,8 @@ import {
   type CompletePaymentResponse,
   type CreatePaymentResponse,
   type ErrorResponse,
+  type FundSplitRequest,
+  type FundSplitResponse,
   type PausePaymentRequest,
   type PausePaymentResponse,
   type PaymentExecution,
@@ -685,6 +687,130 @@ describe('PaymentExecutionApiClient', () => {
           payload,
         ),
       ).rejects.toThrowError('Payment Execution ID is required');
+    });
+  });
+  describe('createFundSplit', () => {
+    test('given request was successful, should return response', async () => {
+      const expectedResponse: FundSplitResponse = {
+        fundSplitId: 'fund-split-id',
+        paymentExecutionId: 'paymentExecutionId',
+        eventId: 'eventId',
+      };
+
+      mockedFetch.mockResolvedValueOnce(
+        createResponseMock<FundSplitResponse>(201, expectedResponse),
+      );
+
+      const payload: FundSplitRequest = {
+        fundSplit: {
+          fundDistributions: [
+            {
+              accountId: 'accountId',
+              amount: 1000,
+              type: 'SELLER_REVENUE' as never,
+            },
+          ],
+        },
+      };
+
+      const res = await paymentExecutionApiClient.createFundSplit(
+        'merchantId',
+        'commerceCaseId',
+        'checkoutId',
+        'paymentExecutionId',
+        'eventId',
+        payload,
+      );
+
+      expect(res).toEqual(expectedResponse);
+    });
+    test('given request was not successful (400), then return errorresponse', async () => {
+      const expectedResponse: ErrorResponse = { errorId: 'error-id' };
+
+      mockedFetch.mockResolvedValueOnce(createResponseMock<ErrorResponse>(400, expectedResponse));
+
+      expect.assertions(1);
+      try {
+        await paymentExecutionApiClient.createFundSplit(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentExecutionId',
+          'eventId',
+          { fundSplit: { fundDistributions: [] } },
+        );
+      } catch (error) {
+        expect(error).toEqual(new ApiErrorResponseException(400, JSON.stringify(expectedResponse)));
+      }
+    });
+    test('given request was not successful (500), throw ApiResponseRetrievalException', async () => {
+      mockedFetch.mockResolvedValueOnce(createEmptyErrorResponseMock(500));
+
+      expect.assertions(1);
+      try {
+        await paymentExecutionApiClient.createFundSplit(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentExecutionId',
+          'eventId',
+          { fundSplit: { fundDistributions: [] } },
+        );
+      } catch (error) {
+        expect(error).toEqual(new ApiResponseRetrievalException(500, ''));
+      }
+    });
+    test('a required param is empty, throw an error', async () => {
+      await expect(() =>
+        paymentExecutionApiClient.createFundSplit(
+          '',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentExecutionId',
+          'eventId',
+          { fundSplit: { fundDistributions: [] } },
+        ),
+      ).rejects.toThrowError('Merchant ID is required');
+      await expect(() =>
+        paymentExecutionApiClient.createFundSplit(
+          'merchantId',
+          '',
+          'checkoutId',
+          'paymentExecutionId',
+          'eventId',
+          { fundSplit: { fundDistributions: [] } },
+        ),
+      ).rejects.toThrowError('Commerce Case ID is required');
+      await expect(() =>
+        paymentExecutionApiClient.createFundSplit(
+          'merchantId',
+          'commerceCaseId',
+          '',
+          'paymentExecutionId',
+          'eventId',
+          { fundSplit: { fundDistributions: [] } },
+        ),
+      ).rejects.toThrowError('Checkout ID is required');
+      await expect(() =>
+        paymentExecutionApiClient.createFundSplit(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          '',
+          'eventId',
+          { fundSplit: { fundDistributions: [] } },
+        ),
+      ).rejects.toThrowError('Payment Execution ID is required');
+      await expect(() =>
+        paymentExecutionApiClient.createFundSplit(
+          'merchantId',
+          'commerceCaseId',
+          'checkoutId',
+          'paymentExecutionId',
+          '',
+          { fundSplit: { fundDistributions: [] } },
+        ),
+      ).rejects.toThrowError('Event ID is required');
     });
   });
 });

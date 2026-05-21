@@ -17,6 +17,7 @@ export interface CompleteFinancingPaymentMethodSpecificInput {
    *                false = the payment does not require approval, and the funds will be captured automatically
    *
    *  If the parameter is not provided in the request, the default value will be true
+   * @default true
    */
   requiresApproval?: boolean;
   paymentProduct3391SpecificInput?: PaymentProduct3391SpecificInput;

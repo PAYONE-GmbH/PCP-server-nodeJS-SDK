@@ -8,6 +8,8 @@ import type {
   CompletePaymentRequest,
   CompletePaymentResponse,
   CreatePaymentResponse,
+  FundSplitRequest,
+  FundSplitResponse,
   PaymentExecution,
   PaymentExecutionRequest,
   RefundPaymentResponse,
@@ -24,6 +26,7 @@ import {
 } from './BaseApiClient.js';
 
 const PAYMENT_EXECUTION_ID_REQUIRED_ERROR = 'Payment Execution ID is required';
+const EVENT_ID_REQUIRED_ERROR = 'Event ID is required';
 
 export class PaymentExecutionApiClient extends BaseApiClient {
   constructor(config: CommunicatorConfiguration) {
@@ -276,5 +279,45 @@ export class PaymentExecutionApiClient extends BaseApiClient {
     };
 
     return this.makeApiCall<PaymentExecution>(url.toString(), requestInit);
+  }
+
+  public async createFundSplit(
+    merchantId: string,
+    commerceCaseId: string,
+    checkoutId: string,
+    paymentExecutionId: string,
+    eventId: string,
+    payload: FundSplitRequest,
+  ): Promise<FundSplitResponse> {
+    if (!merchantId) {
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
+    }
+    if (!commerceCaseId) {
+      throw new TypeError(COMMERCE_CASE_ID_REQUIRED_ERROR);
+    }
+    if (!checkoutId) {
+      throw new TypeError(CHECKOUT_ID_REQUIRED_ERROR);
+    }
+    if (!paymentExecutionId) {
+      throw new TypeError(PAYMENT_EXECUTION_ID_REQUIRED_ERROR);
+    }
+    if (!eventId) {
+      throw new TypeError(EVENT_ID_REQUIRED_ERROR);
+    }
+
+    const url = new URL(
+      `/v1/${merchantId}/commerce-cases/${commerceCaseId}/checkouts/${checkoutId}/payment-executions/${paymentExecutionId}/events/${eventId}/fund-splits`,
+      this.getConfig().getHost(),
+    );
+
+    const requestInit: RequestInit = {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(payload),
+    };
+
+    return this.makeApiCall<FundSplitResponse>(url.toString(), requestInit);
   }
 }

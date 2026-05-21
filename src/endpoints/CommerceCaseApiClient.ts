@@ -6,7 +6,7 @@ import type {
   CommerceCaseResponse,
   CreateCommerceCaseRequest,
   CreateCommerceCaseResponse,
-  Customer,
+  PatchCommerceCaseRequest,
 } from '../models/index.js';
 import { GetCommerceCasesQuery } from '../queries/GetCommerceCasesQuery.js';
 import {
@@ -90,7 +90,7 @@ export class CommerceCaseApiClient extends BaseApiClient {
   public async updateCommerceCaseRequest(
     merchantId: string,
     commerceCaseId: string,
-    customer: Customer,
+    payload: PatchCommerceCaseRequest,
   ): Promise<void> {
     if (!merchantId) {
       throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
@@ -109,7 +109,7 @@ export class CommerceCaseApiClient extends BaseApiClient {
       headers: new Headers({
         'Content-Type': 'application/json',
       }),
-      body: JSON.stringify({ customer }),
+      body: JSON.stringify(payload),
     };
 
     await this.makeApiCall(url.toString(), requestInit, BaseApiClient.parseVoid);
