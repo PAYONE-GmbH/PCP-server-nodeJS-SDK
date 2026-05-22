@@ -7,8 +7,8 @@ import { ApiResponseRetrievalException } from '../errors/ApiResponseRetrievalExc
 import { BusinessRelation } from '../models/BusinessRelation.js';
 import type { CommerceCaseResponse } from '../models/CommerceCaseResponse.js';
 import type { CreateCommerceCaseResponse } from '../models/CreateCommerceCaseResponse.js';
-import type { Customer } from '../models/Customer.js';
 import type { ErrorResponse } from '../models/ErrorResponse.js';
+import type { PatchCommerceCaseRequest } from '../models/PatchCommerceCaseRequest.js';
 import { GetCommerceCasesQuery } from '../queries/GetCommerceCasesQuery.js';
 import { createEmptyErrorResponseMock, createResponseMock } from '../testutils/mock-response.js';
 
@@ -210,13 +210,15 @@ describe('CheckoutApiClient', () => {
     test('given request was successful, then return response', async () => {
       mockedFetch.mockResolvedValueOnce(createResponseMock(204));
 
-      const customer: Customer = {
-        locale: '',
+      const payload: PatchCommerceCaseRequest = {
+        customer: {
+          locale: '',
+        },
       };
       await commerceCaseApiClient.updateCommerceCaseRequest(
         'merchantId',
         'commerceCaseId',
-        customer,
+        payload,
       );
     });
     test('given request was not successful (400), then return errorresponse', async () => {

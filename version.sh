@@ -25,6 +25,7 @@ if [ -n "$NEW_VERSION" ]; then
         exit 1
     fi
     npm run changelog
+    npm run biome:fix
     git add CHANGELOG.md
     echo "Updated CHANGELOG.md"
 
