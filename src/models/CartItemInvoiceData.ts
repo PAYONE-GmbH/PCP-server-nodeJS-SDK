@@ -2,7 +2,8 @@
 export interface CartItemInvoiceData {
   /**
    * @description Shopping cart item description.
-   *     The description will also be displayed in the portal as the product name.
+   *     The description will also be displayed in the portal as the product name
+   *     if orderLineDetails.productName is not set.
    *
    * @example Smartwatch
    */

@@ -64,4 +64,12 @@ export interface OrderLineDetailsInput {
    * has been collected (e.g., for Click & Collect or Click & Reserve).
    */
   merchantShopDeliveryReference?: string;
+
+  /**
+   * @description The name of the product, will be displayed in Portal if set.
+   *
+   * @maxLength 116
+   * @example Smartwatch-123
+   */
+  productName?: string;
 }
