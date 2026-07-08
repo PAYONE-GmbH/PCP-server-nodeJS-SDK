@@ -209,6 +209,9 @@ describe('PaymentExecutionApiClient', () => {
             isRefundable: false,
           },
         },
+        fundSplit: {
+          fundDistributions: [],
+        },
       };
 
       mockedFetch.mockResolvedValueOnce(
@@ -217,6 +220,9 @@ describe('PaymentExecutionApiClient', () => {
 
       const payload: CancelPaymentRequest = {
         cancellationReason: CancellationReason.CONSUMER_REQUEST,
+        fundSplit: {
+          fundDistributions: [],
+        },
       };
       const res = await paymentExecutionApiClient.cancelPayment(
         'merchantId',
