@@ -1,4 +1,5 @@
 import type { CancellationReason } from './CancellationReason.js';
+import type { FundSplit } from './FundSplit.js';
 
 export interface CancelPaymentRequest {
   cancellationReason?: CancellationReason;
@@ -10,4 +11,5 @@ export interface CancelPaymentRequest {
    * @maximum 999999999999
    */
   amount?: number;
+  fundSplit?: FundSplit;
 }
