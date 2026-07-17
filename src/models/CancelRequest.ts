@@ -1,6 +1,7 @@
 import type { CancelItem } from './CancelItem.js';
 import type { CancellationReason } from './CancellationReason.js';
 import type { CancelType } from './CancelType.js';
+import type { FundSplit } from './FundSplit.js';
 
 /**
  *  @description Request to mark items as of the respective Checkout as cancelled and to automatically reverse the associated
@@ -17,4 +18,5 @@ export interface CancelRequest {
   cancelType?: CancelType;
   cancellationReason?: CancellationReason;
   cancelItems?: CancelItem[];
+  fundSplit?: FundSplit;
 }
