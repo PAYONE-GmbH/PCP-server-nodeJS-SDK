@@ -1,6 +1,7 @@
 import fetch, { type RequestInit, type Response } from 'node-fetch';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
+import { ApiResponseRetrievalException } from '../errors/index.js';
 import type { FetchOptions } from '../types/FetchOptions.js';
 import { BaseApiClient } from './BaseApiClient.js';
 
@@ -34,6 +35,18 @@ class TestApiClient extends BaseApiClient {
   ): Promise<T> {
     return this.makeApiCall(url, requestInit, parseBody);
   }
+
+  public static parseJsonForTest<T>(body: string): T {
+    return super.parseJson<T>(body);
+  }
+
+  public static parseVoidForTest(): void {
+    return super.parseVoid();
+  }
+
+  public getRequestHeaderGeneratorForTest() {
+    return this.getRequestHeaderGenerator();
+  }
 }
 
 describe('BaseApiClient', () => {
@@ -49,6 +62,7 @@ describe('BaseApiClient', () => {
   test('constructs without fetch options', () => {
     expect(testApiClient).toBeDefined();
     expect(testApiClient.getConfig()).toBe(config);
+    expect(testApiClient.getRequestHeaderGeneratorForTest()).toBeDefined();
   });
 
   test('constructs with client-specific fetch options', () => {
@@ -248,5 +262,144 @@ describe('BaseApiClient', () => {
       expect(hasAuthHeader).toBe(true);
       expect(hasDateHeader).toBe(true);
     }
+  });
+
+  test('parses JSON objects and rejects JSON primitives', () => {
+    expect(TestApiClient.parseJsonForTest<{ result: string }>('{"result":"success"}')).toEqual({
+      result: 'success',
+    });
+    expect(() => TestApiClient.parseJsonForTest('null')).toThrow('Parsed JSON is not an object');
+    expect(() => TestApiClient.parseJsonForTest('"value"')).toThrow('Parsed JSON is not an object');
+  });
+
+  test('parses void response bodies', () => {
+    expect(TestApiClient.parseVoidForTest()).toBeUndefined();
+  });
+
+  test('wraps parsing errors with the response details and error cause', async () => {
+    const parsingError = new Error('Unable to parse');
+    const mockResponse: MockResponse = {
+      ok: true,
+      status: 200,
+      text: vi.fn().mockResolvedValue('response body'),
+    };
+    mockedFetch.mockResolvedValue(mockResponse as unknown as Response);
+
+    await expect(
+      testApiClient.testMakeApiCall('https://test.com/api', { method: 'GET' }, () => {
+        throw parsingError;
+      }),
+    ).rejects.toMatchObject({
+      statusCode: 200,
+      responseBody: 'response body',
+      stack: parsingError.stack,
+    });
+  });
+
+  test('wraps non-Error parsing failures without a cause', async () => {
+    const mockResponse: MockResponse = {
+      ok: true,
+      status: 200,
+      text: vi.fn().mockResolvedValue('response body'),
+    };
+    mockedFetch.mockResolvedValue(mockResponse as unknown as Response);
+
+    await expect(
+      testApiClient.testMakeApiCall('https://test.com/api', { method: 'GET' }, () => {
+        throw 'Unable to parse';
+      }),
+    ).rejects.toBeInstanceOf(ApiResponseRetrievalException);
+  });
+
+  test('throws API error responses with their errors', async () => {
+    const body = '{"errorId":"request-id","errors":[{"errorCode":"INVALID"}]}';
+    const mockResponse: MockResponse = {
+      ok: false,
+      status: 400,
+      text: vi.fn().mockResolvedValue(body),
+    };
+    mockedFetch.mockResolvedValue(mockResponse as unknown as Response);
+
+    await expect(
+      testApiClient.testMakeApiCall('https://test.com/api', { method: 'GET' }),
+    ).rejects.toMatchObject({
+      statusCode: 400,
+      responseBody: body,
+      errors: [{ errorCode: 'INVALID' }],
+    });
+  });
+
+  test('throws retrieval errors for malformed API error responses', async () => {
+    const body = '{"errorId":123}';
+    const mockResponse: MockResponse = {
+      ok: false,
+      status: 500,
+      text: vi.fn().mockResolvedValue(body),
+    };
+    mockedFetch.mockResolvedValue(mockResponse as unknown as Response);
+
+    await expect(
+      testApiClient.testMakeApiCall('https://test.com/api', { method: 'GET' }),
+    ).rejects.toMatchObject({
+      statusCode: 500,
+      responseBody: body,
+    });
+  });
+
+  test('throws retrieval errors when an API error response has invalid errors', async () => {
+    const body = '{"errorId":"request-id","errors":{}}';
+    const mockResponse: MockResponse = {
+      ok: false,
+      status: 500,
+      text: vi.fn().mockResolvedValue(body),
+    };
+    mockedFetch.mockResolvedValue(mockResponse as unknown as Response);
+
+    await expect(
+      testApiClient.testMakeApiCall('https://test.com/api', { method: 'GET' }),
+    ).rejects.toBeInstanceOf(ApiResponseRetrievalException);
+  });
+
+  test.each([
+    null,
+    'not an object',
+  ])('throws retrieval errors for non-object error bodies', async (parsed) => {
+    const mockResponse: MockResponse = {
+      ok: false,
+      status: 500,
+      text: vi.fn().mockResolvedValue('response body'),
+    };
+    mockedFetch.mockResolvedValue(mockResponse as unknown as Response);
+
+    await expect(
+      testApiClient.testMakeApiCall('https://test.com/api', { method: 'GET' }, () => parsed),
+    ).rejects.toBeInstanceOf(ApiResponseRetrievalException);
+  });
+
+  test('throws retrieval errors when an API error response has no errors array', async () => {
+    const body = '{"errorId":"request-id"}';
+    const mockResponse: MockResponse = {
+      ok: false,
+      status: 400,
+      text: vi.fn().mockResolvedValue(body),
+    };
+    mockedFetch.mockResolvedValue(mockResponse as unknown as Response);
+
+    await expect(
+      testApiClient.testMakeApiCall('https://test.com/api', { method: 'GET' }),
+    ).rejects.toBeInstanceOf(ApiResponseRetrievalException);
+  });
+
+  test('throws an API error with no errors for an empty error object', async () => {
+    const mockResponse: MockResponse = {
+      ok: false,
+      status: 400,
+      text: vi.fn().mockResolvedValue('response body'),
+    };
+    mockedFetch.mockResolvedValue(mockResponse as unknown as Response);
+
+    await expect(
+      testApiClient.testMakeApiCall('https://test.com/api', { method: 'GET' }, () => ({})),
+    ).rejects.toMatchObject({ errors: [] });
   });
 });

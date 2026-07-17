@@ -61,5 +61,8 @@ describe('PaymentIntentApiClient', () => {
     await expect(client.getPaymentIntent('merchantId', '')).rejects.toThrow(
       'Payment Intent ID is required',
     );
+    await expect(client.getPaymentIntent('', 'payment-intent-id')).rejects.toThrow(
+      'Merchant ID is required',
+    );
   });
 });
