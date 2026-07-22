@@ -10,4 +10,9 @@ export interface RedirectPaymentProduct840SpecificInput
    * (FraudNet Session Identifier). This SDK is available here https://developer.paypal.com/docs/checkout/apm/pay-upon-invoice/fraudnet/
    */
   fraudNetId?: FraudNetId;
+
+  /**
+   * @description Unique payment transaction identifier of the payment gateway. Required for PayPal Express to associate the request with the original payment intent.
+   */
+  paymentId?: string;
 }
