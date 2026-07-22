@@ -4,3 +4,4 @@ export { CommerceCaseApiClient } from './CommerceCaseApiClient.js';
 export { OrderManagementCheckoutActionsApiClient } from './OrderManagementCheckoutActionsApiClient.js';
 export { PaymentExecutionApiClient } from './PaymentExecutionApiClient.js';
 export { PaymentInformationApiClient } from './PaymentInformationApiClient.js';
+export { PaymentIntentApiClient } from './PaymentIntentApiClient.js';
