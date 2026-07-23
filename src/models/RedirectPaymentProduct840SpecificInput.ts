@@ -1,28 +1,18 @@
-/** @description Object containing specific input required for PayPal payments (Payment product ID 840) */
-export interface RedirectPaymentProduct840SpecificInput {
-  /**
-   *  @description Indicates whether to use PayPal Express Checkout Shortcut.
-   *      * true = When shortcut is enabled, the consumer can select a shipping address during PayPal checkout.
-   *      * false = When shortcut is disabled, the consumer cannot change the shipping address.
-   *     Default value is false.
-   *     Please note that this field is ignored when order.additionalInput.typeInformation.purchaseType is set to
-   *     "digital"
-   */
-  addressSelectionAtPayPal?: boolean;
+import type { FraudNetId } from './FraudNetId.js';
+import type { RedirectPaymentProduct840SpecificInputData } from './RedirectPaymentProduct840SpecificInputData.js';
+
+/** @description Object containing specific input required for PayPal payments (Payment product ID 840). */
+export interface RedirectPaymentProduct840SpecificInput
+  extends RedirectPaymentProduct840SpecificInputData {
   /**
    * @description A unique ID determined by the merchant, to link a Paypal transaction to a FraudNet PayPal risk session.
    * Only applicable to customer-initiated transactions, when the FraudNet SDK is used, and to be passed in the API request the same tracking ID value
    * (FraudNet Session Identifier). This SDK is available here https://developer.paypal.com/docs/checkout/apm/pay-upon-invoice/fraudnet/
    */
-  fraudNetId?: string;
+  fraudNetId?: FraudNetId;
+
   /**
-   * @description Indicates whether the PayPal JavaScript SDK flow is used.
-   *    * true = The PayPal JavaScript SDK flow is used.
-   *    * false = The PayPal JavaScript SDK flow is not used.
-   *
-   *   Default value is false.
-   * @default false
-   * @example true
+   * @description Unique payment transaction identifier of the payment gateway. Required for PayPal Express to associate the request with the original payment intent.
    */
-  javaScriptSdkFlow?: boolean;
+  paymentId?: string;
 }
