@@ -3,11 +3,11 @@
  */
 export interface AuthenticationToken {
   /** JWT token string */
-  token: string;
+  token?: string;
   /** UUID for the token */
-  id: string;
+  id?: string;
   /** Creation date/time (ISO 8601) */
-  creationDate: string;
+  creationDate?: string;
   /** Expiration date/time (ISO 8601) */
-  expirationDate: string;
+  expirationDate?: string;
 }

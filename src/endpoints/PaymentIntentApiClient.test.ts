@@ -28,6 +28,7 @@ describe('PaymentIntentApiClient', () => {
   test('creates a payment intent using the specified endpoint and payload', async () => {
     const payload: CreatePaymentIntentRequest = {
       amountOfMoney: { amount: 3720, currencyCode: 'EUR' },
+      references: { merchantReference: 'payment-intent-123' },
     };
     const expectedResponse: CreatePaymentIntentResponse = {};
     mockedFetch.mockResolvedValueOnce(createResponseMock(201, expectedResponse));
@@ -57,7 +58,9 @@ describe('PaymentIntentApiClient', () => {
   });
 
   test('rejects missing path parameters', async () => {
-    await expect(client.createPaymentIntent('', {})).rejects.toThrow('Merchant ID is required');
+    await expect(
+      client.createPaymentIntent('', { references: { merchantReference: 'payment-intent-123' } }),
+    ).rejects.toThrow('Merchant ID is required');
     await expect(client.getPaymentIntent('merchantId', '')).rejects.toThrow(
       'Payment Intent ID is required',
     );

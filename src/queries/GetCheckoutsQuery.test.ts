@@ -43,6 +43,9 @@ describe('GetCheckoutsQuery', () => {
     query.setCompanyInformation('Company Inc.');
     query.setTerminalId('1234');
     query.setReportingToken('5678');
+    query.setCardAuthorizationId('260042');
+    query.setReceiptNumber('0321');
+    query.setTraceNumber('012345');
 
     const queryMap = query.toQueryMap();
 
@@ -79,6 +82,9 @@ describe('GetCheckoutsQuery', () => {
     expect(queryMap.get('companyInformation')).toEqual('Company Inc.');
     expect(queryMap.get('terminalId')).toEqual('1234');
     expect(queryMap.get('reportingToken')).toEqual('5678');
+    expect(queryMap.get('cardAuthorizationId')).toEqual('260042');
+    expect(queryMap.get('receiptNumber')).toEqual('0321');
+    expect(queryMap.get('traceNumber')).toEqual('012345');
   });
 
   test('getters', () => {
@@ -119,6 +125,9 @@ describe('GetCheckoutsQuery', () => {
     query.setCompanyInformation('Company Inc.');
     query.setTerminalId('1234');
     query.setReportingToken('5678');
+    query.setCardAuthorizationId('260042');
+    query.setReceiptNumber('0321');
+    query.setTraceNumber('012345');
 
     expect(query.getOffset()).toEqual(1);
     expect(query.getSize()).toEqual(10);
@@ -162,6 +171,9 @@ describe('GetCheckoutsQuery', () => {
     expect(query.getCompanyInformation()).toEqual('Company Inc.');
     expect(query.getTerminalId()).toEqual('1234');
     expect(query.getReportingToken()).toEqual('5678');
+    expect(query.getCardAuthorizationId()).toEqual('260042');
+    expect(query.getReceiptNumber()).toEqual('0321');
+    expect(query.getTraceNumber()).toEqual('012345');
   });
 
   test('nulls', () => {
