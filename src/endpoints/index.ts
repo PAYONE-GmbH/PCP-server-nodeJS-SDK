@@ -2,6 +2,7 @@ export { AuthenticationApiClient } from './AuthenticationApiClient.js';
 export { CheckoutApiClient } from './CheckoutApiClient.js';
 export { CommerceCaseApiClient } from './CommerceCaseApiClient.js';
 export { OrderManagementCheckoutActionsApiClient } from './OrderManagementCheckoutActionsApiClient.js';
+export { PayByLinkApiClient } from './PayByLinkApiClient.js';
 export { PaymentExecutionApiClient } from './PaymentExecutionApiClient.js';
 export { PaymentInformationApiClient } from './PaymentInformationApiClient.js';
 export { PaymentIntentApiClient } from './PaymentIntentApiClient.js';

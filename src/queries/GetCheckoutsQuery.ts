@@ -35,6 +35,9 @@ export class GetCheckoutsQuery implements QueryConfig {
   private companyInformation?: string;
   private terminalId?: string;
   private reportingToken?: string;
+  private cardAuthorizationId?: string;
+  private receiptNumber?: string;
+  private traceNumber?: string;
 
   public setOffset(offset: number): this {
     this.offset = offset;
@@ -203,6 +206,21 @@ export class GetCheckoutsQuery implements QueryConfig {
     return this;
   }
 
+  public setCardAuthorizationId(cardAuthorizationId: string): this {
+    this.cardAuthorizationId = cardAuthorizationId;
+    return this;
+  }
+
+  public setReceiptNumber(receiptNumber: string): this {
+    this.receiptNumber = receiptNumber;
+    return this;
+  }
+
+  public setTraceNumber(traceNumber: string): this {
+    this.traceNumber = traceNumber;
+    return this;
+  }
+
   public getOffset(): number | undefined {
     return this.offset;
   }
@@ -335,6 +353,18 @@ export class GetCheckoutsQuery implements QueryConfig {
     return this.reportingToken;
   }
 
+  public getCardAuthorizationId(): string | undefined {
+    return this.cardAuthorizationId;
+  }
+
+  public getReceiptNumber(): string | undefined {
+    return this.receiptNumber;
+  }
+
+  public getTraceNumber(): string | undefined {
+    return this.traceNumber;
+  }
+
   public toQueryMap(): Map<string, string> {
     const query = new Map<string, string>();
 
@@ -437,6 +467,15 @@ export class GetCheckoutsQuery implements QueryConfig {
     }
     if (this.reportingToken !== undefined) {
       query.set('reportingToken', this.reportingToken);
+    }
+    if (this.cardAuthorizationId !== undefined) {
+      query.set('cardAuthorizationId', this.cardAuthorizationId);
+    }
+    if (this.receiptNumber !== undefined) {
+      query.set('receiptNumber', this.receiptNumber);
+    }
+    if (this.traceNumber !== undefined) {
+      query.set('traceNumber', this.traceNumber);
     }
     return query;
   }
