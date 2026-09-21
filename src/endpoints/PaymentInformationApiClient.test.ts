@@ -48,6 +48,8 @@ describe('PaymentInformationApiClient', () => {
       const expectedResponse: PaymentInformationResponse = {
         paymentChannel: PaymentChannel.POS,
         terminalId: 'terminalId',
+        traceNumber: '012345',
+        receiptNumber: '0321',
         cardPaymentDetails: {
           maskedCardNumber: '672559XXXXXX1108',
           paymentProcessingToken: '0ca037cc-9079-4df7-8f6f-f2a3443ee521',

@@ -47,6 +47,16 @@ export interface PaymentInformationResponse {
   merchantReference?: string;
 
   /**
+   * @description Trace number incremented by the terminal for every transaction request.
+   */
+  traceNumber?: string;
+
+  /**
+   * @description Receipt number incremented by the terminal for every successful financial transaction.
+   */
+  receiptNumber?: string;
+
+  /**
    * @description The date and time when the payment was created.
    */
   creationDateTime?: string;
