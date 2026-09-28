@@ -110,6 +110,8 @@ export * from './OrderResponse.js';
 export * from './OrderType.js';
 export * from './PatchCheckoutRequest.js';
 export * from './PatchCommerceCaseRequest.js';
+export * from './PatchPaymentIntentRequest.js';
+export * from './PatchPaymentIntentResponse.js';
 export * from './PausePaymentRequest.js';
 export * from './PausePaymentResponse.js';
 export * from './Payee.js';
