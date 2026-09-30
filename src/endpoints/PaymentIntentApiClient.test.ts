@@ -1,10 +1,14 @@
-import fetch from 'node-fetch';
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import fetch, { Headers } from 'node-fetch';
+import { beforeEach, describe, expect, expectTypeOf, test, vi } from 'vitest';
 import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import type {
   CreatePaymentIntentRequest,
   CreatePaymentIntentResponse,
+  PatchPaymentIntentRequest,
+  PatchPaymentIntentResponse,
   PaymentIntentResponse,
+  RedirectData,
+  RedirectPaymentMethodSpecificOutputForCreateIntent,
 } from '../models/index.js';
 import { createResponseMock } from '../testutils/mock-response.js';
 import { PaymentIntentApiClient } from './PaymentIntentApiClient.js';
@@ -57,6 +61,46 @@ describe('PaymentIntentApiClient', () => {
     );
   });
 
+  test('patches a payment intent using the specified endpoint and payload', async () => {
+    const payload: PatchPaymentIntentRequest = {
+      amountOfMoney: { amount: 4200, currencyCode: 'EUR' },
+      shoppingCart: { items: [] },
+    };
+    const expectedResponse: PatchPaymentIntentResponse = {
+      shoppingCart: { items: [] },
+      paymentIntentOutput: {
+        paymentIntentId: 'payment-intent-id',
+        amountOfMoney: { amount: 4200, currencyCode: 'EUR' },
+        redirectPaymentMethodSpecificOutput: {
+          redirectData: { redirectURL: 'https://example-redirect-url.com' },
+        },
+      },
+    };
+    mockedFetch.mockResolvedValueOnce(createResponseMock(200, expectedResponse));
+
+    await expect(
+      client.patchPaymentIntent('merchantId', 'payment-intent-id', payload),
+    ).resolves.toEqual(expectedResponse);
+
+    expect(mockedFetch).toHaveBeenCalledWith(
+      'https://test.com/v1/merchantId/payment-intents/payment-intent-id',
+      expect.objectContaining({
+        method: 'PATCH',
+        body: JSON.stringify(payload),
+      }),
+    );
+    const request = mockedFetch.mock.lastCall?.[1];
+    expect(request?.headers).toBeInstanceOf(Headers);
+    expect((request?.headers as Headers).get('Content-Type')).toBe('application/json');
+  });
+
+  test('patch response and created-intent redirect output match the schema', () => {
+    expectTypeOf<PatchPaymentIntentResponse>().toExtend<CreatePaymentIntentResponse>();
+    expectTypeOf<
+      RedirectPaymentMethodSpecificOutputForCreateIntent['redirectData']
+    >().toEqualTypeOf<RedirectData | undefined>();
+  });
+
   test('rejects missing path parameters', async () => {
     await expect(
       client.createPaymentIntent('', { references: { merchantReference: 'payment-intent-123' } }),
@@ -66,6 +110,12 @@ describe('PaymentIntentApiClient', () => {
     );
     await expect(client.getPaymentIntent('', 'payment-intent-id')).rejects.toThrow(
       'Merchant ID is required',
+    );
+    await expect(client.patchPaymentIntent('', 'payment-intent-id', {})).rejects.toThrow(
+      'Merchant ID is required',
+    );
+    await expect(client.patchPaymentIntent('merchantId', '', {})).rejects.toThrow(
+      'Payment Intent ID is required',
     );
   });
 });
