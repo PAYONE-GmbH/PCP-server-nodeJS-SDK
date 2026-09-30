@@ -39,7 +39,7 @@ describe('GetCheckoutsQuery', () => {
     query.setSurname('Doe');
     query.setEmail('john.doe@example.com');
     query.setPhoneNumber('1234567890');
-    query.setDateOfBirth('1980-01-01');
+    query.setDateOfBirth('19800101');
     query.setCompanyInformation('Company Inc.');
     query.setTerminalId('1234');
     query.setReportingToken('5678');
@@ -78,7 +78,7 @@ describe('GetCheckoutsQuery', () => {
     expect(queryMap.get('surname')).toEqual('Doe');
     expect(queryMap.get('email')).toEqual('john.doe@example.com');
     expect(queryMap.get('phoneNumber')).toEqual('1234567890');
-    expect(queryMap.get('dateOfBirth')).toEqual('1980-01-01');
+    expect(queryMap.get('dateOfBirth')).toEqual('19800101');
     expect(queryMap.get('companyInformation')).toEqual('Company Inc.');
     expect(queryMap.get('terminalId')).toEqual('1234');
     expect(queryMap.get('reportingToken')).toEqual('5678');
@@ -121,7 +121,7 @@ describe('GetCheckoutsQuery', () => {
     query.setSurname('Doe');
     query.setEmail('john.doe@example.com');
     query.setPhoneNumber('1234567890');
-    query.setDateOfBirth('1980-01-01');
+    query.setDateOfBirth('19800101');
     query.setCompanyInformation('Company Inc.');
     query.setTerminalId('1234');
     query.setReportingToken('5678');
@@ -167,7 +167,7 @@ describe('GetCheckoutsQuery', () => {
     expect(query.getSurname()).toEqual('Doe');
     expect(query.getEmail()).toEqual('john.doe@example.com');
     expect(query.getPhoneNumber()).toEqual('1234567890');
-    expect(query.getDateOfBirth()).toEqual('1980-01-01');
+    expect(query.getDateOfBirth()).toEqual('19800101');
     expect(query.getCompanyInformation()).toEqual('Company Inc.');
     expect(query.getTerminalId()).toEqual('1234');
     expect(query.getReportingToken()).toEqual('5678');

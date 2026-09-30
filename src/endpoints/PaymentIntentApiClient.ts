@@ -3,6 +3,8 @@ import { CommunicatorConfiguration } from '../CommunicatorConfiguration.js';
 import type {
   CreatePaymentIntentRequest,
   CreatePaymentIntentResponse,
+  PatchPaymentIntentRequest,
+  PatchPaymentIntentResponse,
   PaymentIntentResponse,
 } from '../models/index.js';
 import { BaseApiClient, MERCHANT_ID_REQUIRED_ERROR } from './BaseApiClient.js';
@@ -55,5 +57,32 @@ export class PaymentIntentApiClient extends BaseApiClient {
     };
 
     return this.makeApiCall<PaymentIntentResponse>(url.toString(), requestInit);
+  }
+
+  public async patchPaymentIntent(
+    merchantId: string,
+    paymentIntentId: string,
+    payload: PatchPaymentIntentRequest,
+  ): Promise<PatchPaymentIntentResponse> {
+    if (!merchantId) {
+      throw new TypeError(MERCHANT_ID_REQUIRED_ERROR);
+    }
+    if (!paymentIntentId) {
+      throw new TypeError(PAYMENT_INTENT_ID_REQUIRED_ERROR);
+    }
+
+    const url = new URL(
+      `/v1/${merchantId}/payment-intents/${paymentIntentId}`,
+      this.getConfig().getHost(),
+    );
+    const requestInit: RequestInit = {
+      method: 'PATCH',
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(payload),
+    };
+
+    return this.makeApiCall<PatchPaymentIntentResponse>(url.toString(), requestInit);
   }
 }
