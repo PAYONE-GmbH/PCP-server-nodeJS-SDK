@@ -4,6 +4,7 @@ on:
 
 permissions:
   id-token: write # Required for authentication with npm using OIDC
+
 jobs:
   build:
     runs-on: ubuntu-24.04
