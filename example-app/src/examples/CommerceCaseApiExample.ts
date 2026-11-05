@@ -52,11 +52,9 @@ export class CommerceCaseApiExample {
       },
     };
 
-    const res = await this.client.updateCommerceCaseRequest(
-      this.merchantId,
-      this.commerceCaseId,
-      modifiedCustomer,
-    );
+    const res = await this.client.updateCommerceCaseRequest(this.merchantId, this.commerceCaseId, {
+      customer: modifiedCustomer,
+    });
     console.log(res);
   }
 }

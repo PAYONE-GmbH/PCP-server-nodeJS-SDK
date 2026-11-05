@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PAYONE · SDK Test Backend</title>
+    <link rel="stylesheet" href="/ui/style.css" />
+    <script type="module" src="/ui/app.js"></script>
+  </head>
+  <body>
+    <header><span class="eyebrow">PAYONE / DEVELOPER TOOLS</span><h1>SDK Test Backend</h1><p>Demo-Aktionen und alle SDK-Operationen direkt im Browser ausführen.</p><span id="connection" role="status">Verbindung wird geprüft …</span></header>
+    <main>
+      <section aria-labelledby="demo-title">
+        <h2 id="demo-title">Demo-Aktionen</h2>
+        <p>Die Beispiele aus dem ursprünglichen <code>index.ts</code>. Ein Klick führt die Aktion aus.</p>
+        <div class="actions">
+          <button type="button" data-demo="token">Token abrufen</button>
+          <button type="button" data-demo="create">Commerce Case anlegen</button>
+          <button type="button" data-demo="list">Commerce Cases auflisten</button>
+          <button type="button" data-demo="get">Commerce Case abrufen</button>
+          <button type="button" data-demo="city">Rechnungsadresse aktualisieren</button>
+        </div>
+        <p class="hint">Auflisten nutzt wie zuvor <code>offset=2&amp;size=1</code>. Das Adress-Update lädt zuerst den Commerce Case und erhält die übrigen Kundendaten.</p>
+        <label for="city">Neue Stadt</label><input id="city" value="New York" />
+      </section>
+      <section aria-labelledby="ids-title">
+        <h2 id="ids-title">Ressourcen-IDs</h2>
+        <p>Für Demo-Aktionen und Platzhalter im Request-Pfad. Zurückgegebene IDs werden automatisch übernommen.</p>
+        <div id="ids" class="grid"></div>
+      </section>
+      <section aria-labelledby="request-title">
+        <h2 id="request-title">API-Explorer <span class="badge" id="route-count"></span></h2>
+        <form id="request-form">
+          <label for="operation">SDK-Operation</label><select id="operation" required></select>
+          <div class="grid">
+            <div><label for="query">Query-Parameter</label><input id="query" placeholder="offset=0&amp;size=10" /></div>
+            <div><label for="request-id">X-Request-ID (optional)</label><input id="request-id" placeholder="Automatisch generiert" /></div>
+          </div>
+          <label for="body">JSON-Body</label><textarea id="body" rows="10" spellcheck="false">{}</textarea>
+          <p class="hint">Request-Modelle des SDK als JSON-Objekt eingeben. GET und DELETE senden keinen Body.</p>
+          <button type="submit" class="primary">Request senden</button>
+        </form>
+      </section>
+      <section aria-labelledby="result-title">
+        <div class="section-heading"><h2 id="result-title">Requests &amp; Responses</h2><button type="button" id="clear">Leeren</button></div>
+        <p id="feedback" role="status" aria-live="polite">Bereit. Noch keine Requests gesendet.</p>
+        <p class="hint">Die letzten 20 Aufrufe dieser Seite, neueste zuerst. Token werden hier vollständig angezeigt; die Server-Logs maskieren sensible Felder.</p>
+        <div id="history"></div>
+      </section>
+    </main>
+  </body>
+</html>

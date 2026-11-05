@@ -1,0 +1,152 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #17263b;
+  background: #f1f4f8;
+  line-height: 1.5;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+header {
+  background: #10243c;
+  color: white;
+  padding: 36px max(24px, calc((100vw - 1100px) / 2));
+}
+h1 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin: 8px 0;
+  letter-spacing: -0.04em;
+}
+h2 {
+  font-size: 1.15rem;
+  margin: 0 0 12px;
+}
+p {
+  margin: 8px 0 16px;
+}
+.eyebrow {
+  color: #a8c5e6;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+}
+main {
+  max-width: 1148px;
+  margin: 24px auto;
+  padding: 0 24px;
+  display: grid;
+  gap: 20px;
+}
+section {
+  background: white;
+  border: 1px solid #dce3ec;
+  border-radius: 12px;
+  padding: 24px;
+  min-width: 0;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 12px 20px;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin: 12px 0 6px;
+}
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #afbdcf;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font: inherit;
+  color: inherit;
+  background: white;
+}
+textarea,
+pre,
+code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+}
+textarea {
+  resize: vertical;
+}
+button {
+  border: 1px solid #afbdcf;
+  background: #f8faff;
+  color: #17263b;
+  border-radius: 6px;
+  padding: 10px 14px;
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+button:hover {
+  background: #e7effa;
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+.primary {
+  background: #145bc1;
+  color: white;
+  border-color: #145bc1;
+}
+.primary:hover {
+  background: #104b9e;
+}
+:focus-visible {
+  outline: 3px solid #77a7ea;
+  outline-offset: 2px;
+}
+.hint {
+  color: #53647b;
+  font-size: 0.85rem;
+}
+.badge {
+  background: #e7effa;
+  border-radius: 5px;
+  padding: 2px 6px;
+  font-size: 0.75rem;
+}
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+details {
+  border-top: 1px solid #dce3ec;
+  padding: 14px 0;
+}
+summary {
+  cursor: pointer;
+  overflow-wrap: anywhere;
+  font-family: ui-monospace, monospace;
+  font-size: 0.85rem;
+}
+pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #f1f4f8;
+  padding: 14px;
+  border-radius: 6px;
+  max-height: 520px;
+  overflow: auto;
+}
+.error {
+  color: #b42318;
+}
