@@ -1,7 +1,4 @@
-import { readFile } from 'node:fs/promises';
-import { runInNewContext } from 'node:vm';
-
-import { describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 // Minimal DOM for exercising the actual browser script's request workflows.
 class Element {
@@ -26,33 +23,27 @@ async function browser() {
     return elements.get(id)!;
   };
   get('city').value = 'New York';
-  const fetch = vi.fn().mockResolvedValue({
-    ok: true,
-    json: async () => ({
-      routes: [
+  const fetch = vi.fn();
+  vi.stubGlobal('fetch', fetch);
+  vi.stubGlobal('document', {
+    getElementById: get,
+    createElement: () => new Element(),
+    querySelectorAll: () => [],
+  });
+  // Exercise the browser's native modules directly, without evaluating source strings.
+  const { createExplorer } = await import('../public/ui/explorer.js');
+  const { demo } = await import('../public/ui/demos.js');
+  const explorer = createExplorer([
         { method: 'GET', path: '/api/commerce-cases/:commerceCaseId' },
         { method: 'PATCH', path: '/api/commerce-cases/:commerceCaseId' },
-      ],
-    }),
-  });
-  const source = await readFile(new URL('./ui.js', import.meta.url), 'utf8');
-  const api = runInNewContext(`${source}\n({ demo, sendEditor });`, {
-    document: {
-      getElementById: get,
-      createElement: () => new Element(),
-      querySelectorAll: () => [],
-    },
-    fetch,
-    performance,
-    URLSearchParams,
-  });
-  await vi.waitFor(() => expect(get('connection').textContent).toContain('Verbunden'));
-  fetch.mockReset();
+  ]);
+  const api = { demo: (action: string) => demo(action, explorer), sendEditor: explorer.sendEditor };
   get('commerceCaseId').value = 'case-1';
   return { api, get, fetch };
 }
 
 describe('browser demo workflows', () => {
+  afterEach(() => { vi.unstubAllGlobals(); });
   it('fetches the customer before updating the city and preserves all other customer fields', async () => {
     const { api, fetch } = await browser();
     const customer = {
@@ -104,5 +95,26 @@ describe('browser demo workflows', () => {
     get('body').value = '{';
     await expect(api.sendEditor()).rejects.toThrow('gültiges JSON');
     expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it('does not update when fetching the current customer fails', async () => {
+    const { api, fetch } = await browser();
+    fetch.mockResolvedValueOnce({
+      ok: false, status: 404, headers: new Map(), text: async () => '{"message":"not found"}',
+    });
+    await expect(api.demo('city')).rejects.toThrow('HTTP 404');
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+
+  it('bootstraps discovery and defaults through the module entry point', async () => {
+    const { get, fetch } = await browser();
+    fetch.mockResolvedValueOnce({ ok: true, json: async () => ({ routes: [] }) });
+    fetch.mockResolvedValueOnce({
+      ok: true, json: async () => ({ merchantId: 'merchant-1', commerceCaseId: 'case-default' }),
+    });
+    await import('../public/ui/app.js');
+    await vi.waitFor(() => expect(get('connection').textContent).toBe('Verbunden · Merchant merchant-1'));
+    expect(get('commerceCaseId').value).toBe('case-default');
+    expect(fetch.mock.calls.map(([url]) => url)).toEqual(['/api', '/ui/config']);
   });
 });

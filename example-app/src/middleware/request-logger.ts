@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto';
-import type { IncomingMessage, ServerResponse } from 'node:http';
+
+import type { RequestHandler } from 'express';
 
 const sensitiveKey =
   /authorization|cookie|secret|token|api[-_]?key|password|card|cvv|cvc|iban|accountnumber/i;
@@ -33,7 +34,7 @@ function bodyForLog(body: unknown): unknown {
   return sanitized;
 }
 
-export function createHttpLogger(request: IncomingMessage, response: ServerResponse) {
+export const requestLogger: RequestHandler = (request, response, next) => {
   const started = performance.now();
   const suppliedId = request.headers['x-request-id'];
   const requestId = typeof suppliedId === 'string' ? suppliedId : randomUUID();
@@ -46,7 +47,7 @@ export function createHttpLogger(request: IncomingMessage, response: ServerRespo
   response.setHeader('Access-Control-Expose-Headers', 'X-Request-ID');
   let requestLogged = false;
   let responseBody: unknown;
-  const logRequest = (body?: string) => {
+  const logRequest = () => {
     if (requestLogged) return;
     requestLogged = true;
     console.log(
@@ -55,9 +56,10 @@ export function createHttpLogger(request: IncomingMessage, response: ServerRespo
         event: 'request',
         ...context,
         headers: sanitize(request.headers),
-        body: bodyForLog(body),
+        body: bodyForLog(response.locals.rawBody ?? request.body),
       }),
     );
+    delete response.locals.rawBody;
   };
   const logResponse = (event: 'response' | 'response-aborted') => {
     logRequest();
@@ -77,10 +79,11 @@ export function createHttpLogger(request: IncomingMessage, response: ServerRespo
   response.once('close', () => {
     if (!response.writableFinished) logResponse('response-aborted');
   });
-  return {
-    request: logRequest,
-    response: (body: unknown) => {
-      responseBody = body;
-    },
+  const originalJson = response.json;
+  response.json = function (body) {
+    logRequest();
+    responseBody = body;
+    return originalJson.call(this, body);
   };
-}
+  next();
+};
