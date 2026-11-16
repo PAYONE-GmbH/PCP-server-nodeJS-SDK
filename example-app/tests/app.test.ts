@@ -82,11 +82,13 @@ describe('client SDK test backend', () => {
       response.end(responseBody);
     });
     const host = await listen(upstream);
-    backend = createServer(createApp({
-      configuration: new CommunicatorConfiguration('test-key', 'test-secret', host),
-      merchantId: 'merchant-1',
-      uiDefaults: { commerceCaseId: 'case-default', checkoutId: 'checkout-default' },
-    }));
+    backend = createServer(
+      createApp({
+        configuration: new CommunicatorConfiguration('test-key', 'test-secret', host),
+        merchantId: 'merchant-1',
+        uiDefaults: { commerceCaseId: 'case-default', checkoutId: 'checkout-default' },
+      }),
+    );
     base = await listen(backend);
   });
 
@@ -97,7 +99,9 @@ describe('client SDK test backend', () => {
     received.length = 0;
   });
 
-  afterEach(() => { vi.restoreAllMocks(); });
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
 
   it('correlates request and response logs and masks secrets without changing HTTP data', async () => {
     responseBody = JSON.stringify({ token: 'response-secret', result: 'ok' });
@@ -215,13 +219,20 @@ describe('client SDK test backend', () => {
     const discovery = await (await fetch(`${base}/api`)).json();
     expect(discovery.routes).toHaveLength(30);
     const ids: Record<string, string> = {
-      commerceCaseId: 'case-1', checkoutId: 'checkout-1',
-      paymentExecutionId: 'execution-1', paymentInformationId: 'info-1',
-      paymentIntentId: 'intent-1', eventId: 'event-1',
+      commerceCaseId: 'case-1',
+      checkoutId: 'checkout-1',
+      paymentExecutionId: 'execution-1',
+      paymentInformationId: 'info-1',
+      paymentIntentId: 'intent-1',
+      eventId: 'event-1',
     };
-    const concreteRoutes = discovery.routes.map(({ method, path }: { method: string; path: string }) =>
-      `${method} ${path.replace(/:([a-zA-Z]+)/g, (_match, name) => ids[name])}`);
-    expect(concreteRoutes.sort()).toEqual(cases.map(([method, path]) => `${method} /api${path}`).sort());
+    const concreteRoutes = discovery.routes.map(
+      ({ method, path }: { method: string; path: string }) =>
+        `${method} ${path.replace(/:([a-zA-Z]+)/g, (_match, name) => ids[name])}`,
+    );
+    expect(concreteRoutes.sort()).toEqual(
+      cases.map(([method, path]) => `${method} /api${path}`).sort(),
+    );
     const response = await fetch(`${base}/api/commerce-cases`, { method: 'OPTIONS' });
     expect(response.status).toBe(204);
     expect(response.headers.get('access-control-allow-origin')).toBe('*');
@@ -235,7 +246,10 @@ describe('client SDK test backend', () => {
     expect(await page.text()).toContain('SDK Test Backend');
     for (const [path, type] of [
       ['/ui/app.js', 'text/javascript'],
-      ...['api', 'demos', 'dom', 'explorer', 'history'].map((name) => [`/ui/${name}.js`, 'text/javascript']),
+      ...['api', 'demos', 'dom', 'explorer', 'history'].map((name) => [
+        `/ui/${name}.js`,
+        'text/javascript',
+      ]),
       ['/ui/style.css', 'text/css'],
     ]) {
       const asset = await fetch(`${base}${path}`);

@@ -34,8 +34,8 @@ async function browser() {
   const { createExplorer } = await import('../public/ui/explorer.js');
   const { demo } = await import('../public/ui/demos.js');
   const explorer = createExplorer([
-        { method: 'GET', path: '/api/commerce-cases/:commerceCaseId' },
-        { method: 'PATCH', path: '/api/commerce-cases/:commerceCaseId' },
+    { method: 'GET', path: '/api/commerce-cases/:commerceCaseId' },
+    { method: 'PATCH', path: '/api/commerce-cases/:commerceCaseId' },
   ]);
   const api = { demo: (action: string) => demo(action, explorer), sendEditor: explorer.sendEditor };
   get('commerceCaseId').value = 'case-1';
@@ -43,7 +43,9 @@ async function browser() {
 }
 
 describe('browser demo workflows', () => {
-  afterEach(() => { vi.unstubAllGlobals(); });
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
   it('fetches the customer before updating the city and preserves all other customer fields', async () => {
     const { api, fetch } = await browser();
     const customer = {
@@ -100,7 +102,10 @@ describe('browser demo workflows', () => {
   it('does not update when fetching the current customer fails', async () => {
     const { api, fetch } = await browser();
     fetch.mockResolvedValueOnce({
-      ok: false, status: 404, headers: new Map(), text: async () => '{"message":"not found"}',
+      ok: false,
+      status: 404,
+      headers: new Map(),
+      text: async () => '{"message":"not found"}',
     });
     await expect(api.demo('city')).rejects.toThrow('HTTP 404');
     expect(fetch).toHaveBeenCalledTimes(1);
@@ -110,10 +115,13 @@ describe('browser demo workflows', () => {
     const { get, fetch } = await browser();
     fetch.mockResolvedValueOnce({ ok: true, json: async () => ({ routes: [] }) });
     fetch.mockResolvedValueOnce({
-      ok: true, json: async () => ({ merchantId: 'merchant-1', commerceCaseId: 'case-default' }),
+      ok: true,
+      json: async () => ({ merchantId: 'merchant-1', commerceCaseId: 'case-default' }),
     });
     await import('../public/ui/app.js');
-    await vi.waitFor(() => expect(get('connection').textContent).toBe('Verbunden · Merchant merchant-1'));
+    await vi.waitFor(() =>
+      expect(get('connection').textContent).toBe('Verbunden · Merchant merchant-1'),
+    );
     expect(get('commerceCaseId').value).toBe('case-default');
     expect(fetch.mock.calls.map(([url]) => url)).toEqual(['/api', '/ui/config']);
   });
