@@ -27,6 +27,9 @@ jobs:
           node-version: ${{ matrix.node }}
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
+      - name: Install example app dependencies
+        working-directory: example-app
+        run: npm ci --legacy-peer-deps
       - name: Run Build
         run: npm run build
       - name: Run Linting
@@ -49,6 +52,9 @@ jobs:
         with:
           node-version: 24
       - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+      - name: Install example app dependencies
+        working-directory: example-app
         run: npm ci --legacy-peer-deps
       - name: Run Tests with coverage
         run: npm run test:coverage
