@@ -3,7 +3,7 @@ import type { AddressInfo } from 'node:net';
 
 import { CommunicatorConfiguration } from 'pcp-server-nodejs-sdk';
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
-import { createTestServer } from './server.js';
+import { createApp } from '../src/app.js';
 
 async function listen(server: Server): Promise<string> {
   await new Promise<void>((resolve) => server.listen(0, '127.0.0.1', resolve));
@@ -65,6 +65,10 @@ describe('client SDK test backend', () => {
 
   beforeAll(async () => {
     upstream = createServer(async (request, response) => {
+      if (status === 0) {
+        request.destroy();
+        return;
+      }
       let body = '';
       for await (const chunk of request) body += chunk;
       received.push({
@@ -78,12 +82,11 @@ describe('client SDK test backend', () => {
       response.end(responseBody);
     });
     const host = await listen(upstream);
-    backend = createTestServer(
-      new CommunicatorConfiguration('test-key', 'test-secret', host),
-      'merchant-1',
-      '*',
-      { commerceCaseId: 'case-default', checkoutId: 'checkout-default' },
-    );
+    backend = createServer(createApp({
+      configuration: new CommunicatorConfiguration('test-key', 'test-secret', host),
+      merchantId: 'merchant-1',
+      uiDefaults: { commerceCaseId: 'case-default', checkoutId: 'checkout-default' },
+    }));
     base = await listen(backend);
   });
 
@@ -94,7 +97,7 @@ describe('client SDK test backend', () => {
     received.length = 0;
   });
 
-  afterEach(() => vi.restoreAllMocks());
+  afterEach(() => { vi.restoreAllMocks(); });
 
   it('correlates request and response logs and masks secrets without changing HTTP data', async () => {
     responseBody = JSON.stringify({ token: 'response-secret', result: 'ok' });
@@ -211,6 +214,14 @@ describe('client SDK test backend', () => {
     expect(await (await fetch(`${base}/health`)).json()).toEqual({ status: 'ok' });
     const discovery = await (await fetch(`${base}/api`)).json();
     expect(discovery.routes).toHaveLength(30);
+    const ids: Record<string, string> = {
+      commerceCaseId: 'case-1', checkoutId: 'checkout-1',
+      paymentExecutionId: 'execution-1', paymentInformationId: 'info-1',
+      paymentIntentId: 'intent-1', eventId: 'event-1',
+    };
+    const concreteRoutes = discovery.routes.map(({ method, path }: { method: string; path: string }) =>
+      `${method} ${path.replace(/:([a-zA-Z]+)/g, (_match, name) => ids[name])}`);
+    expect(concreteRoutes.sort()).toEqual(cases.map(([method, path]) => `${method} /api${path}`).sort());
     const response = await fetch(`${base}/api/commerce-cases`, { method: 'OPTIONS' });
     expect(response.status).toBe(204);
     expect(response.headers.get('access-control-allow-origin')).toBe('*');
@@ -224,6 +235,7 @@ describe('client SDK test backend', () => {
     expect(await page.text()).toContain('SDK Test Backend');
     for (const [path, type] of [
       ['/ui/app.js', 'text/javascript'],
+      ...['api', 'demos', 'dom', 'explorer', 'history'].map((name) => [`/ui/${name}.js`, 'text/javascript']),
       ['/ui/style.css', 'text/css'],
     ]) {
       const asset = await fetch(`${base}${path}`);
@@ -264,6 +276,25 @@ describe('client SDK test backend', () => {
       headers: { 'Content-Type': 'application/json' },
       body,
     });
+    expect(response.status).toBe(400);
+    expect(received).toHaveLength(0);
+  });
+
+  it('maps connection failures to a safe 502 response', async () => {
+    status = 0;
+    const response = await fetch(`${base}/api/commerce-cases`);
+    expect(response.status).toBe(502);
+    expect(await response.json()).toEqual({ message: 'PAYONE request failed' });
+  });
+
+  it('accepts an omitted body as an empty SDK request object', async () => {
+    const response = await fetch(`${base}/api/commerce-cases`, { method: 'POST' });
+    expect(response.status).toBe(200);
+    expect(received[0].body).toBe('{}');
+  });
+
+  it('rejects malformed path encoding before invoking the SDK', async () => {
+    const response = await fetch(`${base}/api/commerce-cases/%ZZ`);
     expect(response.status).toBe(400);
     expect(received).toHaveLength(0);
   });

@@ -1,8 +1,46 @@
-# Local client-SDK test backend
+# Modular Express example
 
-The example app runs an HTTP backend for testing client SDKs against PAYONE Preprod.
+The example app uses Express 5 and TypeScript to run an HTTP backend for testing
+client SDKs against PAYONE Preprod.
 All 30 server-SDK operations are exposed. API credentials stay on the server, and
 every request uses the merchant configured in `MERCHANT_ID`.
+
+## Structure
+
+```text
+src/
+  server.ts              Environment, startup, and shutdown
+  config.ts              Environment validation and defaults
+  app.ts                 Express application factory
+  sdk.ts                 Shared SDK client construction
+  routes/                One router per SDK area
+    index.ts             API composition and route discovery
+    router.ts            Registration, response handling, and 405 fallback
+  middleware/            JSON/ID validation, masked logs, and error handling
+  helpers/queries.ts     HTTP query adapters for the SDK query classes
+public/
+  index.html             Browser interface
+  ui/                    Styles and native JavaScript modules
+tests/                   Mock-PAYONE integration and browser workflow tests
+HTTP_CLIENT.md           SDK HTTP-client configuration recipes
+```
+
+`createApp({ configuration, merchantId, ... })` returns an Express application
+without reading environment variables or opening a port. SDK clients are created
+once per app and passed explicitly to the resource routers. The routers call the
+SDK directly; request bodies use the corresponding SDK model types, while PAYONE
+validates their fields.
+
+To add an endpoint, open its resource router and register a method, path, and async
+SDK call with `add(...)`. Paths are relative to `/api`. The small registration helper
+adds ID/body validation, converts undefined results to 204, and records the endpoint
+for discovery. Express handles path matching and asynchronous error propagation.
+For a new resource, include its router factory in `routes/index.ts` as well.
+Route discovery and the browser explorer then include the endpoint automatically.
+Extend `tests/app.test.ts` to verify the signed upstream request.
+
+The standalone authentication and commerce-case demos are consolidated into the
+browser workflows. HTTP customization examples are now [documented recipes](HTTP_CLIENT.md).
 
 ## Start
 
@@ -39,7 +77,7 @@ without loading `.env`. Rebuild the root SDK after changing its source code.
 ## Browser interface
 
 Open **http://localhost:3000/** after starting the backend (or use the LAN address
-below). The page provides the original `index.ts` demos as clickable actions:
+below). The page provides these SDK demos as clickable actions:
 
 - Retrieve an authentication token.
 - Create a commerce case with an empty request object.
@@ -167,7 +205,8 @@ From the repository root:
 ```sh
 npm run build
 npm --prefix example-app run typecheck
-npm test -- --run example-app/src/server.test.ts example-app/src/ui.test.ts
+npm test -- --run example-app/tests
+npx biome check example-app
 ```
 
 The integration tests use a local mock PAYONE server and need no API credentials.
